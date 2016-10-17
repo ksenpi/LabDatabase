@@ -10,13 +10,14 @@ import java.sql.Statement;
 
 import examples.branch;
 
-public class OurConnection implements ActionListener {
+public class OurConnection{
 	private Connection con;
-	
+
 	public OurConnection(){
-		Statement stmt; 
-		
-		 try 
+		Statement stmt;
+		ResultSet rs;
+
+		try
 	      {
 		// Load the Oracle JDBC driver
 		DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -30,20 +31,21 @@ public class OurConnection implements ActionListener {
 		 if(connect("ora_e5w9a", "a10682145")){
 			 try{
 				 stmt = con.createStatement();
-				 int branchPhone;
-				 ResultSet rs = stmt.executeQuery("SELECT * FROM branch");
-				 
+				 String authorID;
+				 rs = stmt.executeQuery("SELECT AU_ID FROM authors");
+
 				 while(rs.next())
 				 {
-				   branchPhone = rs.getInt(5); 
+				   authorID = rs.getString("AU_ID");
 				   if (rs.wasNull())
 				      {
-				    	  System.out.printf("%-15.15s\n", " ");
+						  System.out.printf("%-11.11s", " ");
 			              }
 				      else
 				      {
-				    	  System.out.printf("%-15.15s\n", branchPhone);
-				      } 
+						  System.out.printf("%-11.11s", authorID);
+				      }
+				      System.out.println("     ");
 				 }
 				 
 				 stmt.close();
@@ -57,12 +59,6 @@ public class OurConnection implements ActionListener {
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	private boolean connect(String username, String password)
     {
       String connectURL = "jdbc:oracle:thin:@localhost:1522:ug"; 
