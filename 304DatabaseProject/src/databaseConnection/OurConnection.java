@@ -31,19 +31,20 @@ public class OurConnection{
 		 if(connect("ora_e5w9a", "a10682145")){
 			 try{
 				 stmt = con.createStatement();
-				 String authorID;
-				 rs = stmt.executeQuery("SELECT AU_ID FROM authors");
+				 String name;
+				 //rs = stmt.executeQuery("select lab_manager.name from lab_manager join researcher on lab_manager.emp_id = researcher.emp_id");
+				 rs = stmt.executeQuery("select lab_manager.name from lab_manager join researcher on lab_manager.emp_id = researcher.emp_id");
 
 				 while(rs.next())
 				 {
-				   authorID = rs.getString("AU_ID");
+				   name = rs.getString("name");
 				   if (rs.wasNull())
 				      {
-						  System.out.printf("%-11.11s", " ");
+						  System.out.printf("%-20.20s", " ");
 			              }
 				      else
 				      {
-						  System.out.printf("%-11.11s", authorID);
+						  System.out.printf("%-20.20s", name);
 				      }
 				      System.out.println("     ");
 				 }
