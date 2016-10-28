@@ -14,10 +14,21 @@ public class OurConnection{
 	private Connection con;
 
 	public OurConnection(){
-		Statement stmt;
-		ResultSet rs;
+		//Statement stmt;
+		//ResultSet rs;
 
 		try
+		{
+			// Load the Oracle JDBC driver
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+		}
+	      catch (SQLException ex)
+		{
+			System.out.println("Message: " + ex.getMessage());
+			System.exit(-1);
+		}
+
+		/*try
 	      {
 		// Load the Oracle JDBC driver
 		DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -56,11 +67,11 @@ public class OurConnection{
 				System.out.println("Message: " + ex.getMessage());
 			}	
 			 
-		 }
+		 }*/
 		
 	}
 
-	private boolean connect(String username, String password)
+	public boolean connect(String username, String password)
     {
       String connectURL = "jdbc:oracle:thin:@localhost:1522:ug"; 
 
@@ -77,6 +88,10 @@ public class OurConnection{
 	return false;
       }
     }
+
+    public Connection getConnection(){
+		return this.con;
+	}
 	
 	public static void main(String args[])
     {
