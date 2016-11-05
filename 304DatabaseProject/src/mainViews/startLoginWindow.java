@@ -1,15 +1,14 @@
 package mainViews;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -44,17 +43,24 @@ public class startLoginWindow extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 
-        Label userName = new Label("User Name:");
-        grid.add(userName, 0, 1);
+        Label userType = new Label("User Type");
+        grid.add(userType, 0, 1);
+
+        final ComboBox comboBox = new ComboBox();
+        comboBox.getItems().addAll("Lab Manager", "Researcher", "Exernal User");
+        grid.add(comboBox, 1, 1);
+
+        Label employeeID = new Label("Employee ID:");
+        grid.add(employeeID, 0, 2);
 
         TextField userTextField = new TextField();
-        grid.add(userTextField, 1, 1);
+        grid.add(userTextField, 1, 2);
 
-        Label pw = new Label("Password:");
-        grid.add(pw, 0, 2);
+        /*Label pw = new Label("Password:");
+        grid.add(pw, 0, 3);
 
         PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 2);
+        grid.add(pwBox, 1, 3);*/
 
         Button btn = new Button("Sign in");
         HBox hbBtn = new HBox(10);
@@ -69,9 +75,17 @@ public class startLoginWindow extends Application {
 
             @Override
             public void handle(ActionEvent e) {
-                actiontarget.setFill(Color.FIREBRICK);
-                actiontarget.setText("Sign in button pressed");
+                if(comboBox.getValue() == null)
+                {   actiontarget.setFill(Color.FIREBRICK);
+                    actiontarget.setText("select User Type");}
+                else if(comboBox.getValue().equals("External User"))
+                        ;//todo - tamar - show the external user view pane}
+                else{
+                    // todo - tamar - check that the user ID is in the corresponding user table
+                    // todo - tamar - show the corresponding view pane ( either researcher or lab manager)
+                }
             }
+
         });
 
         Scene scene = new Scene(grid, 300, 275);
