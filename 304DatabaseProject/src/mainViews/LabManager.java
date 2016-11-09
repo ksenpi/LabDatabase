@@ -5,9 +5,14 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -98,8 +103,56 @@ public class LabManager extends Application implements User {
 
     //Query
     //TODO (Darius): Refer to the application functionality document in the Drive.
-    public int findBoxesUnderCapacity(){
-        return 0;
+    public Map<String, String[]> findBoxesUnderCapacity(){
+        // TODO: FIX THIS I AM A BAD PERSON FOR COPYING THIS
+        Statement stmt1;
+        Statement stmt2;
+        ResultSet rs;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt1 = con.createStatement();
+                stmt2 = con.createStatement();
+                String name;
+                Map<String, String[]> workerList = new HashMap<String, String[]>();
+
+                rs = stmt1.executeQuery("select name from lab_manager");
+                while (rs.next()) {
+                    name = rs.getString("name");
+                    if (!rs.wasNull()) {
+                        //System.out.printf("%-20.20s", name);
+                        String[] typeOfWorker = {"Lab Manager"};
+                        workerList.put(name, typeOfWorker);
+                    }
+                    //System.out.println("     ");
+                }
+                stmt1.close();
+
+                rs = stmt2.executeQuery("select name from researcher");
+                while (rs.next()) {
+                    name = rs.getString("name");
+                    if (!rs.wasNull()) {
+                        if (workerList.get(name) == null) {
+                            //System.out.printf("%-20.20s", name);
+                            String[] typeOfWorker = {"Researcher"};
+                            workerList.put(name, typeOfWorker);
+                        } else {
+                            //System.out.printf("%-20.20s", name);
+                            String[] typeOfWorker = {"Lab Manager and Researcher"};
+                            workerList.put(name, typeOfWorker);
+                        }
+                    }
+                    //System.out.println("     ");
+                }
+                stmt1.close();
+
+                return workerList;
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return null;
     }
 
     @Override
