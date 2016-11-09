@@ -27,25 +27,49 @@ public class LabManager extends Application implements User {
 
     }
 
-    public int addFridge(int fridgeID, int fridgeOccupancy, int temperature, int employeeID){
-        int atCapacity;
-        PreparedStatement ps;
+    public String addFridge(int fridgeID, int fridgeOccupancy, int temperature, int employeeID){
+        PreparedStatement ps1;
+        PreparedStatement ps2;
         OurConnection connectionToDatabase = new OurConnection();
         Connection con = null;
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
+                //two more things: check if the fridgeID is already existing & add to maintains table
+
                 con = connectionToDatabase.getConnection();
-                ps = con.prepareStatement("INSERT INTO fridge VALUES (?,?,?,?)");
-                ps.setInt(1, fridgeID);
-                ps.setInt(2, fridgeOccupancy);
-                ps.setInt(3, temperature);
-                ps.setInt(4, 0);
 
-                ps.executeUpdate();
-                con.commit();
+                final String queryCheck = "SELECT * from fridge2 WHERE fr_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, fridgeID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    return "Error_Already_Exists";
 
-                ps.close();
-                return 1; 
+                }
+                else{
+                    ps1 = con.prepareStatement("INSERT INTO fridge2 VALUES (?,?,?)");
+                    ps1.setInt(1, fridgeID);
+                    ps1.setInt(2, fridgeOccupancy);
+                    ps1.setInt(3, temperature);
+
+                    ps1.executeUpdate();
+                    con.commit();
+
+                    ps1.close();
+
+                    ps2 = con.prepareStatement("INSERT INTO maintains VALUES (?,?,?)");
+                    ps2.setInt(1, fridgeID);
+                    ps2.setInt(2, fridgeOccupancy);
+                    ps2.setInt(3, 0); //TODO (Ksenia): Discuss in meeting and change this
+
+                    ps2.executeUpdate();
+                    con.commit();
+
+                    ps2.close();
+                    return "OK";
+
+                }
+
             } catch (SQLException ex) {
 
                 System.out.println("Message: " + ex.getMessage());
@@ -60,37 +84,129 @@ public class LabManager extends Application implements User {
             }
         }
 
-        return 0;
+        return "Error_Adding";
     }
-
+    //TODO (Ksenia)
     public int removeFridge(){
         return 0;
     }
 
-    public int addResearcher(){
-        return 0;
+    public String addResearcher(int employeeID, String employeeName){
+        PreparedStatement ps1;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                //two more things: check if the fridgeID is already existing & add to maintains table
+
+                con = connectionToDatabase.getConnection();
+
+                final String queryCheck = "SELECT * from researcher WHERE emp_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, employeeID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    return "Error_Already_Exists";
+
+                }
+                else{
+
+                    ps1 = con.prepareStatement("INSERT INTO researcher VALUES (?,?)");
+                    ps1.setInt(1, employeeID);
+                    ps1.setString(2, employeeName);
+
+                    ps1.executeUpdate();
+                    con.commit();
+
+                    ps1.close();
+                    return "OK";
+
+                }
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Adding";
     }
 
-    public int addLabManager(){
-        return 0;
-    }
 
+    public String addLabManager(int employeeID, String employeeName){
+        PreparedStatement ps1;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                //two more things: check if the fridgeID is already existing & add to maintains table
+
+                con = connectionToDatabase.getConnection();
+
+                final String queryCheck = "SELECT * from lab_manager WHERE emp_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, employeeID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    return "Error_Already_Exists";
+
+                }
+                else{
+
+                    ps1 = con.prepareStatement("INSERT INTO lab_manager VALUES (?,?)");
+                    ps1.setInt(1, employeeID);
+                    ps1.setString(2, employeeName);
+
+                    ps1.executeUpdate();
+                    con.commit();
+
+                    ps1.close();
+                    return "OK";
+
+                }
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Adding";
+    }
+    //TODO (Ksenia)
     public int removeLabManager(){
         return 0;
     }
-
+    //TODO (Ksenia)
     public int addSampleToBox(){
         return 0;
     }
-
+    //TODO (Ksenia)
     public int removeSampleFromBox(){
         return 0;
     }
-
+    //TODO (Ksenia)
     public int addBox() {
         return 0;
     }
 
+    //TODO (Ksenia)
     public int removeBox() {
         return 0;
     }

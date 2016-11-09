@@ -120,6 +120,7 @@ public class ExternalUser extends Application implements User {
                 String part1;
                 String part2;
                 Map<String, String[]> sampleList = new HashMap<String, String[]>();
+                //TODO (Ksenia): fix this query!
 
                 rs = stmt1.executeQuery("select samp_id, strain, volume, composition, " +
                         "concentration, name, antibiotic, res_enz_1, res_enz_2, origin, " +

@@ -17,7 +17,7 @@ public class Researcher extends Application implements User {
         //methods below.
 
     }
-
+    //TODO(Ksenia): 6 methods below
     public int addSample(){
         return 0;
     }
@@ -30,7 +30,7 @@ public class Researcher extends Application implements User {
         return 0;
     }
 
-    public int samplesCreatedSince(Date date){
+    public int samplesCreatedBy(String name){
         return 0;
     }
 
