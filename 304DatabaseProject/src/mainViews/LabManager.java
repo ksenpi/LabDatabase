@@ -1,9 +1,13 @@
 package mainViews;
 
+import databaseConnection.OurConnection;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -18,7 +22,39 @@ public class LabManager extends Application implements User {
 
     }
 
-    public int addFridge(){
+    public int addFridge(int fridgeID, int fridgeOccupancy, int temperature, int employeeID){
+        int atCapacity;
+        PreparedStatement ps;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                con = connectionToDatabase.getConnection();
+                ps = con.prepareStatement("INSERT INTO fridge VALUES (?,?,?,?)");
+                ps.setInt(1, fridgeID);
+                ps.setInt(2, fridgeOccupancy);
+                ps.setInt(3, temperature);
+                ps.setInt(4, 0);
+
+                ps.executeUpdate();
+                con.commit();
+
+                ps.close();
+                return 1; 
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
         return 0;
     }
 
