@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public class ExternalUser extends Application implements User {
 
+    public ExternalUser() {
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
