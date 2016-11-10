@@ -1,29 +1,23 @@
-package mainViews;
+package mainViews;/**
+ * Created by Tamar on 2016-11-10.
+ */
 
 import databaseConnection.OurConnection;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by kseniapinski on 2016-10-26.
- */
-public class LabManager extends Application implements User {
+public class LabManager extends Application implements User{
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        //TODO (Tamar): Generate window for LabManager. There should be a button associated with each of the
-        //methods below.
+    public void start(Stage primaryStage) {
 
     }
 
