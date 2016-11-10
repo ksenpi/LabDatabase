@@ -1,22 +1,22 @@
-package mainViews;
+package mainViews;/**
+ * Created by Tamar on 2016-11-10.
+ */
 
 import databaseConnection.OurConnection;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by kseniapinski on 2016-10-26.
- */
-public class ExternalUser extends Application implements User {
-
+public class ExternalUser extends Application implements User{
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         //TODO (Tamar): Generate window for ExternalUser. There should be a button associated with each of the
         //methods below. I have given an example for how you can handle the ResultSet handed back from a helper.
 
@@ -209,5 +209,5 @@ public class ExternalUser extends Application implements User {
 
     }
 
+    }
 
-}

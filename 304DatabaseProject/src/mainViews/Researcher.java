@@ -1,36 +1,27 @@
-package mainViews;
+package mainViews;/**
+ * Created by Tamar on 2016-11-10.
+ */
 
 import javafx.application.Application;
-import javafx.stage.Stage;
-
-import java.util.Date;
-import java.util.Map;
-
-import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
 
+import java.util.Map;
 
-/**
- * Created by kseniapinski on 2016-10-26.
- */
 public class Researcher extends Application implements User {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Welcome to LabDatabasePro3000");
 
         GridPane grid = new GridPane();
@@ -38,50 +29,50 @@ public class Researcher extends Application implements User {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-
-        //HBox
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-
+//collum, row
         //addSample
+        HBox hbBtn = new HBox(10);
         Button addSample = new Button("Add Sample");
         hbBtn.getChildren().add(addSample);
         grid.add(hbBtn, 0, 0);
 
         //editSample
+        HBox hbBtn1 = new HBox(10);
         Button editSample = new Button("Edit Sample");
-        hbBtn.getChildren().add(editSample);
-        grid.add(hbBtn, 1, 0);
+        hbBtn1.getChildren().add(editSample);
+        grid.add(hbBtn1, 1, 0);
 
         //addSampleResearch
+        HBox hbBtn3 = new HBox(10);
         Button addSampleResearch = new Button("Reseach Sample");
-        hbBtn.getChildren().add(addSampleResearch);
-        grid.add(hbBtn, 0, 1);
+        hbBtn3.getChildren().add(addSampleResearch);
+        grid.add(hbBtn3, 0, 1);
 
         //SamplesCreatedSince
+        HBox hbBtn4 = new HBox(10);
         Button samplesCreatedSince = new Button("Samples Created Since");
-        hbBtn.getChildren().add(samplesCreatedSince);
-        grid.add(hbBtn, 1, 1);
+        hbBtn4.getChildren().add(samplesCreatedSince);
+        grid.add(hbBtn4, 1, 1);
 
         //addBox
+        HBox hbBtn5 = new HBox(10);
         Button addBox = new Button("Add Box");
-        hbBtn.getChildren().add(addBox);
-        grid.add(hbBtn, 0, 2);
+        hbBtn5.getChildren().add(addBox);
+        grid.add(hbBtn5, 0, 2);
 
         //removeBox
-        Button removeBox = new Button("Remove");
-        hbBtn.getChildren().add(removeBox);
-        grid.add(hbBtn, 1, 2);
+        HBox hbBtn6 = new HBox(10);
+        Button removeBox = new Button("Remove Box");
+        hbBtn6.getChildren().add(removeBox);
+        grid.add(hbBtn6, 1, 2);
 
         Scene scene = new Scene(grid, 300, 275);
         primaryStage.setScene(scene);
 
         primaryStage.show();
 
-        //TODO (Tamar): Generate window for Researcher. There should be a button associated with each of the
-        //methods below.
-
     }
+
     //TODO(Ksenia): 6 methods below
     public int addSample(){
         return 0;
