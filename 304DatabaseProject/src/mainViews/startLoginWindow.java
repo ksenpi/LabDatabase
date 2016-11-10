@@ -17,10 +17,14 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+
 /**
  * Created by kseniapinski on 2016-10-26.
  */
-public class startLoginWindow extends Application {
+public class startLoginWindow extends Application  {
+    private Researcher researcher;
+    private LabManager labManager;
+    private ExternalUser externalUser;
 
     //TODO (Tamar): This will be the first thing a user sees when they open up the application. Currently the login
     //window is not what we want (I just copied an example off the internet), but it'll be in a similar layout.
@@ -75,14 +79,23 @@ public class startLoginWindow extends Application {
 
             @Override
             public void handle(ActionEvent e) {
-                if(comboBox.getValue() == null)
-                {   actiontarget.setFill(Color.FIREBRICK);
-                    actiontarget.setText("select User Type");}
-                else if(comboBox.getValue().equals("External User"))
-                        ;//todo - tamar - show the external user view pane}
-                else{
-                    // todo - tamar - check that the user ID is in the corresponding user table
-                    // todo - tamar - show the corresponding view pane ( either researcher or lab manager)
+                if (comboBox.getValue() == null) {
+                    actiontarget.setFill(Color.FIREBRICK);
+                    actiontarget.setText("select User Type");
+                } else if (comboBox.getValue().equals("External User"))
+                    ;//todo - tamar - show the external user view pane}
+                else if (true) // todo - darius - check that the user ID is in the corresponding user table
+                {
+                    if (comboBox.getValue().equals("Researcher")){
+                      ;//todo - tamar - show researcher view panel
+                    }
+                        //todo - tamar - show researcher view panel
+                    if (comboBox.getValue().equals("Lab Manager"))
+                        ;   //todo - tamar - show lab manager view panel
+
+                } else {
+                    actiontarget.setFill(Color.FIREBRICK);
+                    actiontarget.setText("access denied");
                 }
             }
 
