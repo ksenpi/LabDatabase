@@ -26,6 +26,7 @@ public class startLoginWindow extends Application  {
     private LabManager labManager;
     private ExternalUser externalUser;
 
+
     //TODO (Tamar): This will be the first thing a user sees when they open up the application. Currently the login
     //window is not what we want (I just copied an example off the internet), but it'll be in a similar layout.
     //Ideally, we want the user to select whether they are a Researcher, Lab Manager, or external user. If they
