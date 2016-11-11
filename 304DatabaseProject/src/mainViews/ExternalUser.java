@@ -13,7 +13,9 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class ExternalUser extends Application implements User{
+
 
     @Override
     public void start(Stage primaryStage) {

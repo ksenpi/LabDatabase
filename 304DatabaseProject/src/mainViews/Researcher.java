@@ -17,7 +17,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
 
 import java.util.Map;
 
