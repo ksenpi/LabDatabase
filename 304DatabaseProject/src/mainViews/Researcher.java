@@ -5,15 +5,13 @@ package mainViews;/**
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -76,8 +74,9 @@ public class Researcher extends Application implements User {
 
         //addSampleScene
         Label sampleType = new Label("Sample Type");
-        ComboBox sampleTypeBox = new ComboBox();
-        sampleTypeBox.getItems().addAll("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest");
+        ChoiceBox sampleTypeBox = new ChoiceBox();
+        sampleTypeBox.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
+        //sampleTypeBox.getItems().addAll("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest");
         Label strain = new Label("Strain:");
         TextField strainTextField = new TextField();
         Label volume = new Label("Volume(mL):");
@@ -152,7 +151,17 @@ public class Researcher extends Application implements User {
         //adding all the buttons to the entry pane
         addSamplePane.add(sampleType, 0, 0);
         addSamplePane.add(sampleTypeBox, 1, 0);
-        addSamplePane.add(strain, 2, 0);
+
+        addSamplePane.add(goBack,0,7);                  //check the placement of this button
+        addSamplePane.add(enter,7,7);                   //check the placement of this button
+        enter.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                addSample(); //todo - tamar- add the right call now
+            }
+        });
+        /*addSamplePane.add(strain, 2, 0);
         addSamplePane.add(strainTextField, 3, 0);
         addSamplePane.add(volume, 0, 1);
         addSamplePane.add(volumeTextField, 1, 1);
@@ -173,16 +182,70 @@ public class Researcher extends Application implements User {
         addSamplePane.add(ligation1, 0, 5);
         addSamplePane.add(ligation1TextField, 1, 5);
         addSamplePane.add(ligation2, 2, 5);
-        addSamplePane.add(ligation2TextField, 3, 5);
-        addSamplePane.add(goBack,0,7);                  //check the placement of this button
-        addSamplePane.add(enter,7,7);                   //check the placeent of this button
-        addBox.setOnAction(new EventHandler<ActionEvent>() {
+        addSamplePane.add(ligation2TextField, 3, 5);*/
 
+
+        sampleTypeBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent e) {
-                addSample(); //todo - tamar- add the right call now
+            public void handle(ActionEvent event) {
+                addSamplePane.getChildren().remove(4, addSamplePane.getChildren().size());
+
+                if(sampleTypeBox.getValue()=="Bacterial Culture"){
+                    addSamplePane.add(strain, 0, 1);
+                    addSamplePane.add(strainTextField, 1, 1);
+                }
+                if(sampleTypeBox.getValue()=="Glycerol Stock"){
+                    addSamplePane.add(strain, 0, 1);
+                    addSamplePane.add(strainTextField, 1, 1);
+                    addSamplePane.add(volume, 0, 2);
+                    addSamplePane.add(volumeTextField, 1, 2);
+                }
+                if(sampleTypeBox.getValue()=="Plate"){
+                    addSamplePane.add(strain, 0, 1);
+                    addSamplePane.add(strainTextField, 1, 1);
+                    addSamplePane.add(composition, 0, 2);
+                    addSamplePane.add(compositionTextField, 1, 2);
+                }
+                if(sampleTypeBox.getValue()=="DNA Sample"){
+                    addSamplePane.add(concentration, 0, 1);
+                    addSamplePane.add(concentrationTextField, 1, 1);
+                }
+                if(sampleTypeBox.getValue()=="Plasmid"){
+                    addSamplePane.add(concentration, 0, 1);
+                    addSamplePane.add(concentrationTextField, 1, 1);
+                    addSamplePane.add(plasmidName, 0, 2);
+                    addSamplePane.add(plasmidTextField, 1, 2);
+                    addSamplePane.add(plasmidAntibiotic, 0, 3);
+                    addSamplePane.add(antibioticTextField, 1, 3);
+                }
+                if(sampleTypeBox.getValue()=="Ligation"){
+                    addSamplePane.add(concentration, 0, 1);
+                    addSamplePane.add(concentrationTextField, 1, 1);
+                    addSamplePane.add(ligation1, 0, 2);
+                    addSamplePane.add(ligation1TextField, 1, 2);
+                    addSamplePane.add(ligation2, 0, 3);
+                    addSamplePane.add(ligation2TextField, 1, 3);
+                }
+                if(sampleTypeBox.getValue()=="Genomic"){
+                    addSamplePane.add(concentration, 0, 1);
+                    addSamplePane.add(concentrationTextField, 1, 1);
+                    addSamplePane.add(genomic, 0, 2);
+                    addSamplePane.add(genomicTextField, 1, 2);
+                }
+                if(sampleTypeBox.getValue()=="Digest"){
+                    addSamplePane.add(concentration, 0, 1);
+                    addSamplePane.add(concentrationTextField, 1, 1);
+                    addSamplePane.add(rez1, 0, 2);
+                    addSamplePane.add(rez1TextField, 1, 2);
+                    addSamplePane.add(rez2, 0, 3);
+                    addSamplePane.add(rez2TextField, 1, 3);
+                }
+
             }
+
+
         });
+
         addSampleScene = new Scene(addSamplePane, 1000, 500);
 
         // editSampleScene
