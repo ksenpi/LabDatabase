@@ -109,6 +109,7 @@ public class ExternalUser extends Application implements User{
             try {
                 Connection con = connectionToDatabase.getConnection();
                 stmt1 = con.createStatement();
+                stmt2 = con.createStatement();
                 String sampleID;
                 String strain;
                 int volume;
@@ -124,29 +125,41 @@ public class ExternalUser extends Application implements User{
                 Map<String, String[]> sampleList = new HashMap<String, String[]>();
                 //TODO (Ksenia): fix this query!
 
-                rs = stmt1.executeQuery("select samp_id, strain, volume, composition, " +
-                        "concentration, name, antibiotic, res_enz_1, res_enz_2, origin, " +
-                        "part1, part2 from ligation full outer join " +
-                        "(select samp_id, strain, volume, composition, " +
-                        "concentration, name, antibiotic, res_enz_1, res_enz_2, origin " +
-                        "from genomic full outer join " +
-                        "(select samp_id, strain, volume, composition, concentration, " +
-                        "name, antibiotic, res_enz_1, res_enz_2 from digest full outer join " +
-                        "(select samp_id, strain, volume, composition, concentration, " +
-                        "name, antibiotic from plasmid p full outer join " +
-                        "(select samp_id, strain, volume, composition, concentration " +
-                        "from dna_sample d full outer join (select samp_id, strain, volume, " +
-                        "composition from plate full outer join (select samp_id, strain, " +
-                        "volume from bacterial_culture b full outer join (select samp_id, " +
-                        "volume from sample s full outer join glycerol_stock g on s.samp_id=g.sample_id) " +
-                        "on b.sample_id = samp_id) on plate.sample_id = samp_id) on d.sample_id = samp_id) " +
-                        "on p.sample_id = samp_id) on digest.sample_id = samp_id) " +
-                        "on genomic.sample_id=samp_id) on ligation.sample_id = samp_id");
+                rs = stmt1.executeQuery("select b2.sample_id, strain, volume, composition " +
+                        "from glycerol_stock g full outer join (select b.sample_id, strain, " +
+                        "composition from plate p full outer join bacterial_culture b on p.sample_id = b.sample_id) " +
+                        "b2 on g.sample_id = b2.sample_id");
                 while (rs.next()) {
-                    sampleID = rs.getString("samp_id");
+                    sampleID = rs.getString("sample_id");
                     strain = rs.getString("strain");
                     volume = rs.getInt("volume");
                     composition = rs.getString("composition");
+                    String[] sampleDetails;
+                    if (volume != 0) {
+                        sampleDetails = new String[]{"Glycerol Stock", "Strain:" + strain, "Volume: " + volume};
+                    } else if (composition != null) {
+                        sampleDetails = new String[]{"Plate", "Strain:" + strain, "Composition: " + composition};
+                    } else  if (strain != null) {
+                        sampleDetails = new String[]{"Bacterial Culture", "Strain: " + strain};
+                    } else{
+                        sampleDetails = new String[]{};
+                    }
+
+                    sampleList.put(sampleID, sampleDetails);
+
+                }
+                stmt1.close();
+
+                rs = stmt2.executeQuery("select d6.sample_id, concentration, name, antibiotic, res_enz_1, res_enz_2, " +
+                        "origin, part1, part2 from plasmid p full outer join (select d5.sample_id, concentration, " +
+                        "res_enz_1, res_enz_2, origin, part1, part2 from digest d full outer join " +
+                        "(select d4.sample_id, concentration, origin, part1, part2 from genomic g full outer join " +
+                        "(select d3.sample_id, concentration, part1, part2 from ligation l full outer join " +
+                        "dna_sample d3 on d3.sample_id=l.sample_id) d4 on g.sample_id = d4.sample_id) d5 on " +
+                        "d.sample_id = d5.sample_id) d6 on p.sample_id = d6.sample_id");
+
+                while (rs.next()) {
+                    sampleID = rs.getString("sample_id");
                     concentration = rs.getInt("concentration");
                     name = rs.getString("name");
                     antibiotic = rs.getString("antibiotic");
@@ -155,42 +168,37 @@ public class ExternalUser extends Application implements User{
                     origin = rs.getString("origin");
                     part1 = rs.getString("part1");
                     part2 = rs.getString("part2");
-                    String[] sampleDetails;
-                    if (strain != null) {
-                        sampleDetails = new String[]{"Bacterial Culture", "Strain: " + strain};
-                    } else if (volume != 0) {
-                        sampleDetails = new String[]{"Glycerol Stock", "Volume: " + volume};
-                    } else if (composition != null) {
-                        sampleDetails = new String[]{"Plate", "Composition: " + composition};
-                    } else if (concentration != 0) {
-                        sampleDetails = new String[]{"DNA Sample", "Concentration: " + concentration};
-                    } else if (name != null || antibiotic != null) {
+                    String[] sampleDetails2;
+
+                    if (name != null || antibiotic != null) {
                         if (name == null) {
-                            sampleDetails = new String[]{"Plasmid", "Antibiotic: " + antibiotic};
+                            sampleDetails2 = new String[]{"Plasmid", "Concentration: " + concentration, "Antibiotic: " + antibiotic};
                         } else if (antibiotic == null) {
-                            sampleDetails = new String[]{"Plasmid", "Name: " + name};
+                            sampleDetails2 = new String[]{"Plasmid", "Concentration: " + concentration, "Name: " + name};
                         } else {
-                            sampleDetails = new String[]{"Plasmid", "Antibiotic: " + antibiotic, "Name: " + name};
+                            sampleDetails2 = new String[]{"Plasmid", "Concentration: " + concentration, "Antibiotic: " + antibiotic, "Name: " + name};
                         }
                     } else if (res_enz_1 != null || res_enz_2 != null) {
                         if (res_enz_1 == null) {
-                            sampleDetails = new String[]{"Digest", "Restriction Enzyme 2: " + res_enz_2};
+                            sampleDetails2 = new String[]{"Digest", "Concentration: " + concentration, "Restriction Enzyme 2: " + res_enz_2};
                         } else if (res_enz_2 == null) {
-                            sampleDetails = new String[]{"Digest", "Restriction Enzyme 1: " + res_enz_1};
+                            sampleDetails2 = new String[]{"Digest", "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1};
                         } else {
-                            sampleDetails = new String[]{"Digest", "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleDetails2 = new String[]{"Digest", "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
                         }
                     } else if (origin != null) {
-                        sampleDetails = new String[]{"Genomic", "Origin: " + origin};
+                        sampleDetails2 = new String[]{"Genomic", "Concentration: " + concentration, "Origin: " + origin};
                     } else if (part1 != null || part2 != null) {
-                        sampleDetails = new String[]{"Ligation", "Part 1: " + part1, "Part 2: " + part2};
+                        sampleDetails2 = new String[]{"Ligation", "Concentration: " + concentration, "Part 1: " + part1, "Part 2: " + part2};
+                    } else if (concentration != 0){
+                        sampleDetails2 = new String[]{"DNA Sample", "Concentration: " + concentration};
                     } else {
-                        sampleDetails = new String[]{};
+                        sampleDetails2 = new String[]{};
                     }
-                    sampleList.put(sampleID, sampleDetails);
 
+                    sampleList.put(sampleID, sampleDetails2);
                 }
-                stmt1.close();
+                stmt2.close();
 
 
                 return sampleList;
