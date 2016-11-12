@@ -20,10 +20,31 @@ public class LabManager extends Application implements User{
         //lb.addLabManager("Darius Bird");   //this works! yay
         //lb.addResearcher("Zac Efron");     //this works! yay
         //lb.removeLabManager(10);           //this works! yay
+        lb.start(null);
+
+
     }
 
     @Override
     public void start(Stage primaryStage) {
+
+        System.out.println("we got here!");
+
+        Map<String, String> boxless = findBoxlessSamples();
+        for (String key : boxless.keySet()) {
+            System.out.println(key + "  ,  " + boxless.get(key).toString());
+        }
+
+        Map<String, String[]> notCapacity = findContainersUnderCapacity();
+        for (String key : notCapacity.keySet()) {
+            System.out.printf("%s", key);
+            for(String element: notCapacity.get(key)){
+                System.out.printf("%s", "     ,     ");
+                System.out.printf("%s", element);
+            }
+            System.out.printf("%s\n", "");
+
+        }
 
     }
     //TODO (Ksenia)
@@ -272,9 +293,8 @@ public class LabManager extends Application implements User{
         return 0;
     }
 
-    //Query
-    //TODO (Darius): Refer to the application functionality document in the Drive.
-    public int findBoxlessSamples(){
+    //Query 10
+    public Map<String, String> findBoxlessSamples(){
         Statement stmt;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
@@ -282,64 +302,67 @@ public class LabManager extends Application implements User{
             try {
                 Connection con = connectionToDatabase.getConnection();
                 stmt = con.createStatement();
+                String sampleID;
+                String dateCreated;
+                Map<String, String> boxlessSamples = new HashMap<String, String>();
 
+                results = stmt.executeQuery("select s.samp_id, s.date_cr from sample s LEFT JOIN " +
+                        "contains c on s.samp_id = c.samp_id where c.c_id IS NULL order by s.samp_id");
+                while (results.next()) {
+                    //Get the values at each row
+                    sampleID = results.getString("samp_id");
+                    dateCreated = results.getDate("date_cr").toString();
+                    if (!results.wasNull()) {
+                        boxlessSamples.put(sampleID, dateCreated);
+                    }
+                }
+                stmt.close();
+                return boxlessSamples;
 
-            } catch (Exception ex) {
+            } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
             }
         }
-
-
-        return 0;
+        return null;
     }
 
-    //Query
-    //TODO (Darius): Refer to the application functionality document in the Drive.
-    public Map<String, String[]> findBoxesUnderCapacity(){
-        // TODO: FIX THIS I AM A BAD PERSON FOR COPYING THIS
-        Statement stmt1;
-        Statement stmt2;
-        ResultSet rs;
+    //Query 11
+    public Map<String, String[]> findContainersUnderCapacity(){
+        Statement stmt;
+        ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
-                stmt1 = con.createStatement();
-                stmt2 = con.createStatement();
-                String name;
-                Map<String, String[]> workerList = new HashMap<String, String[]>();
+                stmt = con.createStatement();
+                String containerID;
+                String fridgeID;
+                String fridgeOccupancy;
+                String containerOccupancy;
+                String containerName;
 
-                rs = stmt1.executeQuery("select name from lab_manager");
-                while (rs.next()) {
-                    name = rs.getString("name");
-                    if (!rs.wasNull()) {
-                        //System.out.printf("%-20.20s", name);
-                        String[] typeOfWorker = {"Lab Manager"};
-                        workerList.put(name, typeOfWorker);
+                Map<String, String[]> underCapacityContainers = new HashMap<String, String[]>();
+
+                results = stmt.executeQuery("select c2.f_occupancy, c2.c_name, c2.c_occupancy, " +
+                        "c2.c_id, c2.fr_id, c2.c_date from container1 c1 LEFT JOIN container2 c2 " +
+                        "on c2.c_occupancy=c1.c_occupancy where c1.at_capacity=0 AND c2.f_occupancy " +
+                        "IS NOT NULL");
+                while (results.next()) {
+                    containerID = results.getString("c_id");
+                    fridgeID = results.getString("fr_id");
+                    fridgeOccupancy = results.getString("f_occupancy");
+                    containerOccupancy = results.getString("c_occupancy");
+                    containerName = results.getString("c_name");
+                    if (!results.wasNull()) {
+                        String[] attributes = {"Container Name: " + containerName, "Container Occupancy: " +
+                        containerOccupancy, "Fridge Occupancy: " + fridgeOccupancy, "FridgeID: " +
+                        fridgeID};
+                        underCapacityContainers.put(containerID, attributes);
                     }
-                    //System.out.println("     ");
                 }
-                stmt1.close();
+                stmt.close();
 
-                rs = stmt2.executeQuery("select name from researcher");
-                while (rs.next()) {
-                    name = rs.getString("name");
-                    if (!rs.wasNull()) {
-                        if (workerList.get(name) == null) {
-                            //System.out.printf("%-20.20s", name);
-                            String[] typeOfWorker = {"Researcher"};
-                            workerList.put(name, typeOfWorker);
-                        } else {
-                            //System.out.printf("%-20.20s", name);
-                            String[] typeOfWorker = {"Lab Manager and Researcher"};
-                            workerList.put(name, typeOfWorker);
-                        }
-                    }
-                    //System.out.println("     ");
-                }
-                stmt1.close();
-
-                return workerList;
+                return underCapacityContainers;
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
             }

@@ -31,10 +31,9 @@ public class ExternalUser extends Application implements User{
         Map<String, String[]> sampleList = generateSampleList();
         for (String key : sampleList.keySet()) {
             System.out.printf("%s", key);
-            System.out.printf("%s", "     ,     ");
             for(String element: sampleList.get(key)){
-                System.out.printf("%s", element);
                 System.out.printf("%s", "     ,     ");
+                System.out.printf("%s", element);
             }
             System.out.printf("%s\n", "");
 
