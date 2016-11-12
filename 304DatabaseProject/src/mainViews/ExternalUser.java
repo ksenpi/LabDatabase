@@ -51,7 +51,8 @@ public class ExternalUser extends Application implements User{
         Statement stmt2;
         ResultSet rs;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
                 stmt1 = con.createStatement();
@@ -105,7 +106,8 @@ public class ExternalUser extends Application implements User{
         Statement stmt2;
         ResultSet rs;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
                 stmt1 = con.createStatement();

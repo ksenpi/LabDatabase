@@ -208,6 +208,21 @@ public class LabManager extends Application implements User{
     //Query
     //TODO (Darius): Refer to the application functionality document in the Drive.
     public int findBoxlessSamples(){
+        Statement stmt;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.createStatement();
+
+
+            } catch (Exception ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+
+
         return 0;
     }
 
