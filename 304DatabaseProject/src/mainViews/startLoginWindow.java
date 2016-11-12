@@ -1,6 +1,8 @@
 package mainViews;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,6 +62,25 @@ public class startLoginWindow extends Application  {
 
         TextField userTextField = new TextField();
         grid.add(userTextField, 1, 2);
+        userTextField.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = userTextField.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        userTextField.setText(userTextField.getText().substring(0,userTextField.getText().length()-1));
+                    }
+                }
+            }
+
+        });
 
         /*Label pw = new Label("Password:");
         grid.add(pw, 0, 3);
@@ -88,7 +109,10 @@ public class startLoginWindow extends Application  {
                 else if (true) // todo - darius - check that the user ID is in the corresponding user table
                 {
                     if (comboBox.getValue().equals("Researcher")){
-                      ;//todo - tamar - show researcher view panel
+                        //todo - tamar/darius - check that the id is in userid 
+                        researcher = new Researcher(Integer.parseInt(userTextField.getText()));
+                        researcher.start(Researcher.classStage);
+                        ;//todo - tamar - show researcher view panel
                     }
                         //todo - tamar - show researcher view panel
                     if (comboBox.getValue().equals("Lab Manager"))
