@@ -13,17 +13,25 @@ import java.util.Map;
 public class LabManager extends Application implements User{
 
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);                      //PUT THIS BACK IN LATER!
+        LabManager lb = new LabManager();
+
+        //lb.addFridge(2, -10, 10);           //fix this, inserting into maintains table doesn't work right now
+        //lb.addLabManager("Darius Bird");   //this works! yay
+        //lb.addResearcher("Zac Efron");     //this works! yay
+        //lb.removeLabManager(10);           //this works! yay
     }
 
     @Override
     public void start(Stage primaryStage) {
 
     }
-
-    public String addFridge(int fridgeID, int fridgeOccupancy, int temperature, int employeeID){
+    //TODO (Ksenia)
+    public String addFridge(int fridgeOccupancy, int temperature, int employeeID){
         PreparedStatement ps1;
         PreparedStatement ps2;
+        ResultSet rs;
+        Statement stmt;
         OurConnection connectionToDatabase = new OurConnection();
         Connection con = null;
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
@@ -32,15 +40,22 @@ public class LabManager extends Application implements User{
 
                 con = connectionToDatabase.getConnection();
 
-                final String queryCheck = "SELECT * from fridge2 WHERE fr_id = ?";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("select max(fr_id) as max from fridge2");
+                int fridgeID = 0;
+                if(rs.next()){
+                    fridgeID = rs.getInt("max") + 1;
+                }
+
+                /*final String queryCheck = "SELECT * from fridge2 WHERE fr_id = ?";
                 final PreparedStatement psCheck = con.prepareStatement(queryCheck);
                 psCheck.setInt(1, fridgeID);
-                final ResultSet resultSet = psCheck.executeQuery();
-                if(resultSet.next()) {
+                final ResultSet resultSet = psCheck.executeQuery();*/
+                /*if(resultSet.next()) {
                     return "Error_Already_Exists";
 
-                }
-                else{
+                }*/
+                //else{
                     ps1 = con.prepareStatement("INSERT INTO fridge2 VALUES (?,?,?)");
                     ps1.setInt(1, fridgeID);
                     ps1.setInt(2, fridgeOccupancy);
@@ -54,7 +69,7 @@ public class LabManager extends Application implements User{
                     ps2 = con.prepareStatement("INSERT INTO maintains VALUES (?,?,?)");
                     ps2.setInt(1, fridgeID);
                     ps2.setInt(2, fridgeOccupancy);
-                    ps2.setInt(3, 0); //TODO (Ksenia): Discuss in meeting and change this
+                    ps2.setInt(3, employeeID);  //This insert currently never works.
 
                     ps2.executeUpdate();
                     con.commit();
@@ -62,7 +77,7 @@ public class LabManager extends Application implements User{
                     ps2.close();
                     return "OK";
 
-                }
+                //}
 
             } catch (SQLException ex) {
 
@@ -85,8 +100,10 @@ public class LabManager extends Application implements User{
         return 0;
     }
 
-    public String addResearcher(int employeeID, String employeeName){
+    public String addResearcher(String employeeName){
         PreparedStatement ps1;
+        ResultSet rs;
+        Statement stmt;
         OurConnection connectionToDatabase = new OurConnection();
         Connection con = null;
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
@@ -95,15 +112,22 @@ public class LabManager extends Application implements User{
 
                 con = connectionToDatabase.getConnection();
 
-                final String queryCheck = "SELECT * from researcher WHERE emp_id = ?";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("select max(emp_id) as max from researcher");
+                int employeeID = 0;
+                if(rs.next()){
+                    employeeID = rs.getInt("max") + 1;
+                }
+
+                /*final String queryCheck = "SELECT * from researcher WHERE emp_id = ?";
                 final PreparedStatement psCheck = con.prepareStatement(queryCheck);
                 psCheck.setInt(1, employeeID);
                 final ResultSet resultSet = psCheck.executeQuery();
                 if(resultSet.next()) {
                     return "Error_Already_Exists";
 
-                }
-                else{
+                }*/
+                //else{
 
                     ps1 = con.prepareStatement("INSERT INTO researcher VALUES (?,?)");
                     ps1.setInt(1, employeeID);
@@ -115,7 +139,7 @@ public class LabManager extends Application implements User{
                     ps1.close();
                     return "OK";
 
-                }
+                //}
 
             } catch (SQLException ex) {
 
@@ -135,8 +159,10 @@ public class LabManager extends Application implements User{
     }
 
 
-    public String addLabManager(int employeeID, String employeeName){
+    public String addLabManager(String employeeName){
         PreparedStatement ps1;
+        ResultSet rs;
+        Statement stmt;
         OurConnection connectionToDatabase = new OurConnection();
         Connection con = null;
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
@@ -145,15 +171,22 @@ public class LabManager extends Application implements User{
 
                 con = connectionToDatabase.getConnection();
 
-                final String queryCheck = "SELECT * from lab_manager WHERE emp_id = ?";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("select max(emp_id) as max from lab_manager");
+                int employeeID = 0;
+                if(rs.next()){
+                    employeeID = rs.getInt("max") + 1;
+                }
+
+                /*final String queryCheck = "SELECT * from lab_manager WHERE emp_id = ?";
                 final PreparedStatement psCheck = con.prepareStatement(queryCheck);
                 psCheck.setInt(1, employeeID);
                 final ResultSet resultSet = psCheck.executeQuery();
                 if(resultSet.next()) {
                     return "Error_Already_Exists";
 
-                }
-                else{
+                }*/
+                //else{
 
                     ps1 = con.prepareStatement("INSERT INTO lab_manager VALUES (?,?)");
                     ps1.setInt(1, employeeID);
@@ -165,7 +198,7 @@ public class LabManager extends Application implements User{
                     ps1.close();
                     return "OK";
 
-                }
+                //}
 
             } catch (SQLException ex) {
 
@@ -183,9 +216,43 @@ public class LabManager extends Application implements User{
 
         return "Error_Adding";
     }
-    //TODO (Ksenia)
-    public int removeLabManager(){
-        return 0;
+
+    public String removeLabManager(int employeeID){
+
+        PreparedStatement ps1;
+
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+
+                con = connectionToDatabase.getConnection();
+
+                ps1 = con.prepareStatement("DELETE FROM lab_manager WHERE emp_id = ?");
+                ps1.setInt(1, employeeID);
+
+                ps1.executeUpdate();
+                con.commit();
+
+                ps1.close();
+                return "OK";
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Adding";
+
     }
     //TODO (Ksenia)
     public int addSampleToBox(){
