@@ -63,7 +63,7 @@ public class Researcher extends Application implements User {
         addSample = new Button("Add Sample");
         editSample = new Button("Edit Sample");
         addSampleResearch = new Button("Research Sample");
-        samplesCreatedBy = new Button("Samples Created");
+        samplesCreatedBy = new Button("Samples Created By");
         addBox = new Button("Add Box");
         removeBox = new Button("Remove Box");
         //making button actions
@@ -498,10 +498,103 @@ public class Researcher extends Application implements User {
         addSampleResearchScene = new Scene(addSampleResearchPane, 1000, 500);
 
 
-        // samplesCreatedByScene////////////////////////////////////////////////////////////////////////////////////////
-        // addBoxScene//////////////////////////////////////////////////////////////////////////////////////////////////
-        //removeBoxScene////////////////////////////////////////////////////////////////////////////////////////////////
+        //samplesCreatedByScene////////////////////////////////////////////////////////////////////////////////////////
+        //todo -tamar
+        //addBoxScene//////////////////////////////////////////////////////////////////////////////////////////////////
+        //(C_Name:varchar, C_Occupancy:integer, C_ID:integer, Fr_ID:integer, F_Occupancy:integer, C_Date:date)
+        //Buttons
+        Button enterAddBox = new Button("Enter");
+        enterAddBox.setOnAction(new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent e) {
+                addBox(); //todo - tamar- add the right call now
+            }
+        });
+        Label boxName = new Label("Box Name:");
+        TextField boxNametxt = new TextField();
+        //addBoxPain
+        addBoxPane = new GridPane();
+        addBoxPane.setAlignment(Pos.CENTER);
+        addBoxPane.setHgap(10);
+        addBoxPane.setVgap(10);
+        addBoxPane.setPadding(new Insets(25, 25, 25, 25));
+        addBoxPane.setVgap(10);
+        //adding the buttons
+        addBoxPane.add(boxName,0,0);
+        addBoxPane.add(boxNametxt,1,0);
+        addBoxPane.add(addBoxBack,0,7);                  //check the placement of this button
+        addBoxPane.add(enterAddBox,7,7);
+        //addBoxPane.add();
+        addBoxScene = new Scene(addBoxPane, 1000, 500);
+
+        //removeBoxScene////////////////////////////////////////////////////////////////////////////////////////////////
+        Button enterRemoveBox = new Button("Enter");
+        enterRemoveBox.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                removeBox(); //todo - tamar- add the right call now
+            }
+        });
+        Label boxID = new Label("Box ID:");
+        TextField boxIDtxt = new TextField();
+        boxIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = boxIDtxt.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        boxIDtxt.setText(boxIDtxt.getText().substring(0,boxIDtxt.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Label fridgeID = new Label("Fridge ID:");
+        TextField fridgeIDtxt = new TextField();
+        fridgeIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = fridgeIDtxt.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        fridgeIDtxt.setText(fridgeIDtxt.getText().substring(0,fridgeIDtxt.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        //addBoxPain
+        removeBoxPane = new GridPane();
+        removeBoxPane.setAlignment(Pos.CENTER);
+        removeBoxPane.setHgap(10);
+        removeBoxPane.setVgap(10);
+        removeBoxPane.setPadding(new Insets(25, 25, 25, 25));
+        removeBoxPane.setVgap(10);
+        //adding the buttons
+        removeBoxPane.add(boxID,0,0);
+        removeBoxPane.add(boxIDtxt,1,0);
+        removeBoxPane.add(fridgeID,0,1);
+        removeBoxPane.add(fridgeIDtxt,1,1);
+        removeBoxPane.add(removeBoxBack,0,7);                  //check the placement of this button
+        removeBoxPane.add(enterRemoveBox,7,7);
+
+        removeBoxScene = new Scene(removeBoxPane, 1000, 500);
 
         primaryStage.setScene(entryScene);
 
@@ -520,6 +613,10 @@ public class Researcher extends Application implements User {
             theStage.setScene(editSampleScene);
         if (e.getSource()==addSampleResearch)
             theStage.setScene(addSampleResearchScene);
+        if (e.getSource()==addBox)
+            theStage.setScene(addBoxScene);
+        if (e.getSource()==removeBox)
+            theStage.setScene(removeBoxScene);
     }
 
     //TODO(Ksenia): 6 methods below
