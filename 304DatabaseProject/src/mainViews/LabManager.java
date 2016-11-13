@@ -715,7 +715,6 @@ public class LabManager extends Application implements User{
 
     @Override
     //Query 12
-    //To the query in ExternalUser, but this workList generates employee IDs as well.
     public Map<String, String[]> generateWorkList() {
         Statement stmt1;
         Statement stmt2;
@@ -767,9 +766,6 @@ public class LabManager extends Application implements User{
 
     @Override
     //Query 13
-    //TODO (Darius): Refer to the application functionality document in the Drive. Again, this one is similar
-    //To the query in ExternalUser, but this generates more information about the sample, which may
-    //require more complex querying (such as details about the sample).
     public Map<String, String[]> generateSampleList() {
         Statement stmt;
         ResultSet results;
