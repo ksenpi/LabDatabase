@@ -109,7 +109,7 @@ public class startLoginWindow extends Application  {
                 else if (true) // todo - darius - check that the user ID is in the corresponding user table
                 {
                     if (comboBox.getValue().equals("Researcher")){
-                        //todo - tamar/darius - check that the id is in userid 
+                        //todo - tamar/darius - check that the id is in userid
                         researcher = new Researcher(Integer.parseInt(userTextField.getText()));
                         researcher.start(Researcher.classStage);
                         ;//todo - tamar - show researcher view panel
