@@ -1037,12 +1037,12 @@ public class Researcher extends Application implements User {
 
                         }
                         else{
-                            return "Error_Container_At_Capacity";
+                            return "Error_Fridge_At_Capacity";
                         }
                     }
                 }
                 else{
-                    return "Error_Container_NOT_Exist";
+                    return "Error_Fridge_NOT_Exist";
                 }
 
 
