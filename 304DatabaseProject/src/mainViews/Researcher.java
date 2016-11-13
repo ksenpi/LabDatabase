@@ -423,11 +423,53 @@ public class Researcher extends Application implements User {
 
         editSampleScene = new Scene(editSamplePane, 1000, 500);
 
-        /*/ addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
+        // addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
         //startDate, Duration, Samp_ID, Emp_ID
         DatePicker startDate = new DatePicker();
         Label duration = new Label("Duration in Days:");
         TextField durationText = new TextField();
+        durationText.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = durationText.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        durationText.setText(durationText.getText().substring(0,durationText.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Label sampleIDLabel1 = new Label("Sample ID:");
+        TextField SampleIDTextfield1 = new TextField();
+        SampleIDTextfield1.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = SampleIDTextfield1.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        SampleIDTextfield1.setText(SampleIDTextfield1.getText().substring(0,SampleIDTextfield1.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Button enteraddSampleResearch = new Button("Enter");
+
         //addSamplePane
         addSampleResearchPane = new GridPane();
         addSampleResearchPane.setAlignment(Pos.CENTER);
@@ -443,9 +485,9 @@ public class Researcher extends Application implements User {
         addSampleResearchPane.add(sampleIDLabel,0,2);
         addSampleResearchPane.add(sampleIDTextfield,1,2);
 
-        addSampleResearchPane.add(goBack,0,7);                  //check the placement of this button
-        addSampleResearchPane.add(enter,7,7);                   //check the placement of this button
-        enter.setOnAction(new EventHandler<ActionEvent>() {
+        addSampleResearchPane.add(addSampleResearchBack,0,7);                  //check the placement of this button
+        addSampleResearchPane.add(enteraddSampleResearch,7,7);                   //check the placement of this button
+        enteraddSampleResearch.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
@@ -453,8 +495,8 @@ public class Researcher extends Application implements User {
             }
         });
         //addSampleResearchScene
-        addSampleResearchScene = new Scene(addSamplePane, 1000, 500);
-*/
+        addSampleResearchScene = new Scene(addSampleResearchPane, 1000, 500);
+
 
         // samplesCreatedByScene////////////////////////////////////////////////////////////////////////////////////////
         // addBoxScene//////////////////////////////////////////////////////////////////////////////////////////////////
