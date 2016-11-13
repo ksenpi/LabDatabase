@@ -77,14 +77,13 @@ public class LabManager extends Application implements User{
                     ps1.setInt(3, temperature);
 
                     ps1.executeUpdate();
-                    con.commit();
 
                     ps1.close();
 
                     ps2 = con.prepareStatement("INSERT INTO maintains VALUES (?,?,?)");
                     ps2.setInt(1, fridgeID);
                     ps2.setInt(2, 0);
-                    ps2.setInt(3, employeeID);  //This insert currently never works.
+                    ps2.setInt(3, employeeID);
 
                     ps2.executeUpdate();
                     con.commit();
@@ -473,7 +472,7 @@ public class LabManager extends Application implements User{
                 }
             }
         }
-        return "Error_Adding";
+        return "Error_Removing";
     }
 
     public String addBox(String containerName, int fridgeID) {

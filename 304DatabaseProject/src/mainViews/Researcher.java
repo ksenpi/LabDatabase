@@ -2,6 +2,7 @@ package mainViews;/**
  * Created by Tamar on 2016-11-10.
  */
 
+import databaseConnection.OurConnection;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,6 +19,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.sql.*;
+import java.util.Calendar;
 import java.util.Map;
 
 public class Researcher extends Application implements User {
@@ -285,29 +288,498 @@ public class Researcher extends Application implements User {
             thestage.setScene(scene1);*/
     }
 
-    //TODO(Ksenia): 6 methods below
-    public int addSample(){
-        return 0;
+    //type is 0-7
+    public String addSample(int type, String strain, int volume, String composition, int concentration,
+                            String name, String antibiotic, String res_enz_1, String res_enz_2, String origin,
+                            String part1, String part2){
+
+        PreparedStatement ps1;
+        PreparedStatement ps2;
+        PreparedStatement ps3;
+        ResultSet rs;
+        Statement stmt;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+
+                con = connectionToDatabase.getConnection();
+
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("select max(samp_id) as max from sample");
+                int sampleID = 0;
+                if(rs.next()){
+                    sampleID = rs.getInt("max") + 1;
+                }
+
+                java.sql.Date ourJavaDateObject = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+
+                ps1 = con.prepareStatement("INSERT INTO sample VALUES (?,?)");
+                ps1.setInt(1, sampleID);
+                ps1.setDate(2, ourJavaDateObject);
+
+                ps1.executeUpdate();
+                ps1.close();
+
+                if(type >= 0 && type <=2){
+
+                    ps2 = con.prepareStatement("INSERT INTO bacterial_culture VALUES (?,?)");
+                    ps2.setInt(1, sampleID);
+                    ps2.setString(2, strain);
+
+                    ps2.executeUpdate();
+                    //con.commit();
+                    ps2.close();
+
+                }
+                else if(type >=3 && type <=7){
+
+                    ps2 = con.prepareStatement("INSERT INTO dna_sample VALUES (?,?)");
+                    ps2.setInt(1, sampleID);
+                    ps2.setInt(2, concentration);
+
+                    ps2.executeUpdate();
+                    //con.commit();
+                    ps2.close();
+
+                }
+                else{
+                    return "Error_Invalid_Type";
+                }
+
+                switch(type){
+                    case 0:                  //bacterial_culture
+                        break;
+                    case 1:                  //glycerol_stock
+                        ps3 = con.prepareStatement("INSERT INTO glycerol_stock VALUES (?,?)");
+                        ps3.setInt(1, sampleID);
+                        ps3.setInt(2, volume);
+
+                        ps3.executeUpdate();
+                        con.commit();
+                        ps3.close();
+                        break;
+                    case 2:                  //plate
+                        ps3 = con.prepareStatement("INSERT INTO plate VALUES (?,?)");
+                        ps3.setInt(1, sampleID);
+                        ps3.setString(2, composition);
+
+                        ps3.executeUpdate();
+                        con.commit();
+                        ps3.close();
+                        break;
+                    case 3:                  //dna_sample
+                        break;
+                    case 4:                  //plasmid
+                        ps3 = con.prepareStatement("INSERT INTO plasmid VALUES (?,?,?)");
+                        ps3.setInt(1, sampleID);
+                        ps3.setString(2, name);
+                        ps3.setString(3, antibiotic);
+
+                        ps3.executeUpdate();
+                        con.commit();
+                        ps3.close();
+                        break;
+                    case 5:                  //digest
+                        ps3 = con.prepareStatement("INSERT INTO digest VALUES (?,?,?)");
+                        ps3.setInt(1, sampleID);
+                        ps3.setString(2, res_enz_1);
+                        ps3.setString(3, res_enz_2);
+
+                        ps3.executeUpdate();
+                        con.commit();
+                        ps3.close();
+                        break;
+                    case 6:                  //genomic
+                        ps3 = con.prepareStatement("INSERT INTO genomic VALUES (?,?)");
+                        ps3.setInt(1, sampleID);
+                        ps3.setString(2, origin);
+
+                        ps3.executeUpdate();
+                        con.commit();
+                        ps3.close();
+                        break;
+                    case 7:                  //ligation
+                        ps3 = con.prepareStatement("INSERT INTO ligation VALUES (?,?,?)");
+                        ps3.setInt(1, sampleID);
+                        ps3.setString(2, part1);
+                        ps3.setString(3, part2);
+
+                        ps3.executeUpdate();
+                        con.commit();
+                        ps3.close();
+                        break;
+
+                }
+                return "OK";
+
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Adding";
     }
 
-    public int editSample(){
-        return 0;
-    }
+    public String editSample(int sampleID, String strain, int volume, String composition, int concentration,
+                             String name, String antibiotic, String res_enz_1, String res_enz_2, String origin,
+                             String part1, String part2){
 
-    public int addSampleResearch(){
-        return 0;
-    }
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                con = connectionToDatabase.getConnection();
 
+                final String queryCheck = "SELECT * from sample WHERE samp_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, sampleID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    if(strain!=null){
+                        PreparedStatement ps = con.prepareStatement("UPDATE bacterial_culture " +
+                                "SET strain = ? WHERE sample_id = ?");
+                        ps.setString(1, strain);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+                    }
+                    if(volume!=0){
+                        PreparedStatement ps = con.prepareStatement("UPDATE glycerol_stock " +
+                                "SET volume = ? WHERE sample_id = ?");
+                        ps.setInt(1, volume);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(composition!=null){
+                        PreparedStatement ps = con.prepareStatement("UPDATE plate " +
+                                "SET composition = ? WHERE sample_id = ?");
+                        ps.setString(1, composition);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(concentration!=0){
+                        PreparedStatement ps = con.prepareStatement("UPDATE dna_sample " +
+                                "SET concentration = ? WHERE sample_id = ?");
+                        ps.setInt(1, concentration);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(name!=null){
+                        PreparedStatement ps = con.prepareStatement("UPDATE plasmid " +
+                                "SET name = ? WHERE sample_id = ?");
+                        ps.setString(1, name);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(antibiotic!=null){
+
+                        PreparedStatement ps = con.prepareStatement("UPDATE plasmid " +
+                                "SET antibiotic = ? WHERE sample_id = ?");
+                        ps.setString(1, antibiotic);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(res_enz_1!=null){
+
+                        PreparedStatement ps = con.prepareStatement("UPDATE digest " +
+                                "SET res_enz_1 = ? WHERE sample_id = ?");
+                        ps.setString(1, res_enz_1);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(res_enz_2!=null){
+                        PreparedStatement ps = con.prepareStatement("UPDATE digest " +
+                                "SET res_enz_2 = ? WHERE sample_id = ?");
+                        ps.setString(1, res_enz_2);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(origin!=null){
+                        PreparedStatement ps = con.prepareStatement("UPDATE genomic " +
+                                "SET origin = ? WHERE sample_id = ?");
+                        ps.setString(1, origin);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(part1!=null){
+                        PreparedStatement ps = con.prepareStatement("UPDATE ligation " +
+                                "SET part1 = ? WHERE sample_id = ?");
+                        ps.setString(1, part1);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+                    if(part2!=null){
+                        PreparedStatement ps = con.prepareStatement("UPDATE ligation " +
+                                "SET part2 = ? WHERE sample_id = ?");
+                        ps.setString(1, part2);
+                        ps.setInt(2, sampleID);
+                        ps.executeUpdate();
+
+                        con.commit();
+                        ps.close();
+
+                    }
+
+                    return "OK";
+
+                }
+                else{
+                    return "Error_Does_NOT_Exist";
+                }
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the update
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Updating";
+    }
+    //TODO (Ksenia)
+    public String addSampleResearch(int employeeID, int duration, int sampleID){
+        PreparedStatement ps1;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                con = connectionToDatabase.getConnection();
+
+                final String queryCheck = "SELECT * from sample WHERE samp_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, sampleID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    if(duration <= 30 && duration >=0){
+                        java.sql.Date ourJavaDateObject = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+                        ps1 = con.prepareStatement("INSERT INTO researches VALUES (?,?,?,?)");
+                        ps1.setInt(1, employeeID);
+                        ps1.setDate(2, ourJavaDateObject);
+                        ps1.setInt(3, duration);
+                        ps1.setInt(4, sampleID);
+
+                        ps1.executeUpdate();
+                        con.commit();
+
+                        ps1.close();
+                        return "OK";
+
+                    }
+                    else{
+                        return "Error_Invalid_Duration";
+                    }
+                }
+                else{
+                    return "Error_Sample_NOT_Exist";
+                }
+
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Adding";
+    }
+    //TODO (Ksenia) Do some more queries by input here!
     public int samplesCreatedBy(String name){
         return 0;
     }
+    public String addBox(String containerName, int fridgeID) {
 
-    public int addBox() {
-        return 0;
+        PreparedStatement ps1;
+        ResultSet rs;
+        Statement stmt;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                con = connectionToDatabase.getConnection();
+
+                final String queryCheck = "SELECT * from fridge2 WHERE fr_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, fridgeID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    int occupancy = resultSet.getInt("f_occupancy");
+                    final String queryCheck2 = "SELECT * from fridge1 where f_occupancy = ?";
+                    final PreparedStatement psCheck2 = con.prepareStatement(queryCheck2);
+                    psCheck2.setInt(1, occupancy);
+                    final ResultSet resultSet2 = psCheck2.executeQuery();
+
+                    if(resultSet2.next()){
+                        int condition = resultSet2.getInt("at_capacity");
+                        if(condition == 0){
+
+                            stmt = con.createStatement();
+                            rs = stmt.executeQuery("select max(c_id) as max from container2");
+                            int containerID = 0;
+                            if(rs.next()){
+                                containerID = rs.getInt("max") + 1;
+                            }
+
+                            java.sql.Date ourJavaDateObject = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+                            ps1 = con.prepareStatement("INSERT INTO container2 VALUES (?,?,?,?,?,?)");
+                            ps1.setInt(1, occupancy);
+                            ps1.setString(2, containerName);
+                            ps1.setInt(3, 0);
+                            ps1.setInt(4, containerID);
+                            ps1.setInt(5, fridgeID);
+                            ps1.setDate(6, ourJavaDateObject);
+
+                            ps1.executeUpdate();
+                            con.commit();
+
+                            ps1.close();
+                            return "OK";
+
+                        }
+                        else{
+                            return "Error_Container_At_Capacity";
+                        }
+                    }
+                }
+                else{
+                    return "Error_Container_NOT_Exist";
+                }
+
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Adding";
     }
 
-    public int removeBox() {
-        return 0;
+    public String removeBox(int containerID) {
+        PreparedStatement ps1;
+        ResultSet rs;
+        Statement stmt;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                con = connectionToDatabase.getConnection();
+
+                final String queryCheck = "SELECT * from container2 WHERE c_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, containerID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    int occupancy = resultSet.getInt("c_occupancy");
+                    if(occupancy == 0){
+                        ps1 = con.prepareStatement("DELETE FROM container2 WHERE c_id = ?");
+                        ps1.setInt(1, containerID);
+
+                        ps1.executeUpdate();
+                        con.commit();
+
+                        ps1.close();
+                        return "OK";
+                    }
+                    else{
+                        return "Error_Occupancy_NOT_0";
+                    }
+
+                }
+                else{
+                    return "Error_Container_NOT_Exist";
+                }
+
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Removing";
     }
 
     @Override
