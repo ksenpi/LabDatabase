@@ -95,7 +95,6 @@ public class Researcher extends Application implements User {
 
 
         //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
-        //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
         Label sampleType = new Label("Sample Type");
         ChoiceBox sampleTypeBox = new ChoiceBox();
         sampleTypeBox.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
@@ -181,7 +180,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addSample(); //todo - tamar- add the right call now
+                //addSample(); //todo - tamar- add the right call now
             }
         });
 
@@ -249,10 +248,41 @@ public class Researcher extends Application implements User {
         addSampleScene = new Scene(addSamplePane, 1000, 500);
 
         // editSampleScene//////////////////////////////////////////////////////////////////////////////////////////////
+        //make buttons
         Label sampleType1 = new Label("Sample Type");
         ChoiceBox sampleTypeBox1 = new ChoiceBox();
         sampleTypeBox1.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
-        //sampleTypeBox.getItems().addAll("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest");
+        Label sampleIDLabel = new Label("Sample ID: ");
+        TextField sampleIDTextfield = new TextField();
+        sampleIDTextfield.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = sampleIDTextfield.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        sampleIDTextfield.setText(sampleIDTextfield.getText().substring(0,sampleIDTextfield.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Button enterEditSample = new Button("Enter");
+        enterEditSample.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                //editSample(); //todo - tamar- add the right call now
+            }
+        });
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Label strain1 = new Label("Strain:");
         TextField strainTextField1 = new TextField();
         Label volume1 = new Label("Volume(mL):");
@@ -313,57 +343,25 @@ public class Researcher extends Application implements User {
         TextField ligation1TextField1 = new TextField();
         Label ligation21 = new Label("Ligation Part 2:");
         TextField ligation2TextField1 = new TextField();
-
-        Button enterEditSample = new Button("Enter");
-
-
-        Label sampleIDLabel = new Label("Sample ID: ");
-        TextField sampleIDTextfield = new TextField();
-        sampleIDTextfield.lengthProperty().addListener(new ChangeListener<Number>(){
-
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                if(newValue.intValue() > oldValue.intValue()){
-                    char ch = sampleIDTextfield.getText().charAt(oldValue.intValue());
-                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
-
-                    //Check if the new character is the number or other's
-                    if(!(ch >= '0' && ch <= '9' )){
-
-                        //if it's not number then just setText to previous one
-                        sampleIDTextfield.setText(sampleIDTextfield.getText().substring(0,sampleIDTextfield.getText().length()-1));
-                    }
-                }
-            }
-
-        });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        //editSamplePane (gridpane)
+
+        //entryPane (gridpane)
         editSamplePane = new GridPane();
         editSamplePane.setAlignment(Pos.CENTER);
         editSamplePane.setHgap(10);
         editSamplePane.setVgap(10);
         editSamplePane.setPadding(new Insets(25, 25, 25, 25));
         editSamplePane.setVgap(10);
-
         //adding all the buttons to the entry pane
-        editSamplePane.add(sampleType1, 0, 0);
+        editSamplePane.add(sampleType1,0, 0);
         editSamplePane.add(sampleTypeBox1, 1, 0);
-        editSamplePane.add(sampleIDLabel,2,0);
-        editSamplePane.add(sampleIDTextfield,3,0);
-
+        editSamplePane.add(sampleIDLabel, 2, 0);
+        editSamplePane.add(sampleIDTextfield, 3, 0);
         editSamplePane.add(editSampleBack,0,7);                  //check the placement of this button
-        editSamplePane.add(enterEditSample,7,7);                   //check the placement of this button
-        enterEditSample.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                editSample(); //todo - tamar- add the right call now
-            }
-        });
-
+        editSamplePane.add(enterEditSample,7,7);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         sampleTypeBox1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -377,7 +375,7 @@ public class Researcher extends Application implements User {
                     editSamplePane.add(strain1, 0, 1);
                     editSamplePane.add(strainTextField1, 1, 1);
                     editSamplePane.add(volume1, 0, 2);
-                    addSamplePane.add(volumeTextField1, 1, 2);
+                    editSamplePane.add(volumeTextField1, 1, 2);
                 }
                 if(sampleTypeBox1.getValue()=="Plate"){
                     editSamplePane.add(strain1, 0, 1);
@@ -424,7 +422,7 @@ public class Researcher extends Application implements User {
 
 
         });
-
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         editSampleScene = new Scene(editSamplePane, 1000, 500);
 
         // addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
@@ -486,8 +484,8 @@ public class Researcher extends Application implements User {
         addSampleResearchPane.add(startDate, 0, 0);
         addSampleResearchPane.add(duration, 0, 1);
         addSampleResearchPane.add(durationText,1,1);
-        addSampleResearchPane.add(sampleIDLabel,0,2);
-        addSampleResearchPane.add(sampleIDTextfield,1,2);
+        addSampleResearchPane.add(sampleIDLabel1,0,2);
+        addSampleResearchPane.add(SampleIDTextfield1,1,2);
 
         addSampleResearchPane.add(addSampleResearchBack,0,7);                  //check the placement of this button
         addSampleResearchPane.add(enteraddSampleResearch,7,7);                   //check the placement of this button
@@ -495,7 +493,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addSampleResearch(); //todo - tamar- add the right call now
+                //addSampleResearch(); //todo - tamar- add the right call now
             }
         });
         //addSampleResearchScene
@@ -512,7 +510,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addBox(); //todo - tamar- add the right call now
+                //addBox(); //todo - tamar- add the right call now
             }
         });
         Label boxName = new Label("Box Name:");
@@ -538,7 +536,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                removeBox(); //todo - tamar- add the right call now
+                //removeBox(); //todo - tamar- add the right call now
             }
         });
         Label boxID = new Label("Box ID:");
@@ -1038,12 +1036,12 @@ public class Researcher extends Application implements User {
 
                         }
                         else{
-                            return "Error_Container_At_Capacity";
+                            return "Error_Fridge_At_Capacity";
                         }
                     }
                 }
                 else{
-                    return "Error_Container_NOT_Exist";
+                    return "Error_Fridge_NOT_Exist";
                 }
 
 
