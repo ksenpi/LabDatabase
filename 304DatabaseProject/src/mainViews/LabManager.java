@@ -14,8 +14,11 @@ import java.util.Map;
 public class LabManager extends Application implements User{
 
     public static void main(String[] args) {
-        launch(args);
+       // launch(args);
 
+    // Just for testing!
+        LabManager lb = new LabManager();
+        lb.start(null);
 
     }
 
@@ -651,11 +654,11 @@ public class LabManager extends Application implements User{
                         "contains c on s.samp_id = c.samp_id where c.c_id IS NULL order by s.samp_id");
                 while (results.next()) {
                     //Get the values at each row
-                    if (!results.wasNull()) {
+                   // if (!results.wasNull()) {
                     sampleID = "Sample ID: " + results.getString("samp_id");
                     dateCreated = "Date Created: " + results.getDate("date_cr").toString();
                         boxlessSamples.put(sampleID, dateCreated);
-                    }
+                    //}
                 }
                 stmt.close();
                 return boxlessSamples;
@@ -803,103 +806,103 @@ public class LabManager extends Application implements User{
                         "r.samp_id LEFT JOIN glycerol_stock g2 on s.samp_id = g2.sample_id");
                 while (results.next()) {
                     //All the attributes
-                    name = "Name: " + results.getString("name");
-                    sampleID = "SampleID: " + results.getString("samp_id");
-                    volume = "Volume: " + results.getString("volume");
-                    composition = "Composition: " + results.getString("composition");
-                    strain = "Strain: " + results.getString("strain");
-                    concentration = "Concentration: " + results.getString("concentration");
-                    antibiotic = "Antibiotic: " + results.getString("antibiotic");
-                    res_enz_1 = "Restriction Enzyme 1: " + results.getString("res_enz_1");
-                    res_enz_2 = "Restriction Enzyme 2: " + results.getString("res_enz_2");
-                    origin = "Origin: " + results.getString("origin");
-                    part1 = "Part1: " + results.getString("part1");
-                    part2 = "Part2: " + results.getString("part2");
-                    empID = "Researcher ID: " + results.getString("emp_id");
-                    dateCreated = "Date Created: " + results.getString("date_cr");
+                    name = results.getString("name");
+                    sampleID = results.getString("samp_id");
+                    volume = results.getString("volume");
+                    composition = results.getString("composition");
+                    strain = results.getString("strain");
+                    concentration = results.getString("concentration");
+                    antibiotic = results.getString("antibiotic");
+                    res_enz_1 = results.getString("res_enz_1");
+                    res_enz_2 = results.getString("res_enz_2");
+                    origin = results.getString("origin");
+                    part1 = results.getString("part1");
+                    part2 = results.getString("part2");
+                    empID = results.getString("emp_id");
+                    dateCreated = results.getDate("date_cr").toString();
                     if (empID != null) {
                         // There is someone resarching the sample
                         if (part1 != null) {
-                            String[] sampleAttributes = {empID, dateCreated, concentration, part1, part2};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Part1: " + part1, "Part2: " + part2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (origin != null) {
-                            String[] sampleAttributes = {empID, dateCreated, concentration, origin};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Origin: " + origin};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (res_enz_1 != null) {
-                            String[] sampleAttributes = {empID, dateCreated, concentration, res_enz_1, res_enz_2};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (name != null) {
-                            String[] sampleAttributes = {empID, dateCreated, concentration, name, antibiotic};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Name: " + name, "Antibiotic: " + antibiotic};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (res_enz_1 != null) {
-                            String[] sampleAttributes = {empID, dateCreated, concentration, res_enz_1, res_enz_2};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (concentration != null) {
-                            String[] sampleAttributes = {empID, dateCreated, concentration};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (composition != null) {
-                            String[] sampleAttributes = {empID, dateCreated, strain, composition};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Strain: " + strain, "Composition: " + composition};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (volume != null) {
-                            String[] sampleAttributes = {empID, dateCreated, strain, volume};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Strain: " + strain, "Volume: " + volume};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (strain != null) {
-                            String[] sampleAttributes = {empID, dateCreated, strain};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Strain: " + strain};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (sampleID != null) {
-                            String[] sampleAttributes = {empID, dateCreated};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                     } else //There is nobody researching the sample
                     {
                         if (part1 != null) {
-                            String[] sampleAttributes = {dateCreated, concentration, part1, part2};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Part1: " + part1, "Part2: " + part2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (origin != null) {
-                            String[] sampleAttributes = {dateCreated, concentration, origin};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Origin: " + origin};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (res_enz_1 != null) {
-                            String[] sampleAttributes = {dateCreated, concentration, res_enz_1, res_enz_2};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (name != null) {
-                            String[] sampleAttributes = {dateCreated, concentration, name, antibiotic};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Name: " + name, "Antibiotic: " + antibiotic};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (res_enz_1 != null) {
-                            String[] sampleAttributes = {dateCreated, concentration, res_enz_1, res_enz_2};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (concentration != null) {
-                            String[] sampleAttributes = {dateCreated, concentration};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, concentration};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (composition != null) {
-                            String[] sampleAttributes = {dateCreated, strain, composition};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Strain: " + strain, "Composition: " + composition};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (volume != null) {
-                            String[] sampleAttributes = {dateCreated, strain, volume};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Strain: " + strain, "Volume: " + volume};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (strain != null) {
-                            String[] sampleAttributes = {dateCreated, strain};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Strain: " + strain};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                         else if (sampleID != null) {
-                            String[] sampleAttributes = {dateCreated};
-                            sampleList.put(sampleID, sampleAttributes);
+                            String[] sampleAttributes = {"Date Created: " + dateCreated};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
                         }
                     }
                 }

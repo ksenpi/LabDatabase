@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8f6ef1a-ccc3-4a2f-b69a-c912173161e9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$2.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/304DatabaseProject/mainViews/LabManagerTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tst/mainViews/LabManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$1.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$2.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$3.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$4.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$1.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/304DatabaseProject.iml" afterPath="$PROJECT_DIR$/304DatabaseProject.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/LabManager.java" afterPath="$PROJECT_DIR$/src/mainViews/LabManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/Researcher.java" afterPath="$PROJECT_DIR$/src/mainViews/Researcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/startLoginWindow.java" afterPath="$PROJECT_DIR$/src/mainViews/startLoginWindow.java" />
     </list>
     <ignored path="LabDatabase.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,6 +16,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/304DatabaseProject$LabManager.coverage" NAME="LabManager Coverage Results" MODIFIED="1479016357931" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>mainViews.*</FILTER>
+    </SUITE>
+  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -44,27 +34,49 @@
         <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="200" column="17" selection-start-line="200" selection-start-column="17" selection-end-line="200" selection-end-column="17" />
+              <caret line="218" column="18" selection-start-line="218" selection-start-column="13" selection-end-line="218" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LabManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LabManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mainViews/LabManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.37572256">
+              <caret line="817" column="57" selection-start-line="817" selection-start-column="57" selection-end-line="817" selection-end-column="57" />
+              <folding>
+                <element signature="e#23273#23289#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OracleResultSetImpl.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/Desktop/classes12.jar!/oracle/jdbc/driver/OracleResultSetImpl.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.333333">
+              <caret line="1263" column="0" selection-start-line="1263" selection-start-column="0" selection-end-line="1263" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/application/Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58179724">
-              <caret line="427" column="33" selection-start-line="427" selection-start-column="33" selection-end-line="427" selection-end-column="33" />
+            <state vertical-scroll-proportion="-32.291668">
+              <caret line="455" column="20" selection-start-line="455" selection-start-column="20" selection-end-line="455" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -102,8 +114,8 @@
         <option value="$PROJECT_DIR$/304DatabaseProject/src/mainViews/LabManager.java" />
         <option value="$PROJECT_DIR$/304DatabaseProject/src/mainViews/Researcher.java" />
         <option value="$PROJECT_DIR$/src/mainViews/ExternalUser.java" />
-        <option value="$PROJECT_DIR$/src/mainViews/LabManager.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/mainViews/LabManager.java" />
       </list>
     </option>
   </component>
@@ -570,18 +582,19 @@
     <frame x="640" y="23" width="1227" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24938875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293919" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293919" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30408472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925835" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24938875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39939487" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -615,7 +628,17 @@
     <option name="LAST_COMMIT_MESSAGE" value="Replaced all existing users with javafx files&#10;" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/mainViews/LabManager.java</url>
+          <line>27</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -635,7 +658,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#23273#23289#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -684,27 +709,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-32.291668">
+          <caret line="455" column="20" selection-start-line="455" selection-start-column="20" selection-end-line="455" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/304DatabaseProject.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.project">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="200" column="17" selection-start-line="200" selection-start-column="17" selection-end-line="200" selection-end-column="17" />
+          <caret line="218" column="18" selection-start-line="218" selection-start-column="13" selection-end-line="218" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/application/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Desktop/classes12.jar!/oracle/jdbc/driver/OracleResultSetImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.333333">
+          <caret line="1263" column="0" selection-start-line="1263" selection-start-column="0" selection-end-line="1263" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainViews/LabManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58179724">
-          <caret line="427" column="33" selection-start-line="427" selection-start-column="33" selection-end-line="427" selection-end-column="33" />
-          <folding />
+        <state vertical-scroll-proportion="0.37572256">
+          <caret line="817" column="57" selection-start-line="817" selection-start-column="57" selection-end-line="817" selection-end-column="57" />
+          <folding>
+            <element signature="e#23273#23289#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
