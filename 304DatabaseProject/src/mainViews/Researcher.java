@@ -94,7 +94,6 @@ public class Researcher extends Application implements User {
 
 
         //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
-        //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
         Label sampleType = new Label("Sample Type");
         ChoiceBox sampleTypeBox = new ChoiceBox();
         sampleTypeBox.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
@@ -180,7 +179,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addSample(); //todo - tamar- add the right call now
+                //addSample(); //todo - tamar- add the right call now
             }
         });
 
@@ -248,74 +247,10 @@ public class Researcher extends Application implements User {
         addSampleScene = new Scene(addSamplePane, 1000, 500);
 
         // editSampleScene//////////////////////////////////////////////////////////////////////////////////////////////
+        //make buttons
         Label sampleType1 = new Label("Sample Type");
         ChoiceBox sampleTypeBox1 = new ChoiceBox();
         sampleTypeBox1.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
-        //sampleTypeBox.getItems().addAll("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest");
-        Label strain1 = new Label("Strain:");
-        TextField strainTextField1 = new TextField();
-        Label volume1 = new Label("Volume(mL):");
-        TextField volumeTextField1 = new TextField();
-        volumeTextField1.lengthProperty().addListener(new ChangeListener<Number>(){
-
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                if(newValue.intValue() > oldValue.intValue()){
-                    char ch = volumeTextField1.getText().charAt(oldValue.intValue());
-                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
-
-                    //Check if the new character is the number or other's
-                    if(!(ch >= '0' && ch <= '9' )){
-
-                        //if it's not number then just setText to previous one
-                        volumeTextField1.setText(volumeTextField1.getText().substring(0,volumeTextField1.getText().length()-1));
-                    }
-                }
-            }
-
-        });
-        Label composition1 = new Label("Plate Composition:");
-        TextField compositionTextField1 = new TextField();
-        Label concentration1 = new Label("Concentration(ng/uL):");
-        TextField concentrationTextField1 = new TextField();
-        concentrationTextField1.lengthProperty().addListener(new ChangeListener<Number>(){
-
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                if(newValue.intValue() > oldValue.intValue()){
-                    char ch = concentrationTextField1.getText().charAt(oldValue.intValue());
-                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
-
-                    //Check if the new character is the number or other's
-                    if(!(ch >= '0' && ch <= '9' )){
-
-                        //if it's not number then just setText to previous one
-                        concentrationTextField1.setText(concentrationTextField1.getText().substring(0,concentrationTextField1.getText().length()-1));
-                    }
-                }
-            }
-
-        });
-        Label plasmidName1 = new Label("Plasmid Name:");
-        TextField plasmidTextField1 = new TextField();
-        Label plasmidAntibiotic1 = new Label("Plasmid Antibiotic:");
-        TextField antibioticTextField1 = new TextField();
-        Label rez11 = new Label("Restriction Enzyme 1:");
-        TextField rez1TextField1 = new TextField();
-        Label rez21 = new Label("Restriction Enzyme 2:");
-        TextField rez2TextField1 = new TextField();
-        Label genomic1 = new Label("Origin:");
-        TextField genomicTextField1 = new TextField();
-        Label ligation11 = new Label("Ligation Part 1:");
-        TextField ligation1TextField1 = new TextField();
-        Label ligation21 = new Label("Ligation Part 2:");
-        TextField ligation2TextField1 = new TextField();
-
-        Button enterEditSample = new Button("Enter");
-
-
         Label sampleIDLabel = new Label("Sample ID: ");
         TextField sampleIDTextfield = new TextField();
         sampleIDTextfield.lengthProperty().addListener(new ChangeListener<Number>(){
@@ -337,92 +272,31 @@ public class Researcher extends Application implements User {
             }
 
         });
+        Button enterEditSample = new Button("Enter");
+        enterEditSample.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                //editSample(); //todo - tamar- add the right call now
+            }
+        });
 
 
-        //editSamplePane (gridpane)
+
+        //entryPane (gridpane)
         editSamplePane = new GridPane();
         editSamplePane.setAlignment(Pos.CENTER);
         editSamplePane.setHgap(10);
         editSamplePane.setVgap(10);
         editSamplePane.setPadding(new Insets(25, 25, 25, 25));
         editSamplePane.setVgap(10);
-
         //adding all the buttons to the entry pane
-        editSamplePane.add(sampleType1, 0, 0);
+        editSamplePane.add(sampleType1,0, 0);
         editSamplePane.add(sampleTypeBox1, 1, 0);
-        editSamplePane.add(sampleIDLabel,2,0);
-        editSamplePane.add(sampleIDTextfield,3,0);
-
+        editSamplePane.add(sampleIDLabel, 2, 0);
+        editSamplePane.add(sampleIDTextfield, 3, 0);
         editSamplePane.add(editSampleBack,0,7);                  //check the placement of this button
-        editSamplePane.add(enterEditSample,7,7);                   //check the placement of this button
-        enterEditSample.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                editSample(); //todo - tamar- add the right call now
-            }
-        });
-
-        sampleTypeBox1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                editSamplePane.getChildren().remove(6, editSamplePane.getChildren().size());
-
-                if(sampleTypeBox1.getValue()=="Bacterial Culture"){
-                    editSamplePane.add(strain1, 0, 1);
-                    editSamplePane.add(strainTextField1, 1, 1);
-                }
-                if(sampleTypeBox1.getValue()=="Glycerol Stock"){
-                    editSamplePane.add(strain1, 0, 1);
-                    editSamplePane.add(strainTextField1, 1, 1);
-                    editSamplePane.add(volume1, 0, 2);
-                    addSamplePane.add(volumeTextField1, 1, 2);
-                }
-                if(sampleTypeBox1.getValue()=="Plate"){
-                    editSamplePane.add(strain1, 0, 1);
-                    editSamplePane.add(strainTextField1, 1, 1);
-                    editSamplePane.add(composition1, 0, 2);
-                    editSamplePane.add(compositionTextField1, 1, 2);
-                }
-                if(sampleTypeBox1.getValue()=="DNA Sample"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                }
-                if(sampleTypeBox1.getValue()=="Plasmid"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                    editSamplePane.add(plasmidName1, 0, 2);
-                    editSamplePane.add(plasmidTextField1, 1, 2);
-                    editSamplePane.add(plasmidAntibiotic1, 0, 3);
-                    editSamplePane.add(antibioticTextField1, 1, 3);
-                }
-                if(sampleTypeBox1.getValue()=="Ligation"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                    editSamplePane.add(ligation11, 0, 2);
-                    editSamplePane.add(ligation1TextField1, 1, 2);
-                    editSamplePane.add(ligation21, 0, 3);
-                    editSamplePane.add(ligation2TextField1, 1, 3);
-                }
-                if(sampleTypeBox1.getValue()=="Genomic"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                    editSamplePane.add(genomic1, 0, 2);
-                    editSamplePane.add(genomicTextField1, 1, 2);
-                }
-                if(sampleTypeBox1.getValue()=="Digest"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                    editSamplePane.add(rez11, 0, 2);
-                    editSamplePane.add(rez1TextField1, 1, 2);
-                    editSamplePane.add(rez21, 0, 3);
-                    editSamplePane.add(rez2TextField1, 1, 3);
-                }
-
-            }
-
-
-        });
+        editSamplePane.add(enterEditSample,7,7);
 
         editSampleScene = new Scene(editSamplePane, 1000, 500);
 
@@ -485,8 +359,8 @@ public class Researcher extends Application implements User {
         addSampleResearchPane.add(startDate, 0, 0);
         addSampleResearchPane.add(duration, 0, 1);
         addSampleResearchPane.add(durationText,1,1);
-        addSampleResearchPane.add(sampleIDLabel,0,2);
-        addSampleResearchPane.add(sampleIDTextfield,1,2);
+        addSampleResearchPane.add(sampleIDLabel1,0,2);
+        addSampleResearchPane.add(SampleIDTextfield1,1,2);
 
         addSampleResearchPane.add(addSampleResearchBack,0,7);                  //check the placement of this button
         addSampleResearchPane.add(enteraddSampleResearch,7,7);                   //check the placement of this button
@@ -494,7 +368,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addSampleResearch(); //todo - tamar- add the right call now
+                //addSampleResearch(); //todo - tamar- add the right call now
             }
         });
         //addSampleResearchScene
@@ -511,7 +385,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addBox(); //todo - tamar- add the right call now
+                //addBox(); //todo - tamar- add the right call now
             }
         });
         Label boxName = new Label("Box Name:");
@@ -537,7 +411,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                removeBox(); //todo - tamar- add the right call now
+                //removeBox(); //todo - tamar- add the right call now
             }
         });
         Label boxID = new Label("Box ID:");
