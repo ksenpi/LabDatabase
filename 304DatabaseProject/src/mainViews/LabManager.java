@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.sql.*;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class LabManager extends Application implements User{
 
     public static void main(String[] args) {
         launch(args);
+
 
     }
 
@@ -325,7 +327,7 @@ public class LabManager extends Application implements User{
         return "Error_Removing";
 
     }
-    //TODO (Ksenia)
+
     public String addSampleToBox(int containerID, int sampleID, int employeeID){
         PreparedStatement ps0;
         PreparedStatement ps1;
@@ -361,17 +363,18 @@ public class LabManager extends Application implements User{
                         if(resultSet3.next()){
                             int condition = resultSet3.getInt("at_capacity");
                             if(condition == 0){
-                                ps0 = con.prepareStatement("UPDATE container2 SET c_occupancy = ? WHERE c_id = ?");
+                                /*ps0 = con.prepareStatement("UPDATE container2 SET c_occupancy = ? WHERE c_id = ?");
+
                                 ps0.setInt(1, containerOccupancy + 1);
                                 ps0.setInt(2, containerID);
                                 ps0.executeUpdate();
                                 con.commit();
-                                ps0.close();
+                                ps0.close();*/
 
                                 ps1 = con.prepareStatement("INSERT INTO contains VALUES (?,?,?,?,?,?)");
                                 ps1.setInt(1, containerID);
                                 ps1.setInt(2, fridgeID);
-                                ps1.setInt(3, containerOccupancy + 1);
+                                ps1.setInt(3, containerOccupancy);
                                 ps1.setInt(4, fridgeOccupancy);
                                 ps1.setInt(5, sampleID);
                                 ps1.setInt(6, employeeID);
@@ -413,18 +416,194 @@ public class LabManager extends Application implements User{
         }
         return "Error_Adding";
     }
-    //TODO (Ksenia)
-    public int removeSampleFromBox(){
-        return 0;
-    }
-    //TODO (Ksenia)
-    public int addBox() {
-        return 0;
+
+    public String removeSampleFromBox(int containerID, int sampleID){
+        PreparedStatement ps0;
+        PreparedStatement ps1;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                //two more things: check if the fridgeID is already existing & add to maintains table
+
+                con = connectionToDatabase.getConnection();
+
+                final String queryCheck = "SELECT * from sample WHERE samp_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, sampleID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+
+                    final String queryCheck2 = "SELECT * from container2 WHERE c_id = ?";
+                    final PreparedStatement psCheck2 = con.prepareStatement(queryCheck2);
+                    psCheck2.setInt(1, containerID);
+                    final ResultSet resultSet2 = psCheck2.executeQuery();
+
+                    if(resultSet2.next()){
+
+                                ps1 = con.prepareStatement("DELETE FROM contains WHERE c_id = ? AND samp_id = ?");
+                                ps1.setInt(1, containerID);
+                                ps1.setInt(2, sampleID);
+
+                                ps1.executeUpdate();
+                                con.commit();
+
+                                ps1.close();
+                                return "OK";
+                    }
+                    else{
+                        return "Error_Container_NOT_Exist";
+                    }
+
+                }
+                else{
+                    return "Error_Sample_NOT_Exist";
+                }
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+        return "Error_Adding";
     }
 
-    //TODO (Ksenia)
-    public int removeBox() {
-        return 0;
+    public String addBox(String containerName, int fridgeID) {
+
+        PreparedStatement ps1;
+        ResultSet rs;
+        Statement stmt;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                con = connectionToDatabase.getConnection();
+
+                final String queryCheck = "SELECT * from fridge2 WHERE fr_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, fridgeID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    int occupancy = resultSet.getInt("f_occupancy");
+                    final String queryCheck2 = "SELECT * from fridge1 where f_occupancy = ?";
+                    final PreparedStatement psCheck2 = con.prepareStatement(queryCheck2);
+                    psCheck2.setInt(1, occupancy);
+                    final ResultSet resultSet2 = psCheck2.executeQuery();
+
+                    if(resultSet2.next()){
+                        int condition = resultSet2.getInt("at_capacity");
+                        if(condition == 0){
+
+                            stmt = con.createStatement();
+                            rs = stmt.executeQuery("select max(c_id) as max from container2");
+                            int containerID = 0;
+                            if(rs.next()){
+                                containerID = rs.getInt("max") + 1;
+                            }
+
+                            java.sql.Date ourJavaDateObject = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+                            ps1 = con.prepareStatement("INSERT INTO container2 VALUES (?,?,?,?,?,?)");
+                            ps1.setInt(1, occupancy);
+                            ps1.setString(2, containerName);
+                            ps1.setInt(3, 0);
+                            ps1.setInt(4, containerID);
+                            ps1.setInt(5, fridgeID);
+                            ps1.setDate(6, ourJavaDateObject);
+
+                            ps1.executeUpdate();
+                            con.commit();
+
+                            ps1.close();
+                            return "OK";
+
+                        }
+                        else{
+                            return "Error_Fridge_At_Capacity";
+                        }
+                    }
+                }
+                else{
+                    return "Error_Fridge_NOT_Exist";
+                }
+
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Adding";
+    }
+
+    public String removeBox(int containerID) {
+        PreparedStatement ps1;
+        ResultSet rs;
+        Statement stmt;
+        OurConnection connectionToDatabase = new OurConnection();
+        Connection con = null;
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                con = connectionToDatabase.getConnection();
+
+                final String queryCheck = "SELECT * from container2 WHERE c_id = ?";
+                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
+                psCheck.setInt(1, containerID);
+                final ResultSet resultSet = psCheck.executeQuery();
+                if(resultSet.next()) {
+                    int occupancy = resultSet.getInt("c_occupancy");
+                    if(occupancy == 0){
+                        ps1 = con.prepareStatement("DELETE FROM container2 WHERE c_id = ?");
+                        ps1.setInt(1, containerID);
+
+                        ps1.executeUpdate();
+                        con.commit();
+
+                        ps1.close();
+                        return "OK";
+                    }
+                    else{
+                        return "Error_Occupancy_NOT_0";
+                    }
+
+                }
+                else{
+                    return "Error_Container_NOT_Exist";
+                }
+
+
+            } catch (SQLException ex) {
+
+                System.out.println("Message: " + ex.getMessage());
+                try {
+                    // undo the insert
+                    con.rollback();
+                } catch (SQLException ex2) {
+                    System.out.println("Message: " + ex2.getMessage());
+                    System.exit(-1);
+
+                }
+            }
+        }
+
+        return "Error_Removing";
     }
 
     //Query 10
