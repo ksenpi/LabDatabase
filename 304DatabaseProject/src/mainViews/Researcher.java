@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import java.util.Map;
 
 public class Researcher extends Application implements User {
-    Button goBack, addSample, editSample, addSampleResearch, samplesCreatedBy, addBox, removeBox;
+    Button addSample, editSample, addSampleResearch, samplesCreatedBy, addBox, removeBox, addSampleBack, editSampleBack, addSampleResearchBack, samplesCreatedByBack, addBoxBack, removeBoxBack;
     Stage theStage;
     Scene entryScene, addSampleScene, editSampleScene, addSampleResearchScene, samplesCreatedByScene, addBoxScene, removeBoxScene;
     GridPane entryPane, addSamplePane, editSamplePane, addSampleResearchPane, samplesCreatedByPane, addBoxPane, removeBoxPane;
@@ -46,8 +46,18 @@ public class Researcher extends Application implements User {
 
         theStage = primaryStage;
 
-        goBack = new Button("Go to Main Page");
-        goBack.setOnAction(e->ButtonClicked(e));
+        addSampleBack = new Button("Go to Main Page");
+        addSampleBack.setOnAction(e->ButtonClicked(e));
+        editSampleBack = new Button("Go to Main Page");
+        editSampleBack.setOnAction(e->ButtonClicked(e));
+        addSampleResearchBack = new Button("Go to Main Page");
+        addSampleResearchBack.setOnAction(e->ButtonClicked(e));
+        samplesCreatedByBack = new Button("Go to Main Page");
+        samplesCreatedByBack.setOnAction(e->ButtonClicked(e));
+        addBoxBack = new Button("Go to Main Page");
+        addBoxBack.setOnAction(e->ButtonClicked(e));
+        removeBoxBack = new Button("Go to Main Page");
+        removeBoxBack.setOnAction(e->ButtonClicked(e));
 
         //entryScene////////////////////////////////////////////////////////////////////////////////////////////////////
         addSample = new Button("Add Sample");
@@ -77,11 +87,11 @@ public class Researcher extends Application implements User {
         entryPane.add(samplesCreatedBy, 1, 1);
         entryPane.add(addBox, 2, 0);
         entryPane.add(removeBox, 2, 1);
-        entryPane.add(goBack,0,7);                        //check the placement of this button
         entryScene = new Scene(entryPane, 1000, 500);
 
 
-        //addSampleScene+editSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
+        //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
+        //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
         Label sampleType = new Label("Sample Type");
         ChoiceBox sampleTypeBox = new ChoiceBox();
         sampleTypeBox.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
@@ -147,7 +157,7 @@ public class Researcher extends Application implements User {
         Label ligation2 = new Label("Ligation Part 2:");
         TextField ligation2TextField = new TextField();
 
-        Button enter = new Button("Enter");
+        Button enterAddSample = new Button("Enter");
 
         //entryPane (gridpane)
         addSamplePane = new GridPane();
@@ -161,9 +171,9 @@ public class Researcher extends Application implements User {
         addSamplePane.add(sampleType, 0, 0);
         addSamplePane.add(sampleTypeBox, 1, 0);
 
-        addSamplePane.add(goBack,0,7);                  //check the placement of this button
-        addSamplePane.add(enter,7,7);                   //check the placement of this button
-        enter.setOnAction(new EventHandler<ActionEvent>() {
+        addSamplePane.add(addSampleBack,0,7);                  //check the placement of this button
+        addSamplePane.add(enterAddSample,7,7);                   //check the placement of this button
+        enterAddSample.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
@@ -235,6 +245,74 @@ public class Researcher extends Application implements User {
         addSampleScene = new Scene(addSamplePane, 1000, 500);
 
         // editSampleScene//////////////////////////////////////////////////////////////////////////////////////////////
+        Label sampleType1 = new Label("Sample Type");
+        ChoiceBox sampleTypeBox1 = new ChoiceBox();
+        sampleTypeBox1.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
+        //sampleTypeBox.getItems().addAll("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest");
+        Label strain1 = new Label("Strain:");
+        TextField strainTextField1 = new TextField();
+        Label volume1 = new Label("Volume(mL):");
+        TextField volumeTextField1 = new TextField();
+        volumeTextField1.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = volumeTextField1.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        volumeTextField1.setText(volumeTextField1.getText().substring(0,volumeTextField1.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Label composition1 = new Label("Plate Composition:");
+        TextField compositionTextField1 = new TextField();
+        Label concentration1 = new Label("Concentration(ng/uL):");
+        TextField concentrationTextField1 = new TextField();
+        concentrationTextField1.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = concentrationTextField1.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        concentrationTextField1.setText(concentrationTextField1.getText().substring(0,concentrationTextField1.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Label plasmidName1 = new Label("Plasmid Name:");
+        TextField plasmidTextField1 = new TextField();
+        Label plasmidAntibiotic1 = new Label("Plasmid Antibiotic:");
+        TextField antibioticTextField1 = new TextField();
+        Label rez11 = new Label("Restriction Enzyme 1:");
+        TextField rez1TextField1 = new TextField();
+        Label rez21 = new Label("Restriction Enzyme 2:");
+        TextField rez2TextField1 = new TextField();
+        Label genomic1 = new Label("Origin:");
+        TextField genomicTextField1 = new TextField();
+        Label ligation11 = new Label("Ligation Part 1:");
+        TextField ligation1TextField1 = new TextField();
+        Label ligation21 = new Label("Ligation Part 2:");
+        TextField ligation2TextField1 = new TextField();
+
+        Button enterEditSample = new Button("Enter");
+
+
         Label sampleIDLabel = new Label("Sample ID: ");
         TextField sampleIDTextfield = new TextField();
         sampleIDTextfield.lengthProperty().addListener(new ChangeListener<Number>(){
@@ -267,14 +345,14 @@ public class Researcher extends Application implements User {
         editSamplePane.setVgap(10);
 
         //adding all the buttons to the entry pane
-        editSamplePane.add(sampleType, 0, 0);
-        editSamplePane.add(sampleTypeBox, 1, 0);
+        editSamplePane.add(sampleType1, 0, 0);
+        editSamplePane.add(sampleTypeBox1, 1, 0);
         editSamplePane.add(sampleIDLabel,2,0);
         editSamplePane.add(sampleIDTextfield,3,0);
 
-        editSamplePane.add(goBack,0,7);                  //check the placement of this button
-        editSamplePane.add(enter,7,7);                   //check the placement of this button
-        enter.setOnAction(new EventHandler<ActionEvent>() {
+        editSamplePane.add(editSampleBack,0,7);                  //check the placement of this button
+        editSamplePane.add(enterEditSample,7,7);                   //check the placement of this button
+        enterEditSample.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
@@ -282,60 +360,60 @@ public class Researcher extends Application implements User {
             }
         });
 
-        sampleTypeBox.setOnAction(new EventHandler<ActionEvent>() {
+        sampleTypeBox1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 editSamplePane.getChildren().remove(6, editSamplePane.getChildren().size());
 
-                if(sampleTypeBox.getValue()=="Bacterial Culture"){
-                    editSamplePane.add(strain, 0, 1);
-                    editSamplePane.add(strainTextField, 1, 1);
+                if(sampleTypeBox1.getValue()=="Bacterial Culture"){
+                    editSamplePane.add(strain1, 0, 1);
+                    editSamplePane.add(strainTextField1, 1, 1);
                 }
-                if(sampleTypeBox.getValue()=="Glycerol Stock"){
-                    editSamplePane.add(strain, 0, 1);
-                    editSamplePane.add(strainTextField, 1, 1);
-                    editSamplePane.add(volume, 0, 2);
-                    addSamplePane.add(volumeTextField, 1, 2);
+                if(sampleTypeBox1.getValue()=="Glycerol Stock"){
+                    editSamplePane.add(strain1, 0, 1);
+                    editSamplePane.add(strainTextField1, 1, 1);
+                    editSamplePane.add(volume1, 0, 2);
+                    addSamplePane.add(volumeTextField1, 1, 2);
                 }
-                if(sampleTypeBox.getValue()=="Plate"){
-                    editSamplePane.add(strain, 0, 1);
-                    editSamplePane.add(strainTextField, 1, 1);
-                    editSamplePane.add(composition, 0, 2);
-                    editSamplePane.add(compositionTextField, 1, 2);
+                if(sampleTypeBox1.getValue()=="Plate"){
+                    editSamplePane.add(strain1, 0, 1);
+                    editSamplePane.add(strainTextField1, 1, 1);
+                    editSamplePane.add(composition1, 0, 2);
+                    editSamplePane.add(compositionTextField1, 1, 2);
                 }
-                if(sampleTypeBox.getValue()=="DNA Sample"){
-                    editSamplePane.add(concentration, 0, 1);
-                    editSamplePane.add(concentrationTextField, 1, 1);
+                if(sampleTypeBox1.getValue()=="DNA Sample"){
+                    editSamplePane.add(concentration1, 0, 1);
+                    editSamplePane.add(concentrationTextField1, 1, 1);
                 }
-                if(sampleTypeBox.getValue()=="Plasmid"){
-                    editSamplePane.add(concentration, 0, 1);
-                    editSamplePane.add(concentrationTextField, 1, 1);
-                    editSamplePane.add(plasmidName, 0, 2);
-                    editSamplePane.add(plasmidTextField, 1, 2);
-                    editSamplePane.add(plasmidAntibiotic, 0, 3);
-                    editSamplePane.add(antibioticTextField, 1, 3);
+                if(sampleTypeBox1.getValue()=="Plasmid"){
+                    editSamplePane.add(concentration1, 0, 1);
+                    editSamplePane.add(concentrationTextField1, 1, 1);
+                    editSamplePane.add(plasmidName1, 0, 2);
+                    editSamplePane.add(plasmidTextField1, 1, 2);
+                    editSamplePane.add(plasmidAntibiotic1, 0, 3);
+                    editSamplePane.add(antibioticTextField1, 1, 3);
                 }
-                if(sampleTypeBox.getValue()=="Ligation"){
-                    editSamplePane.add(concentration, 0, 1);
-                    editSamplePane.add(concentrationTextField, 1, 1);
-                    editSamplePane.add(ligation1, 0, 2);
-                    editSamplePane.add(ligation1TextField, 1, 2);
-                    editSamplePane.add(ligation2, 0, 3);
-                    editSamplePane.add(ligation2TextField, 1, 3);
+                if(sampleTypeBox1.getValue()=="Ligation"){
+                    editSamplePane.add(concentration1, 0, 1);
+                    editSamplePane.add(concentrationTextField1, 1, 1);
+                    editSamplePane.add(ligation11, 0, 2);
+                    editSamplePane.add(ligation1TextField1, 1, 2);
+                    editSamplePane.add(ligation21, 0, 3);
+                    editSamplePane.add(ligation2TextField1, 1, 3);
                 }
-                if(sampleTypeBox.getValue()=="Genomic"){
-                    editSamplePane.add(concentration, 0, 1);
-                    editSamplePane.add(concentrationTextField, 1, 1);
-                    editSamplePane.add(genomic, 0, 2);
-                    editSamplePane.add(genomicTextField, 1, 2);
+                if(sampleTypeBox1.getValue()=="Genomic"){
+                    editSamplePane.add(concentration1, 0, 1);
+                    editSamplePane.add(concentrationTextField1, 1, 1);
+                    editSamplePane.add(genomic1, 0, 2);
+                    editSamplePane.add(genomicTextField1, 1, 2);
                 }
-                if(sampleTypeBox.getValue()=="Digest"){
-                    editSamplePane.add(concentration, 0, 1);
-                    editSamplePane.add(concentrationTextField, 1, 1);
-                    editSamplePane.add(rez1, 0, 2);
-                    editSamplePane.add(rez1TextField, 1, 2);
-                    editSamplePane.add(rez2, 0, 3);
-                    editSamplePane.add(rez2TextField, 1, 3);
+                if(sampleTypeBox1.getValue()=="Digest"){
+                    editSamplePane.add(concentration1, 0, 1);
+                    editSamplePane.add(concentrationTextField1, 1, 1);
+                    editSamplePane.add(rez11, 0, 2);
+                    editSamplePane.add(rez1TextField1, 1, 2);
+                    editSamplePane.add(rez21, 0, 3);
+                    editSamplePane.add(rez2TextField1, 1, 3);
                 }
 
             }
@@ -344,7 +422,7 @@ public class Researcher extends Application implements User {
         });
 
         editSampleScene = new Scene(editSamplePane, 1000, 500);
-*/
+
         /*/ addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
         //startDate, Duration, Samp_ID, Emp_ID
         DatePicker startDate = new DatePicker();
@@ -389,20 +467,17 @@ public class Researcher extends Application implements User {
 
     }
 
+
     public void ButtonClicked(ActionEvent e) {
-        if(e.getSource()==goBack)
+        if((e.getSource()==addSampleBack)||(e.getSource()==editSampleBack)||(e.getSource()==addSampleResearchBack)||(e.getSource()==samplesCreatedByBack)
+                ||(e.getSource()==addBoxBack)|| (e.getSource()==removeBoxBack))
             theStage.setScene(entryScene);
         if (e.getSource()==addSample)
             theStage.setScene(addSampleScene);
         if (e.getSource()==editSample)
             theStage.setScene(editSampleScene);
-        //if (e.getSource()==addSampleResearch)
-        //    theStage.setScene(addSampleResearchScene);
-        /*
-        if (e.getSource()==btnscene1)
-            thestage.setScene(scene2);
-        else
-            thestage.setScene(scene1);*/
+        if (e.getSource()==addSampleResearch)
+            theStage.setScene(addSampleResearchScene);
     }
 
     //TODO(Ksenia): 6 methods below
