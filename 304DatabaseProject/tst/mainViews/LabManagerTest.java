@@ -12,7 +12,7 @@ public class LabManagerTest {
     LabManager lm;
     @Before
     public void initialize(){
-        lm = new LabManager();
+        lm = new LabManager(1);
     }
     @Test
     public void addFridge() throws Exception {

@@ -116,6 +116,8 @@ public class startLoginWindow extends Application  {
                     }
                         //todo - tamar - show researcher view panel
                     if (comboBox.getValue().equals("Lab Manager"))
+                        labManager = new LabManager(Integer.parseInt(userTextField.getText()));
+                        labManager.start(LabManager.classStage);
                         ;   //todo - tamar - show lab manager view panel
 
                 } else {
