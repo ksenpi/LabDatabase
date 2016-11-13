@@ -25,6 +25,13 @@ public class Researcher extends Application implements User {
     Stage theStage;
     Scene entryScene, addSampleScene, editSampleScene, addSampleResearchScene, samplesCreatedByScene, addBoxScene, removeBoxScene;
     GridPane entryPane, addSamplePane, editSamplePane, addSampleResearchPane, samplesCreatedByPane, addBoxPane, removeBoxPane;
+    final int researcherID;
+
+    public Researcher(int researcherID) {
+        this.researcherID = researcherID;
+    }
+    //added so we can call the class from another class
+    static Stage classStage = new Stage();
 
     public static void main(String[] args) {
         launch(args);
@@ -32,6 +39,9 @@ public class Researcher extends Application implements User {
 
     @Override
     public void start(Stage primaryStage) {
+        //added so we can call the class from another class
+        Researcher.classStage = primaryStage ;
+
         primaryStage.setTitle("Welcome to LabDatabasePro3000");
 
         theStage = primaryStage;
