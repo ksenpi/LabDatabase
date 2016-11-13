@@ -636,6 +636,27 @@ public class LabManager extends Application implements User{
         return "Error_Removing";
     }
 
+    // Organizes all the samples into the minimum required number of boxes
+    // TODO (Darius): Finish
+    public String organizeSamples() {
+        ResultSet results;
+        Statement stmt;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.createStatement();
+
+            }
+            catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return null;
+    }
+
+
+
     //Query 10
     public Map<String, String> findBoxlessSamples(){
         Statement stmt;

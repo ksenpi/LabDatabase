@@ -1115,6 +1115,24 @@ public class Researcher extends Application implements User {
         return "Error_Removing";
     }
 
+    // returns the researchers who have researched every sample;
+    // TODO (Darius): Finish
+    public String[] findResearchersResearchingAll() {
+        Statement stmt;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.createStatement();
+
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return null;
+    }
+
     @Override
     // Currently the same as LabManager
     public Map<String, String[]> generateWorkList() {
