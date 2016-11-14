@@ -907,7 +907,7 @@ public class Researcher extends Application implements User {
 
                 }
                 else{
-                    return "Error_Does_NOT_Exist";
+                    return "Error_Sample_NOT_Exist";
                 }
 
             } catch (SQLException ex) {

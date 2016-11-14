@@ -198,6 +198,7 @@ public class ExternalUser extends Application implements User{
                 return workerList;
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
+                return null;
             }
         }
         return null;
@@ -311,6 +312,7 @@ public class ExternalUser extends Application implements User{
                 return sampleList;
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
+                return null;
             }
         }
         return null;
