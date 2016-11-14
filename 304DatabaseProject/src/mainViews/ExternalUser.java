@@ -4,6 +4,27 @@ package mainViews;/**
 
 import databaseConnection.OurConnection;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import databaseConnection.OurConnection;
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
@@ -15,12 +36,89 @@ import java.util.Map;
 
 
 public class ExternalUser extends Application implements User{
+    Stage theStage;
+    Button worklistBack, samplelistBack, worklist, samplelist;
+    GridPane entryPane, worklistPane, samplelistPane;
+    Scene entryScene, worklistScene, samplelistScene;
 
+    public ExternalUser() {}
+
+    //added so we can call the class from another class
+    static Stage classStage = new Stage();
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
+        //added so we can call the class from another class
+        ExternalUser.classStage = primaryStage ;
+        primaryStage.setTitle("Welcome to LabDatabasePro3000");
+        theStage = primaryStage;
+
+        worklistBack = new Button("Go to Main Page");
+        worklistBack.setOnAction(e->ButtonClicked(e));
+        samplelistBack = new Button("Go to Main Page");
+        samplelistBack.setOnAction(e->ButtonClicked(e));
+        //EntryScene////////////////////////////////////////////////////////////////////////////////////////////////////
+        worklist = new Button("See Worklist");
+        samplelist = new Button("See Samplelist");
+        worklist.setOnAction(e-> ButtonClicked(e));;
+        samplelist.setOnAction(e-> ButtonClicked(e));;
+
+        entryPane = new GridPane();
+        entryPane.setAlignment(Pos.CENTER);
+        entryPane.setHgap(10);
+        entryPane.setVgap(10);
+        entryPane.setPadding(new Insets(25, 25, 25, 25));
+        entryPane.setVgap(10);
+
+        entryPane.add(worklist,0,0);
+        entryPane.add(samplelist,1,0);
+
+        entryScene = new Scene(entryPane, 1000, 500);
+
+        //worklist//////////////////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> worklist = new ListView<String>();
+        ObservableList<String> worklistitems =FXCollections.observableArrayList ();
+        Map<String, String[]> workList = generateWorkList();
+        for (String key : workList.keySet()) {
+            worklistitems.add(key + "  ,   " + workList.get(key)[0]);
+        }
+
+        worklist.setItems(worklistitems);
+
+        worklistPane = new GridPane();
+        worklistPane.setAlignment(Pos.CENTER);
+        worklistPane.setHgap(10);
+        worklistPane.setVgap(10);
+        worklistPane.setPadding(new Insets(25, 25, 25, 25));
+        worklistPane.setVgap(10);
+
+        worklistPane.add(worklist,0,0);
+        worklistPane.add(worklistBack,0,7);
+
+        worklistScene = new Scene(worklistPane, 1000, 500);
+        //samplelist////////////////////////////////////////////////////////////////////////////////////////////////////
+        samplelistPane = new GridPane();
+        samplelistPane.setAlignment(Pos.CENTER);
+        samplelistPane.setHgap(10);
+        samplelistPane.setVgap(10);
+        samplelistPane.setPadding(new Insets(25, 25, 25, 25));
+        samplelistPane.setVgap(10);
+
+        samplelistPane.add(samplelistBack,0,7);
+
+        samplelistScene = new Scene(samplelistPane, 1000, 500);
+
+        primaryStage.setScene(entryScene);
+
+        primaryStage.show();
         //TODO (Tamar): Generate window for ExternalUser. There should be a button associated with each of the
         //methods below. I have given an example for how you can handle the ResultSet handed back from a helper.
+
+/*
         Map<String, String[]> workList = generateWorkList();
         System.out.println(workList);
         for (String key : workList.keySet()) {
@@ -38,10 +136,18 @@ public class ExternalUser extends Application implements User{
             System.out.printf("%s\n", "");
 
         }
-
-
+*/
     }
 
+    public void ButtonClicked(ActionEvent e) {
+        if((e.getSource()==samplelistBack)||(e.getSource()==worklistBack))
+            theStage.setScene(entryScene);
+        if (e.getSource()==samplelist)
+            theStage.setScene(samplelistScene);
+        if (e.getSource()==worklist)
+            theStage.setScene(worklistScene);
+
+    }
     @Override
     //TODO (Darius): This one's actually already complete, I just wanted to show an example of how to query the
     //database programmatically.
@@ -215,11 +321,11 @@ public class ExternalUser extends Application implements User{
     //This won't be in the final version of our code, it's only here at the moment so that you guys can run the
     //code in this class and see what prints out. It should print out a list of all the workers in the lab. If it
     //doesn't, there might be something off with your ssh connection.
-    public static void main(String args[]) throws Exception {
-        ExternalUser user = new ExternalUser();
-        user.start(null);
+    //public static void main(String args[]) throws Exception {
+    //    ExternalUser user = new ExternalUser();
+     //   user.start(null);
 
-    }
+   // }
 
     }
 
