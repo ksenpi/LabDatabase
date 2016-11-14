@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.sql.*;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Researcher extends Application implements User {
@@ -93,7 +94,6 @@ public class Researcher extends Application implements User {
         entryScene = new Scene(entryPane, 1000, 500);
 
 
-        //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
         //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
         Label sampleType = new Label("Sample Type");
         ChoiceBox sampleTypeBox = new ChoiceBox();
@@ -180,7 +180,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addSample(); //todo - tamar- add the right call now
+                //addSample(); //todo - tamar- add the right call now
             }
         });
 
@@ -248,10 +248,41 @@ public class Researcher extends Application implements User {
         addSampleScene = new Scene(addSamplePane, 1000, 500);
 
         // editSampleScene//////////////////////////////////////////////////////////////////////////////////////////////
+        //make buttons
         Label sampleType1 = new Label("Sample Type");
         ChoiceBox sampleTypeBox1 = new ChoiceBox();
         sampleTypeBox1.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
-        //sampleTypeBox.getItems().addAll("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest");
+        Label sampleIDLabel = new Label("Sample ID: ");
+        TextField sampleIDTextfield = new TextField();
+        sampleIDTextfield.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = sampleIDTextfield.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        sampleIDTextfield.setText(sampleIDTextfield.getText().substring(0,sampleIDTextfield.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Button enterEditSample = new Button("Enter");
+        enterEditSample.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                //editSample(); //todo - tamar- add the right call now
+            }
+        });
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Label strain1 = new Label("Strain:");
         TextField strainTextField1 = new TextField();
         Label volume1 = new Label("Volume(mL):");
@@ -312,57 +343,25 @@ public class Researcher extends Application implements User {
         TextField ligation1TextField1 = new TextField();
         Label ligation21 = new Label("Ligation Part 2:");
         TextField ligation2TextField1 = new TextField();
-
-        Button enterEditSample = new Button("Enter");
-
-
-        Label sampleIDLabel = new Label("Sample ID: ");
-        TextField sampleIDTextfield = new TextField();
-        sampleIDTextfield.lengthProperty().addListener(new ChangeListener<Number>(){
-
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                if(newValue.intValue() > oldValue.intValue()){
-                    char ch = sampleIDTextfield.getText().charAt(oldValue.intValue());
-                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
-
-                    //Check if the new character is the number or other's
-                    if(!(ch >= '0' && ch <= '9' )){
-
-                        //if it's not number then just setText to previous one
-                        sampleIDTextfield.setText(sampleIDTextfield.getText().substring(0,sampleIDTextfield.getText().length()-1));
-                    }
-                }
-            }
-
-        });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        //editSamplePane (gridpane)
+
+        //entryPane (gridpane)
         editSamplePane = new GridPane();
         editSamplePane.setAlignment(Pos.CENTER);
         editSamplePane.setHgap(10);
         editSamplePane.setVgap(10);
         editSamplePane.setPadding(new Insets(25, 25, 25, 25));
         editSamplePane.setVgap(10);
-
         //adding all the buttons to the entry pane
-        editSamplePane.add(sampleType1, 0, 0);
+        editSamplePane.add(sampleType1,0, 0);
         editSamplePane.add(sampleTypeBox1, 1, 0);
-        editSamplePane.add(sampleIDLabel,2,0);
-        editSamplePane.add(sampleIDTextfield,3,0);
-
+        editSamplePane.add(sampleIDLabel, 2, 0);
+        editSamplePane.add(sampleIDTextfield, 3, 0);
         editSamplePane.add(editSampleBack,0,7);                  //check the placement of this button
-        editSamplePane.add(enterEditSample,7,7);                   //check the placement of this button
-        enterEditSample.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                editSample(); //todo - tamar- add the right call now
-            }
-        });
-
+        editSamplePane.add(enterEditSample,7,7);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         sampleTypeBox1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -376,7 +375,7 @@ public class Researcher extends Application implements User {
                     editSamplePane.add(strain1, 0, 1);
                     editSamplePane.add(strainTextField1, 1, 1);
                     editSamplePane.add(volume1, 0, 2);
-                    addSamplePane.add(volumeTextField1, 1, 2);
+                    editSamplePane.add(volumeTextField1, 1, 2);
                 }
                 if(sampleTypeBox1.getValue()=="Plate"){
                     editSamplePane.add(strain1, 0, 1);
@@ -423,7 +422,7 @@ public class Researcher extends Application implements User {
 
 
         });
-
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         editSampleScene = new Scene(editSamplePane, 1000, 500);
 
         // addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
@@ -485,8 +484,8 @@ public class Researcher extends Application implements User {
         addSampleResearchPane.add(startDate, 0, 0);
         addSampleResearchPane.add(duration, 0, 1);
         addSampleResearchPane.add(durationText,1,1);
-        addSampleResearchPane.add(sampleIDLabel,0,2);
-        addSampleResearchPane.add(sampleIDTextfield,1,2);
+        addSampleResearchPane.add(sampleIDLabel1,0,2);
+        addSampleResearchPane.add(SampleIDTextfield1,1,2);
 
         addSampleResearchPane.add(addSampleResearchBack,0,7);                  //check the placement of this button
         addSampleResearchPane.add(enteraddSampleResearch,7,7);                   //check the placement of this button
@@ -494,7 +493,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addSampleResearch(); //todo - tamar- add the right call now
+                //addSampleResearch(); //todo - tamar- add the right call now
             }
         });
         //addSampleResearchScene
@@ -511,7 +510,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                addBox(); //todo - tamar- add the right call now
+                //addBox(); //todo - tamar- add the right call now
             }
         });
         Label boxName = new Label("Box Name:");
@@ -537,7 +536,7 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
-                removeBox(); //todo - tamar- add the right call now
+                //removeBox(); //todo - tamar- add the right call now
             }
         });
         Label boxID = new Label("Box ID:");
@@ -1116,19 +1115,219 @@ public class Researcher extends Application implements User {
         return "Error_Removing";
     }
 
-    @Override
-    //Query
-    //TODO (Darius): This could be very similar to your implementation in LabManager. You could add some small
-    //Changes if you're feeling up for it.
-    public Map<String, String[]> generateWorkList() {
+    // returns the researchers who have researched every sample;
+    // TODO (Darius): Finish
+    public String[] findResearchersResearchingAll() {
+        Statement stmt;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.createStatement();
+
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
         return null;
     }
 
     @Override
-    //Query
-    //TODO (Darius): This could be very similar to your implementation in LabManager. You could add some small
-    //Changes if you're feeling up for it.
+    // Currently the same as LabManager
+    public Map<String, String[]> generateWorkList() {
+        Statement stmt1;
+        Statement stmt2;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+            //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt1 = con.createStatement();
+                stmt2 = con.createStatement();
+                String name;
+                String EmployeeID;
+                Map<String, String[]> workerList = new HashMap<String, String[]>();
+
+                results = stmt1.executeQuery("select name, emp_id from lab_manager");
+                while (results.next()) {
+                    name = results.getString("name");
+                    EmployeeID = "EmployeeID: " + results.getString("emp_id");
+                    if (!results.wasNull()) {
+                        String[] workerAttributes = {"Name: " + name, "Type: Lab Manager"};
+                        workerList.put(EmployeeID, workerAttributes);
+                    }
+                }
+                stmt1.close();
+
+                results = stmt2.executeQuery("select name, emp_id from researcher");
+                while (results.next()) {
+                    name = results.getString("name");
+                    EmployeeID = "EmployeeID: " + results.getString("emp_id");
+                    if (!results.wasNull()) {
+                        if (workerList.get(EmployeeID) == null) {
+                            String[] workerAttributes = {"Name: " + name, "Type: Researcher"};
+                            workerList.put(EmployeeID, workerAttributes);
+                        } else {
+                            String[] workerAttributes = {"Name: " + name, "Type: Lab Manager and Researcher"};
+                            workerList.put(EmployeeID, workerAttributes);
+                        }
+                    }
+                }
+                stmt1.close();
+                return workerList;
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return null;
+    }
+
+    @Override
+    // Currently the same as LabManager
     public Map<String, String[]> generateSampleList() {
+        Statement stmt;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+            //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.createStatement();
+                String sampleID;
+                String strain;
+                String volume;
+                String composition;
+                String concentration;
+                String name;
+                String antibiotic;
+                String res_enz_1;
+                String res_enz_2;
+                String origin;
+                String part1;
+                String part2;
+                String empID;
+                String dateCreated;
+                Map<String, String[]> sampleList = new HashMap<String, String[]>();
+
+                results = stmt.executeQuery("select s.samp_id, s.date_cr, p1.composition, b.strain, d1.concentration, " +
+                        "p2.name, p2.antibiotic, d2.res_enz_1, d2.res_enz_2, g1.origin, l.part1, l.part2, " +
+                        "r.emp_id, g2.volume from sample s LEFT JOIN plate p1 on s.samp_id = p1.sample_id " +
+                        "LEFT JOIN bacterial_culture b on s.samp_id = b.sample_id LEFT JOIN dna_sample d1 on " +
+                        "s.samp_id = d1.sample_id LEFT JOIN plasmid p2 on s.samp_id = p2.sample_id LEFT JOIN " +
+                        "digest d2 on s.samp_id = d2.sample_id LEFT JOIN genomic g1 on s.samp_id = g1.sample_id " +
+                        "LEFT JOIN ligation l on s.samp_id = l.sample_id LEFT JOIN researches r on s.samp_id = " +
+                        "r.samp_id LEFT JOIN glycerol_stock g2 on s.samp_id = g2.sample_id");
+                while (results.next()) {
+                    //All the attributes
+                    name = results.getString("name");
+                    sampleID = results.getString("samp_id");
+                    volume = results.getString("volume");
+                    composition = results.getString("composition");
+                    strain = results.getString("strain");
+                    concentration = results.getString("concentration");
+                    antibiotic = results.getString("antibiotic");
+                    res_enz_1 = results.getString("res_enz_1");
+                    res_enz_2 = results.getString("res_enz_2");
+                    origin = results.getString("origin");
+                    part1 = results.getString("part1");
+                    part2 = results.getString("part2");
+                    empID = results.getString("emp_id");
+                    dateCreated = results.getDate("date_cr").toString();
+                    if (empID != null) {
+                        // There is someone resarching the sample
+                        if (part1 != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Part1: " + part1, "Part2: " + part2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (origin != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Origin: " + origin};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (res_enz_1 != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (name != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Name: " + name, "Antibiotic: " + antibiotic};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (res_enz_1 != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (concentration != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Concentration: " + concentration};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (composition != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Strain: " + strain, "Composition: " + composition};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (volume != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Strain: " + strain, "Volume: " + volume};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (strain != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated, "Strain: " + strain};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (sampleID != null) {
+                            String[] sampleAttributes = {"Researcher ID: " + empID, "Date Created: " + dateCreated};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                    } else //There is nobody researching the sample
+                    {
+                        if (part1 != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Part1: " + part1, "Part2: " + part2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (origin != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Origin: " + origin};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (res_enz_1 != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (name != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Name: " + name, "Antibiotic: " + antibiotic};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (res_enz_1 != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Concentration: " + concentration, "Restriction Enzyme 1: " + res_enz_1, "Restriction Enzyme 2: " + res_enz_2};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (concentration != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, concentration};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (composition != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Strain: " + strain, "Composition: " + composition};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (volume != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Strain: " + strain, "Volume: " + volume};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (strain != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated, "Strain: " + strain};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                        else if (sampleID != null) {
+                            String[] sampleAttributes = {"Date Created: " + dateCreated};
+                            sampleList.put("SampleID: " + sampleID, sampleAttributes);
+                        }
+                    }
+                }
+                stmt.close();
+                return sampleList;
+
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
         return null;
     }
 }
