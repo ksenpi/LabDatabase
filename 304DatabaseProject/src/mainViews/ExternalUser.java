@@ -102,6 +102,19 @@ public class ExternalUser extends Application implements User{
 
         worklistScene = new Scene(worklistPane, 1000, 500);
         //samplelist////////////////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> samplelist = new ListView<>();
+
+        ObservableList<String> samplelistItems =FXCollections.observableArrayList ();
+
+        Map<String, String[]> sampleList = generateSampleList();
+        for (String key : sampleList.keySet()) {
+            for(String element: sampleList.get(key)) {
+                samplelistItems.add(key + ", " + element);
+            }
+
+        }
+        samplelist.setItems(samplelistItems);
+
         samplelistPane = new GridPane();
         samplelistPane.setAlignment(Pos.CENTER);
         samplelistPane.setHgap(10);
@@ -109,6 +122,7 @@ public class ExternalUser extends Application implements User{
         samplelistPane.setPadding(new Insets(25, 25, 25, 25));
         samplelistPane.setVgap(10);
 
+        samplelistPane.add(samplelist,0,0);
         samplelistPane.add(samplelistBack,0,7);
 
         samplelistScene = new Scene(samplelistPane, 1000, 500);
