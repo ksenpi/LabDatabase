@@ -1527,4 +1527,78 @@ public class LabManager extends Application implements User{
         }
         return null;
     }
+    //aggregationType = 0 for average, 1 for min, 2 for max, 3 for count
+    public Map<String, String[]> findResearchDurationsByResearcher(int aggregationType){
+        Statement stmt;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.createStatement();
+                Map<String, String[]> durationList = new HashMap<String, String[]>();
+
+
+                switch(aggregationType){
+                    case 0:
+                        results = stmt.executeQuery("select emp_id, avg(duration) as special from researches group by emp_id");
+                        while (results.next()) {
+                            String employeeID = results.getString("emp_id");
+                            String special = results.getString("special");
+                            if (!results.wasNull()) {
+                                String[] durationAttributes = {"Average Duration Requested: " + special};
+                                durationList.put(employeeID, durationAttributes);
+                            }
+                        }
+
+                        break;
+                    case 1:
+                        results = stmt.executeQuery("select emp_id, min(duration) as special from researches group by emp_id");
+                        while (results.next()) {
+                            String employeeID = results.getString("emp_id");
+                            String special = results.getString("special");
+                            if (!results.wasNull()) {
+                                String[] durationAttributes = {"Minimum Duration Requested: " + special};
+                                durationList.put(employeeID, durationAttributes);
+                            }
+                        }
+                        break;
+                    case 2:
+                        results = stmt.executeQuery("select emp_id, max(duration) as special from researches group by emp_id");
+                        while (results.next()) {
+                            String employeeID = results.getString("emp_id");
+                            String special = results.getString("special");
+                            if (!results.wasNull()) {
+                                String[] durationAttributes = {"Maximum Duration Requested: " + special};
+                                durationList.put(employeeID, durationAttributes);
+                            }
+                        }
+                        break;
+                    case 3:
+                        results = stmt.executeQuery("select emp_id, count(duration) as special from researches group by emp_id");
+                        while (results.next()) {
+                            String employeeID = results.getString("emp_id");
+                            String special = results.getString("special");
+                            if (!results.wasNull()) {
+                                String[] durationAttributes = {"Total Number of Durations Requested: " + special};
+                                durationList.put(employeeID, durationAttributes);
+                            }
+                        }
+                        break;
+                    default:
+                        return null;
+                }
+
+
+
+                stmt.close();
+
+                return durationList;
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return null;
+    }
 }
