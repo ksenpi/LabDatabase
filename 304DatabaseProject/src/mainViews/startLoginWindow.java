@@ -1,6 +1,8 @@
 package mainViews;
 
+import javafx.application.Application;
 import databaseConnection.OurConnection;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,7 +31,7 @@ import java.sql.SQLException;
 /**
  * Created by kseniapinski on 2016-10-26.
  */
-public class startLoginWindow extends Application  {
+public class startLoginWindow extends Application {
     private Researcher researcher;
     private LabManager labManager;
     private ExternalUser externalUser;
