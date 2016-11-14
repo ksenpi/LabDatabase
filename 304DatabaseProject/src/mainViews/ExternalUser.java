@@ -333,14 +333,5 @@ public class ExternalUser extends Application implements User{
     }
 
 
-    //This won't be in the final version of our code, it's only here at the moment so that you guys can run the
-    //code in this class and see what prints out. It should print out a list of all the workers in the lab. If it
-    //doesn't, there might be something off with your ssh connection.
-    //public static void main(String args[]) throws Exception {
-    //    ExternalUser user = new ExternalUser();
-     //   user.start(null);
-
-   // }
-
     }
 

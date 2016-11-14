@@ -17,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.sql.*;
@@ -24,10 +25,10 @@ import java.sql.Date;
 import java.util.*;
 
 public class Researcher extends Application implements User {
-    Button addSample, editSample, addSampleResearch, samplesCreatedBy, addBox, removeBox, addSampleBack, editSampleBack, addSampleResearchBack, samplesCreatedByBack, addBoxBack, removeBoxBack;
+    Button addSample, editSample, addSampleResearch, addBox, removeBox, addSampleBack, editSampleBack, addSampleResearchBack,  addBoxBack, removeBoxBack;
     Stage theStage;
-    Scene entryScene, addSampleScene, editSampleScene, addSampleResearchScene, samplesCreatedByScene, addBoxScene, removeBoxScene;
-    GridPane entryPane, addSamplePane, editSamplePane, addSampleResearchPane, samplesCreatedByPane, addBoxPane, removeBoxPane;
+    Scene entryScene, addSampleScene, editSampleScene, addSampleResearchScene, addBoxScene, removeBoxScene;
+    GridPane entryPane, addSamplePane, editSamplePane, addSampleResearchPane,  addBoxPane, removeBoxPane;
     final int researcherID;
 
     public Researcher(int researcherID) {
@@ -55,8 +56,6 @@ public class Researcher extends Application implements User {
         editSampleBack.setOnAction(e->ButtonClicked(e));
         addSampleResearchBack = new Button("Go to Main Page");
         addSampleResearchBack.setOnAction(e->ButtonClicked(e));
-        samplesCreatedByBack = new Button("Go to Main Page");
-        samplesCreatedByBack.setOnAction(e->ButtonClicked(e));
         addBoxBack = new Button("Go to Main Page");
         addBoxBack.setOnAction(e->ButtonClicked(e));
         removeBoxBack = new Button("Go to Main Page");
@@ -66,14 +65,12 @@ public class Researcher extends Application implements User {
         addSample = new Button("Add Sample");
         editSample = new Button("Edit Sample");
         addSampleResearch = new Button("Research Sample");
-        samplesCreatedBy = new Button("Samples Created By");
         addBox = new Button("Add Box");
         removeBox = new Button("Remove Box");
         //making button actions
         addSample.setOnAction(e-> ButtonClicked(e));
         editSample.setOnAction(e-> ButtonClicked(e));
         addSampleResearch.setOnAction(e-> ButtonClicked(e));
-        samplesCreatedBy.setOnAction(e-> ButtonClicked(e));
         addBox.setOnAction(e-> ButtonClicked(e));
         removeBox.setOnAction(e-> ButtonClicked(e));
         //entryPane (gridpane)
@@ -85,11 +82,10 @@ public class Researcher extends Application implements User {
         entryPane.setVgap(10);
         //adding all the buttons to the entry pane
         entryPane.add(addSample, 0, 0);
-        entryPane.add(editSample, 0, 1);
-        entryPane.add(addSampleResearch, 1, 0);
-        entryPane.add(samplesCreatedBy, 1, 1);
-        entryPane.add(addBox, 2, 0);
-        entryPane.add(removeBox, 2, 1);
+        entryPane.add(editSample, 1, 0);
+        entryPane.add(addSampleResearch, 2, 0);
+        entryPane.add(addBox, 0, 1);
+        entryPane.add(removeBox, 1, 1);
         entryScene = new Scene(entryPane, 1000, 500);
 
 
@@ -160,7 +156,7 @@ public class Researcher extends Application implements User {
         TextField ligation2TextField = new TextField();
 
         Button enterAddSample = new Button("Enter");
-
+        Text addSampleResponse = new Text();
         //entryPane (gridpane)
         addSamplePane = new GridPane();
         addSamplePane.setAlignment(Pos.CENTER);
@@ -175,11 +171,33 @@ public class Researcher extends Application implements User {
 
         addSamplePane.add(addSampleBack,0,7);                  //check the placement of this button
         addSamplePane.add(enterAddSample,7,7);                   //check the placement of this button
+        addSamplePane.add(addSampleResponse,7,8);
+
         enterAddSample.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
-                //addSample(); //todo - tamar- add the right call now
+                int type = 8;
+                if(sampleTypeBox.getValue() == "Bacterial Culture")
+                    type = 0;
+                if(sampleTypeBox.getValue() == "Glycerol Stock")
+                    type = 1;
+                if(sampleTypeBox.getValue() == "Plate")
+                    type = 2;
+                if(sampleTypeBox.getValue() == "DNA Sample")
+                    type = 3;
+                if(sampleTypeBox.getValue() == "Plasmid")
+                    type = 4;
+                if(sampleTypeBox.getValue() == "Digest")
+                    type = 5;
+                if(sampleTypeBox.getValue() == "Genomic")
+                    type = 6;
+                if(sampleTypeBox.getValue() == "Ligation")
+                    type = 7;
+
+                addSampleResponse.setText(addSample(type, strainTextField.getText(),Integer.parseInt(volumeTextField.getText()),compositionTextField.getText()
+                , Integer.parseInt(concentrationTextField.getText()), plasmidTextField.getText(),antibioticTextField.getText(),
+                        rez1TextField.getText(), rez2TextField.getText(), genomicTextField.getText(), ligation1TextField.getText(), ligation2TextField.getText()));
             }
         });
 
@@ -425,8 +443,7 @@ public class Researcher extends Application implements User {
         editSampleScene = new Scene(editSamplePane, 1000, 500);
 
         // addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
-        //startDate, Duration, Samp_ID, Emp_ID
-        DatePicker startDate = new DatePicker();
+
         Label duration = new Label("Duration in Days:");
         TextField durationText = new TextField();
         durationText.lengthProperty().addListener(new ChangeListener<Number>(){
@@ -469,6 +486,7 @@ public class Researcher extends Application implements User {
             }
 
         });
+        Text addSampleResearchResponse = new Text();
         Button enteraddSampleResearch = new Button("Enter");
 
         //addSamplePane
@@ -480,86 +498,29 @@ public class Researcher extends Application implements User {
         addSampleResearchPane.setVgap(10);
 
         //adding all the buttons to the entry pane
-        addSampleResearchPane.add(startDate, 0, 0);
         addSampleResearchPane.add(duration, 0, 1);
         addSampleResearchPane.add(durationText,1,1);
         addSampleResearchPane.add(sampleIDLabel1,0,2);
         addSampleResearchPane.add(SampleIDTextfield1,1,2);
 
-        addSampleResearchPane.add(addSampleResearchBack,0,7);                  //check the placement of this button
-        addSampleResearchPane.add(enteraddSampleResearch,7,7);                   //check the placement of this button
+        addSampleResearchPane.add(addSampleResearchBack,0,7);
+        addSampleResearchPane.add(enteraddSampleResearch,7,7);
+        addSampleResearchPane.add(addSampleResearchResponse,7,8);
         enteraddSampleResearch.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
-                //addSampleResearch(); //todo - tamar- add the right call now
+                addSampleResearchResponse.setText(addSampleResearch(researcherID,Integer.parseInt(durationText.getText()),Integer.parseInt(SampleIDTextfield1.getText())));
             }
         });
         //addSampleResearchScene
         addSampleResearchScene = new Scene(addSampleResearchPane, 1000, 500);
 
-
-        //samplesCreatedByScene////////////////////////////////////////////////////////////////////////////////////////
-        //todo -tamar
         //addBoxScene//////////////////////////////////////////////////////////////////////////////////////////////////
-        //(C_Name:varchar, C_Occupancy:integer, C_ID:integer, Fr_ID:integer, F_Occupancy:integer, C_Date:date)
         //Buttons
-        Button enterAddBox = new Button("Enter");
-        enterAddBox.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                //addBox(); //todo - tamar- add the right call now
-            }
-        });
-        Label boxName = new Label("Box Name:");
-        TextField boxNametxt = new TextField();
-        //addBoxPain
-        addBoxPane = new GridPane();
-        addBoxPane.setAlignment(Pos.CENTER);
-        addBoxPane.setHgap(10);
-        addBoxPane.setVgap(10);
-        addBoxPane.setPadding(new Insets(25, 25, 25, 25));
-        addBoxPane.setVgap(10);
-        //adding the buttons
-        addBoxPane.add(boxName,0,0);
-        addBoxPane.add(boxNametxt,1,0);
-        addBoxPane.add(addBoxBack,0,7);                  //check the placement of this button
-        addBoxPane.add(enterAddBox,7,7);
-        //addBoxPane.add();
-        addBoxScene = new Scene(addBoxPane, 1000, 500);
-
-        //removeBoxScene////////////////////////////////////////////////////////////////////////////////////////////////
-        Button enterRemoveBox = new Button("Enter");
-        enterRemoveBox.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                //removeBox(); //todo - tamar- add the right call now
-            }
-        });
-        Label boxID = new Label("Box ID:");
-        TextField boxIDtxt = new TextField();
-        boxIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
-
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                if(newValue.intValue() > oldValue.intValue()){
-                    char ch = boxIDtxt.getText().charAt(oldValue.intValue());
-                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
-
-                    //Check if the new character is the number or other's
-                    if(!(ch >= '0' && ch <= '9' )){
-
-                        //if it's not number then just setText to previous one
-                        boxIDtxt.setText(boxIDtxt.getText().substring(0,boxIDtxt.getText().length()-1));
-                    }
-                }
-            }
-
-        });
-        Label fridgeID = new Label("Fridge ID:");
+        Label containerNameLabel = new Label("Container Name:");
+        TextField containerNametxt = new TextField();
+        Label fridgeIDLabel = new Label("Sample ID:");
         TextField fridgeIDtxt = new TextField();
         fridgeIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
@@ -580,20 +541,75 @@ public class Researcher extends Application implements User {
             }
 
         });
-        //addBoxPain
+        Text addBoxResponse = new Text();
+        Button addBoxEnter = new Button("Enter");
+        addBoxEnter.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                addBoxResponse.setText(addBox(containerNametxt.getText(),Integer.parseInt(fridgeIDtxt.getText())));
+            }});
+
+        addBoxPane = new GridPane();
+        addBoxPane.setAlignment(Pos.CENTER);
+        addBoxPane.setHgap(10);
+        addBoxPane.setVgap(10);
+        addBoxPane.setPadding(new Insets(25, 25, 25, 25));
+        addBoxPane.setVgap(10);
+
+        addBoxPane.add(addBoxResponse, 7, 8);
+        addBoxPane.add(containerNameLabel,0,0);
+        addBoxPane.add(containerNametxt,1,0);
+        addBoxPane.add(fridgeIDLabel,0,1);
+        addBoxPane.add(fridgeIDtxt,1,1);
+        addBoxPane.add(addBoxBack,0,7);
+        addBoxPane.add(addBoxEnter,7,7);
+
+        addBoxScene = new Scene(addBoxPane, 1000, 500);
+
+        //removeBoxScene////////////////////////////////////////////////////////////////////////////////////////////////
+        Label containerIDLabel2 = new Label("Sample ID:");
+        TextField containerIDtxt2 = new TextField();
+        containerIDtxt2.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = containerIDtxt2.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        containerIDtxt2.setText(containerIDtxt2.getText().substring(0,containerIDtxt2.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Text removeBoxResponse = new Text();
+        Button removeBoxEnter = new Button("Enter");
+        removeBoxEnter.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                removeBoxResponse.setText(removeBox(Integer.parseInt(containerIDtxt2.getText())));
+            }});
+
         removeBoxPane = new GridPane();
         removeBoxPane.setAlignment(Pos.CENTER);
         removeBoxPane.setHgap(10);
         removeBoxPane.setVgap(10);
         removeBoxPane.setPadding(new Insets(25, 25, 25, 25));
         removeBoxPane.setVgap(10);
-        //adding the buttons
-        removeBoxPane.add(boxID,0,0);
-        removeBoxPane.add(boxIDtxt,1,0);
-        removeBoxPane.add(fridgeID,0,1);
-        removeBoxPane.add(fridgeIDtxt,1,1);
-        removeBoxPane.add(removeBoxBack,0,7);                  //check the placement of this button
-        removeBoxPane.add(enterRemoveBox,7,7);
+
+        removeBoxPane.add(removeBoxResponse, 7, 8);
+        removeBoxPane.add(containerIDLabel2,0,0);
+        removeBoxPane.add(containerIDtxt2,1,0);
+        removeBoxPane.add(removeBoxBack,0,7);
+        removeBoxPane.add(removeBoxEnter,7,7);
 
         removeBoxScene = new Scene(removeBoxPane, 1000, 500);
 
@@ -605,7 +621,7 @@ public class Researcher extends Application implements User {
 
 
     public void ButtonClicked(ActionEvent e) {
-        if((e.getSource()==addSampleBack)||(e.getSource()==editSampleBack)||(e.getSource()==addSampleResearchBack)||(e.getSource()==samplesCreatedByBack)
+        if((e.getSource()==addSampleBack)||(e.getSource()==editSampleBack)||(e.getSource()==addSampleResearchBack)
                 ||(e.getSource()==addBoxBack)|| (e.getSource()==removeBoxBack))
             theStage.setScene(entryScene);
         if (e.getSource()==addSample)
