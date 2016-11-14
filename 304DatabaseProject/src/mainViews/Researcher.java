@@ -1185,8 +1185,9 @@ public class Researcher extends Application implements User {
                             ps.setInt(1, value);
                             break;
                         default:
-
-                            return null;
+                            ps = con.prepareStatement("SELECT emp_id, start_date, duration, samp_id " +
+                                    "FROM researches");
+                            break;
                     }
 
                     results = ps.executeQuery();
@@ -1216,7 +1217,9 @@ public class Researcher extends Application implements User {
                             ps.setInt(1, value);
                             break;
                         default:
-                            return null;
+                            ps = con.prepareStatement("SELECT emp_id, start_date, samp_id " +
+                                    "FROM researches");
+                            break;
                     }
 
                     results = ps.executeQuery();
@@ -1245,7 +1248,9 @@ public class Researcher extends Application implements User {
                             ps.setInt(1, value);
                             break;
                         default:
-                            return null;
+                            ps = con.prepareStatement("SELECT emp_id, duration, samp_id " +
+                                    "FROM researches");
+                            break;
                     }
                     results = ps.executeQuery();
                     while (results.next()) {
@@ -1273,7 +1278,9 @@ public class Researcher extends Application implements User {
                             ps.setInt(1, value);
                             break;
                         default:
-                            return null;
+                            ps = con.prepareStatement("SELECT emp_id, samp_id " +
+                                    "FROM researches");
+                            break;
                     }
                     results = ps.executeQuery();
                     while (results.next()) {
@@ -1289,7 +1296,6 @@ public class Researcher extends Application implements User {
 
                 }
 
-                con.commit();
                 ps.close();
 
                 return researchList;
