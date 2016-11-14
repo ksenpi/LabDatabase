@@ -940,7 +940,7 @@ public class Researcher extends Application implements User {
                 psCheck.setInt(1, sampleID);
                 final ResultSet resultSet = psCheck.executeQuery();
                 if(resultSet.next()) {
-                    if(duration <= 30 && duration >=0){
+                    if(duration <= 60 && duration >=0){
                         java.sql.Date ourJavaDateObject = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
                         ps1 = con.prepareStatement("INSERT INTO researches VALUES (?,?,?,?)");
@@ -980,10 +980,6 @@ public class Researcher extends Application implements User {
         }
 
         return "Error_Adding";
-    }
-    //TODO (Ksenia) Do some more queries by input here!
-    public int samplesCreatedBy(String name){
-        return 0;
     }
     public String addBox(String containerName, int fridgeID) {
 
@@ -1131,6 +1127,37 @@ public class Researcher extends Application implements User {
             }
         }
         return null;
+    }
+
+    //TODO (Ksenia) - incomplete
+
+    public Map<String, String[]> findOngoingResearch(boolean employeeID, boolean startDate, boolean duration,
+                                                     boolean sampleID, String attribute, String comparator,
+                                                     int value){
+        Statement stmt1;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt1 = con.createStatement();
+                Map<String, String[]> researchList = new HashMap<String, String[]>();
+
+                if(attribute != null && comparator != null && value != 0){
+                    results = stmt1.executeQuery("select ? from researches where ?");
+                }
+
+                results = stmt1.executeQuery("select ? from researches");
+
+                stmt1.close();
+                return researchList;
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return null;
+
     }
 
     @Override

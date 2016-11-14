@@ -116,11 +116,12 @@ public class ExternalUser extends Application implements User{
         primaryStage.setScene(entryScene);
 
         primaryStage.show();
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //TODO (Tamar): Generate window for ExternalUser. There should be a button associated with each of the
         //methods below. I have given an example for how you can handle the ResultSet handed back from a helper.
+
 /*
         Map<String, String[]> workList = generateWorkList();
+        System.out.println(workList);
         for (String key : workList.keySet()) {
             System.out.println(key + "  ,   " + workList.get(key)[0]);
 
@@ -137,7 +138,6 @@ public class ExternalUser extends Application implements User{
 
         }
 */
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     public void ButtonClicked(ActionEvent e) {
@@ -157,7 +157,7 @@ public class ExternalUser extends Application implements User{
         Statement stmt2;
         ResultSet rs;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
         //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
@@ -213,7 +213,7 @@ public class ExternalUser extends Application implements User{
         Statement stmt2;
         ResultSet rs;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
         //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
@@ -232,7 +232,6 @@ public class ExternalUser extends Application implements User{
                 String part1;
                 String part2;
                 Map<String, String[]> sampleList = new HashMap<String, String[]>();
-                //TODO (Ksenia): fix this query!
 
                 rs = stmt1.executeQuery("select b2.sample_id, strain, volume, composition " +
                         "from glycerol_stock g full outer join (select b.sample_id, strain, " +
