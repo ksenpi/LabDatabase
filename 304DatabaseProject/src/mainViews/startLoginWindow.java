@@ -1,5 +1,6 @@
 package mainViews;
 
+//import com.intellij.sql.psi.SqlCompositeElementType;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -54,7 +55,7 @@ public class startLoginWindow extends Application  {
         grid.add(userType, 0, 1);
 
         final ComboBox comboBox = new ComboBox();
-        comboBox.getItems().addAll("Lab Manager", "Researcher", "Exernal User");
+        comboBox.getItems().addAll("Lab Manager", "Researcher", "External User");
         grid.add(comboBox, 1, 1);
 
         Label employeeID = new Label("Employee ID:");
@@ -104,9 +105,12 @@ public class startLoginWindow extends Application  {
                 if (comboBox.getValue() == null) {
                     actiontarget.setFill(Color.FIREBRICK);
                     actiontarget.setText("select User Type");
-                } else if (comboBox.getValue().equals("External User"))
-                    ;//todo - tamar - show the external user view pane}
-                else if (true) // todo - darius - check that the user ID is in the corresponding user table
+                }
+                if (comboBox.getValue().equals("External User")){
+                    externalUser = new ExternalUser();
+                    externalUser.start(ExternalUser.classStage);
+                }
+                if (true) // todo - darius - check that the user ID is in the corresponding user table
                 {
                     if (comboBox.getValue().equals("Researcher")){
                         //todo - tamar/darius - check that the id is in userid
@@ -116,9 +120,12 @@ public class startLoginWindow extends Application  {
                     }
                         //todo - tamar - show researcher view panel
                     if (comboBox.getValue().equals("Lab Manager"))
+                        labManager = new LabManager(Integer.parseInt(userTextField.getText()));
+                        labManager.start(LabManager.classStage);
                         ;   //todo - tamar - show lab manager view panel
 
-                } else {
+                }
+                else {
                     actiontarget.setFill(Color.FIREBRICK);
                     actiontarget.setText("access denied");
                 }

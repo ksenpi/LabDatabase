@@ -20,9 +20,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.sql.*;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Date;
+import java.util.*;
 
 public class Researcher extends Application implements User {
     Button addSample, editSample, addSampleResearch, samplesCreatedBy, addBox, removeBox, addSampleBack, editSampleBack, addSampleResearchBack, samplesCreatedByBack, addBoxBack, removeBoxBack;
@@ -907,7 +906,7 @@ public class Researcher extends Application implements User {
 
                 }
                 else{
-                    return "Error_Does_NOT_Exist";
+                    return "Error_Sample_NOT_Exist";
                 }
 
             } catch (SQLException ex) {
@@ -940,7 +939,7 @@ public class Researcher extends Application implements User {
                 psCheck.setInt(1, sampleID);
                 final ResultSet resultSet = psCheck.executeQuery();
                 if(resultSet.next()) {
-                    if(duration <= 30 && duration >=0){
+                    if(duration <= 60 && duration >=0){
                         java.sql.Date ourJavaDateObject = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
                         ps1 = con.prepareStatement("INSERT INTO researches VALUES (?,?,?,?)");
@@ -980,10 +979,6 @@ public class Researcher extends Application implements User {
         }
 
         return "Error_Adding";
-    }
-    //TODO (Ksenia) Do some more queries by input here!
-    public int samplesCreatedBy(String name){
-        return 0;
     }
     public String addBox(String containerName, int fridgeID) {
 
@@ -1116,21 +1111,66 @@ public class Researcher extends Application implements User {
     }
 
     // returns the researchers who have researched every sample;
-    // TODO (Darius): Finish
-    public String[] findResearchersResearchingAll() {
+    // Division Query
+    public List<String> findResearchersResearchingAll() {
         Statement stmt;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
                 stmt = con.createStatement();
+                String researcherName;
+                List<String> researcherNames = new ArrayList<String>();
+
+                results = stmt.executeQuery("select r.name from researcher r where NOT EXISTS " +
+                        "(select * from sample s where NOT EXISTS (select r2.samp_id from " +
+                        "researches r2 where r.emp_id=r2.emp_id and s.samp_id=r2.samp_id))");
+
+                while (results.next()) {
+                    researcherName = results.getString("name");
+                    researcherNames.add(researcherName);
+                }
+                stmt.close();
+
+                return researcherNames;
 
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
             }
         }
         return null;
+    }
+
+    //TODO (Ksenia) - incomplete
+
+    public Map<String, String[]> findOngoingResearch(boolean employeeID, boolean startDate, boolean duration,
+                                                     boolean sampleID, String attribute, String comparator,
+                                                     int value){
+        Statement stmt1;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt1 = con.createStatement();
+                Map<String, String[]> researchList = new HashMap<String, String[]>();
+
+                if(attribute != null && comparator != null && value != 0){
+                    results = stmt1.executeQuery("select ? from researches where ?");
+                }
+
+                results = stmt1.executeQuery("select ? from researches");
+
+                stmt1.close();
+                return researchList;
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return null;
+
     }
 
     @Override
@@ -1140,7 +1180,7 @@ public class Researcher extends Application implements User {
         Statement stmt2;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
@@ -1190,7 +1230,7 @@ public class Researcher extends Application implements User {
         Statement stmt;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
