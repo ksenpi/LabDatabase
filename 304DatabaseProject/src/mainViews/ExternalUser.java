@@ -27,10 +27,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,8 +78,11 @@ public class ExternalUser extends Application implements User{
         entryScene = new Scene(entryPane, 1000, 500);
 
         //worklist//////////////////////////////////////////////////////////////////////////////////////////////////////
-        ListView<String> worklist = new ListView<String>();
+
+        ListView<String> worklist = new ListView<>();
+
         ObservableList<String> worklistitems =FXCollections.observableArrayList ();
+
         Map<String, String[]> workList = generateWorkList();
         for (String key : workList.keySet()) {
             worklistitems.add(key + "  ,   " + workList.get(key)[0]);
