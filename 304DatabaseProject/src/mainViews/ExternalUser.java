@@ -78,10 +78,8 @@ public class ExternalUser extends Application implements User{
         entryScene = new Scene(entryPane, 1000, 500);
 
         //worklist//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        ListView<String> worklist = new ListView<>();
-
-        ObservableList<String> worklistitems =FXCollections.observableArrayList ();
+        ListView<String> worklist = new ListView<String>();
+        ObservableList<String> worklistitems = FXCollections.observableArrayList ();
 
         Map<String, String[]> workList = generateWorkList();
         for (String key : workList.keySet()) {

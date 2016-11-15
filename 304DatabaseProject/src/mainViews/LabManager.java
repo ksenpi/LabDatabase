@@ -570,7 +570,7 @@ public class LabManager extends Application implements User{
             theStage.setScene(removeBoxScene);
     }
 
-
+    // Added temperature constraint to fridge
     public String addFridge(int temperature, int employeeID){
         PreparedStatement ps1;
         PreparedStatement ps2;
@@ -1134,24 +1134,122 @@ public class LabManager extends Application implements User{
         return "Error_Removing";
     }
 
+    // Update Query
+
+
+
+/*
     // Organizes all the samples into the minimum required number of boxes
     // TODO (Darius): Finish
     public String organizeSamples() {
         ResultSet results;
-        Statement stmt;
+        ResultSet results2;
+        Statement stmt1;
+        Statement stmt2;;
+        int numSamples = 0;
         OurConnection connectionToDatabase = new OurConnection();
         if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
-                stmt = con.createStatement();
+                stmt1 = con.createStatement();
+                stmt2 = con.createStatement();
 
+                results = stmt1.executeQuery("select count(*) from contains");
+                while (results.next()) {
+                    numSamples = results.getInt("count(*)");
+                }
+                stmt1.close();
+                if (numSamples != 0) {
+
+                    int maxContainerID = 0;
+
+                    // Determine how many containers will be needed
+                    int numFullContainers = numSamples/10;
+                    int numRemainingSamples = numSamples%10;
+                    int totalContainers = 0;
+                    if (numRemainingSamples!=0) {
+                        totalContainers = numFullContainers + 1;
+                    } else {
+                        totalContainers = numFullContainers;
+                    }
+
+                    results = stmt2.executeQuery("select max(c_id) from contains");
+                    while (results.next()) {
+                        // Determine if already organized
+                        maxContainerID = results.getInt("max(c_id)");
+                        if (maxContainerID == totalContainers - 1) {
+                            return "Already organized!";
+                        }
+                    }
+                    stmt2.close();
+
+                    int  containersAtCapacity = 0;
+
+                    while (totalContainers != maxContainerID - 1) {
+
+                        Statement stmt3 = con.createStatement();
+                        results = stmt3.executeQuery("select count(*) from contains where c_id = " + containersAtCapacity);
+
+                        int numberInContainer = 0;
+
+                        while (results.next()) {
+                            numberInContainer = results.getInt("count(*)");
+                            if (numberInContainer <= 10) {
+                                Statement stmt4 = con.createStatement();
+                                results2 = stmt4.executeQuery("select c_id, fr_id, c_occupancy, f_occupancy, samp_id, " +
+                                "emp_id, count(*) from contains where c_id = " + maxContainerID +
+                                "group by c_id, fr_id, f_occupancy, c_occupancy, samp_id, emp_id");
+
+                                while (results2.next() && numberInContainer <= 10) {
+                                    int fr_id = results2.getInt("fr_id");
+                                    int c_id = results2.getInt("c_id");
+                                    int fr_id = results2.getInt("fr_id");
+                                }
+
+                            } else {
+                                containersAtCapacity++;
+                                break;
+                            }
+                        }
+
+
+
+//                        Statement stmt3 = con.createStatement();
+//                        results = stmt3.executeQuery("select c_id, fr_id, c_occupancy, f_occupancy, samp_id, " +
+//                                "emp_id, count(*) from contains where c_id = " + containersAtCapacity +
+//                                "group by c_id, fr_id, f_occupancy, c_occupancy, samp_id, emp_id");
+//                        while (results.next()) {
+//                            if (results.getInt("count(*)") != 10) {
+//
+//                            } else {
+//
+//                                containersAtCapacity++;
+//                            }
+//                        }
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+
+                return "Done!";
             }
             catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
             }
         }
-        return null;
+        return "This should not happen!";
     }
+    */
 
 
 
@@ -1160,7 +1258,7 @@ public class LabManager extends Application implements User{
         Statement stmt;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
                 stmt = con.createStatement();
@@ -1239,7 +1337,7 @@ public class LabManager extends Application implements User{
         Statement stmt2;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
@@ -1289,7 +1387,7 @@ public class LabManager extends Application implements User{
         Statement stmt;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
@@ -1423,6 +1521,80 @@ public class LabManager extends Application implements User{
                 stmt.close();
                 return sampleList;
 
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return null;
+    }
+    //aggregationType = 0 for average, 1 for min, 2 for max, 3 for count
+    public Map<String, String[]> findResearchDurationsByResearcher(int aggregationType){
+        Statement stmt;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.createStatement();
+                Map<String, String[]> durationList = new HashMap<String, String[]>();
+
+
+                switch(aggregationType){
+                    case 0:
+                        results = stmt.executeQuery("select emp_id, avg(duration) as special from researches group by emp_id");
+                        while (results.next()) {
+                            String employeeID = results.getString("emp_id");
+                            String special = results.getString("special");
+                            if (!results.wasNull()) {
+                                String[] durationAttributes = {"Average Duration Requested: " + special};
+                                durationList.put(employeeID, durationAttributes);
+                            }
+                        }
+
+                        break;
+                    case 1:
+                        results = stmt.executeQuery("select emp_id, min(duration) as special from researches group by emp_id");
+                        while (results.next()) {
+                            String employeeID = results.getString("emp_id");
+                            String special = results.getString("special");
+                            if (!results.wasNull()) {
+                                String[] durationAttributes = {"Minimum Duration Requested: " + special};
+                                durationList.put(employeeID, durationAttributes);
+                            }
+                        }
+                        break;
+                    case 2:
+                        results = stmt.executeQuery("select emp_id, max(duration) as special from researches group by emp_id");
+                        while (results.next()) {
+                            String employeeID = results.getString("emp_id");
+                            String special = results.getString("special");
+                            if (!results.wasNull()) {
+                                String[] durationAttributes = {"Maximum Duration Requested: " + special};
+                                durationList.put(employeeID, durationAttributes);
+                            }
+                        }
+                        break;
+                    case 3:
+                        results = stmt.executeQuery("select emp_id, count(duration) as special from researches group by emp_id");
+                        while (results.next()) {
+                            String employeeID = results.getString("emp_id");
+                            String special = results.getString("special");
+                            if (!results.wasNull()) {
+                                String[] durationAttributes = {"Total Number of Durations Requested: " + special};
+                                durationList.put(employeeID, durationAttributes);
+                            }
+                        }
+                        break;
+                    default:
+                        return null;
+                }
+
+
+
+                stmt.close();
+
+                return durationList;
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
             }

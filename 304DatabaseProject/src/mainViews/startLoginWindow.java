@@ -1,6 +1,8 @@
 package mainViews;
 
-import com.intellij.sql.psi.SqlCompositeElementType;
+import javafx.application.Application;
+import databaseConnection.OurConnection;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,11 +22,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 /**
  * Created by kseniapinski on 2016-10-26.
  */
-public class startLoginWindow extends Application  {
+public class startLoginWindow extends Application {
     private Researcher researcher;
     private LabManager labManager;
     private ExternalUser externalUser;
@@ -137,5 +144,49 @@ public class startLoginWindow extends Application  {
         primaryStage.setScene(scene);
 
         primaryStage.show();
+
+
+
+    }
+    //type = 0 if externalUser, 1 if labManager, 2 if researcher
+    public boolean isIDValid(int type, int id){
+        PreparedStatement ps;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                switch(type){
+                    case 0:
+                        return true;
+                    case 1:
+                        ps = con.prepareStatement("SELECT * from lab_manager WHERE emp_id = ?");
+                        ps.setInt(1, id);
+                        results = ps.executeQuery();
+                        if(results.next()){
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                    case 2:
+                        ps = con.prepareStatement("SELECT * from researcher WHERE emp_id = ?");
+                        ps.setInt(1, id);
+                        results = ps.executeQuery();
+                        if(results.next()){
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                }
+
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+
+            }
+       return false;
     }
 }

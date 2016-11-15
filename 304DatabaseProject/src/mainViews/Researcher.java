@@ -21,9 +21,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.sql.*;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Date;
+import java.util.*;
 
 public class Researcher extends Application implements User {
     Button addSample, editSample, addSampleResearch, addBox, removeBox, addSampleBack, editSampleBack, addSampleResearchBack,  addBoxBack, removeBoxBack;
@@ -1162,15 +1161,29 @@ public class Researcher extends Application implements User {
     }
 
     // returns the researchers who have researched every sample;
-    // TODO (Darius): Finish
-    public String[] findResearchersResearchingAll() {
+    // Division Query
+    public List<String> findResearchersResearchingAll() {
         Statement stmt;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
                 stmt = con.createStatement();
+                String researcherName;
+                List<String> researcherNames = new ArrayList<String>();
+
+                results = stmt.executeQuery("select r.name from researcher r where NOT EXISTS " +
+                        "(select * from sample s where NOT EXISTS (select r2.samp_id from " +
+                        "researches r2 where r.emp_id=r2.emp_id and s.samp_id=r2.samp_id))");
+
+                while (results.next()) {
+                    researcherName = results.getString("name");
+                    researcherNames.add(researcherName);
+                }
+                stmt.close();
+
+                return researcherNames;
 
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
@@ -1179,28 +1192,146 @@ public class Researcher extends Application implements User {
         return null;
     }
 
-    //TODO (Ksenia) - incomplete
+    //TODO (Ksenia) - write Documentation for this
+    //attributeCase = 0 if Duration selected, =1 if SampleID is selected
 
-    public Map<String, String[]> findOngoingResearch(boolean employeeID, boolean startDate, boolean duration,
-                                                     boolean sampleID, String attribute, String comparator,
-                                                     int value){
-        Statement stmt1;
+    public Map<String, String[]> findOngoingResearch(boolean startDate, boolean duration,
+                                                     int attributeCase, int value){
+        PreparedStatement ps;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
-                stmt1 = con.createStatement();
                 Map<String, String[]> researchList = new HashMap<String, String[]>();
 
-                if(attribute != null && comparator != null && value != 0){
-                    results = stmt1.executeQuery("select ? from researches where ?");
+                if(startDate&&duration){
+                    switch(attributeCase){
+                        case 0:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, duration, samp_id " +
+                                    "FROM researches WHERE duration > ?");
+                            ps.setInt(1, value);
+                            break;
+                        case 1:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, duration, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        default:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, duration, samp_id " +
+                                    "FROM researches");
+                            break;
+                    }
+
+                    results = ps.executeQuery();
+                    while (results.next()) {
+                        String sampleID = "Sample ID: " + results.getString("samp_id");
+                        String employeeID = "Researcher ID: " + results.getString("emp_id");
+                        String startDate_query = "Start Date: " + results.getString("start_date");
+                        String duration_query = "Duration: " + results.getString("duration");
+
+                        if (!results.wasNull()) {
+                            String[] researchAttributes = {startDate_query, duration_query};
+                            researchList.put(sampleID + "  ,  " + employeeID, researchAttributes);
+                        }
+                    }
+
+                }
+                else if(startDate){
+                    switch(attributeCase){
+                        case 0:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, samp_id " +
+                                    "FROM researches WHERE duration > ?");
+                            ps.setInt(1, value);
+                            break;
+                        case 1:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        default:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, samp_id " +
+                                    "FROM researches");
+                            break;
+                    }
+
+                    results = ps.executeQuery();
+                    while (results.next()) {
+                        String sampleID = "Sample ID: " + results.getString("samp_id");
+                        String employeeID = "Researcher ID: " + results.getString("emp_id");
+                        String startDate_query = "Start Date: " + results.getString("start_date");
+
+                        if (!results.wasNull()) {
+                            String[] researchAttributes = {startDate_query};
+                            researchList.put(sampleID + "  ,  " + employeeID, researchAttributes);
+                        }
+                    }
+
+                }
+                else if(duration){
+                    switch(attributeCase){
+                        case 0:
+                            ps = con.prepareStatement("SELECT emp_id, duration, samp_id " +
+                                    "FROM researches WHERE duration > ?");
+                            ps.setInt(1, value);
+                            break;
+                        case 1:
+                            ps = con.prepareStatement("SELECT emp_id, duration, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        default:
+                            ps = con.prepareStatement("SELECT emp_id, duration, samp_id " +
+                                    "FROM researches");
+                            break;
+                    }
+                    results = ps.executeQuery();
+                    while (results.next()) {
+                        String sampleID = "Sample ID: " + results.getString("samp_id");
+                        String employeeID = "Researcher ID: " + results.getString("emp_id");
+                        String duration_query = "Duration: " + results.getString("duration");
+
+                        if (!results.wasNull()) {
+                            String[] researchAttributes = {duration_query};
+                            researchList.put(sampleID + "  ,  " + employeeID, researchAttributes);
+                        }
+                    }
+
+                }
+                else{
+                    switch(attributeCase){
+                        case 0:
+                            ps = con.prepareStatement("SELECT emp_id, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        case 1:
+                            ps = con.prepareStatement("SELECT emp_id, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        default:
+                            ps = con.prepareStatement("SELECT emp_id, samp_id " +
+                                    "FROM researches");
+                            break;
+                    }
+                    results = ps.executeQuery();
+                    while (results.next()) {
+                        String sampleID = "Sample ID: " + results.getString("samp_id");
+                        String employeeID = "Researcher ID: " + results.getString("emp_id");
+
+                        if (!results.wasNull()) {
+                            String[] researchAttributes = {};
+                            researchList.put(sampleID + "  ,  " + employeeID, researchAttributes);
+                        }
+                    }
+
+
                 }
 
-                results = stmt1.executeQuery("select ? from researches");
+                ps.close();
 
-                stmt1.close();
                 return researchList;
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
@@ -1217,7 +1348,7 @@ public class Researcher extends Application implements User {
         Statement stmt2;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
@@ -1267,7 +1398,7 @@ public class Researcher extends Application implements User {
         Statement stmt;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
