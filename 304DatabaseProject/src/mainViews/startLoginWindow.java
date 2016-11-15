@@ -1,6 +1,8 @@
 package mainViews;
 
-//import com.intellij.sql.psi.SqlCompositeElementType;
+import javafx.application.Application;
+import databaseConnection.OurConnection;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,11 +22,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 /**
  * Created by kseniapinski on 2016-10-26.
  */
-public class startLoginWindow extends Application  {
+public class startLoginWindow extends Application {
     private Researcher researcher;
     private LabManager labManager;
     private ExternalUser externalUser;
@@ -106,11 +113,11 @@ public class startLoginWindow extends Application  {
                     actiontarget.setFill(Color.FIREBRICK);
                     actiontarget.setText("select User Type");
                 }
-                if (comboBox.getValue().equals("External User")){
+                else if (comboBox.getValue().equals("External User")){
                     externalUser = new ExternalUser();
                     externalUser.start(ExternalUser.classStage);
                 }
-                if (true) // todo - darius - check that the user ID is in the corresponding user table
+                else if (!userTextField.getText().equals("")) // todo - darius - check that the user ID is in the corresponding user table
                 {
                     if (comboBox.getValue().equals("Researcher")){
                         //todo - tamar/darius - check that the id is in userid
@@ -119,9 +126,9 @@ public class startLoginWindow extends Application  {
                         ;//todo - tamar - show researcher view panel
                     }
                         //todo - tamar - show researcher view panel
-                    if (comboBox.getValue().equals("Lab Manager"))
+                    if (comboBox.getValue().equals("Lab Manager")){
                         labManager = new LabManager(Integer.parseInt(userTextField.getText()));
-                        labManager.start(LabManager.classStage);
+                        labManager.start(LabManager.classStage);}
                         ;   //todo - tamar - show lab manager view panel
 
                 }
@@ -137,5 +144,49 @@ public class startLoginWindow extends Application  {
         primaryStage.setScene(scene);
 
         primaryStage.show();
+
+
+
+    }
+    //type = 0 if externalUser, 1 if labManager, 2 if researcher
+    public boolean isIDValid(int type, int id){
+        PreparedStatement ps;
+        ResultSet results;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                switch(type){
+                    case 0:
+                        return true;
+                    case 1:
+                        ps = con.prepareStatement("SELECT * from lab_manager WHERE emp_id = ?");
+                        ps.setInt(1, id);
+                        results = ps.executeQuery();
+                        if(results.next()){
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                    case 2:
+                        ps = con.prepareStatement("SELECT * from researcher WHERE emp_id = ?");
+                        ps.setInt(1, id);
+                        results = ps.executeQuery();
+                        if(results.next()){
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                }
+
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+
+            }
+       return false;
     }
 }

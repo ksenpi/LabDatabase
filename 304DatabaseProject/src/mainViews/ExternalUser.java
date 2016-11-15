@@ -78,10 +78,8 @@ public class ExternalUser extends Application implements User{
         entryScene = new Scene(entryPane, 1000, 500);
 
         //worklist//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        ListView<String> worklist = new ListView<>();
-
-        ObservableList<String> worklistitems =FXCollections.observableArrayList ();
+        ListView<String> worklist = new ListView<String>();
+        ObservableList<String> worklistitems = FXCollections.observableArrayList ();
 
         Map<String, String[]> workList = generateWorkList();
         for (String key : workList.keySet()) {
@@ -108,9 +106,12 @@ public class ExternalUser extends Application implements User{
 
         Map<String, String[]> sampleList = generateSampleList();
         for (String key : sampleList.keySet()) {
+            String sampleProperties = "";
             for(String element: sampleList.get(key)) {
-                samplelistItems.add(key + ", " + element);
+                //samplelistItems.add(key + ", " + element);
+                sampleProperties += element + ",   ";
             }
+            samplelistItems.add(key + " : " + sampleProperties);
 
         }
         samplelist.setItems(samplelistItems);

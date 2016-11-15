@@ -32,3 +32,45 @@ Possible outputs:
 
 ** removeBox(int containerID) **
 - see LabManager documentation.
+
+ Bacterial Culture(Sample_ID:integer, Strain:varchar)
+Represents: entity set “Bacterial Culture”
+Primary Key: Sample_ID
+Foreign Key: Sample_ID references “Sample”
+Constraints: Can be glycerol stock or plate but not both
+
+Glycerol Stock(Sample_ID:integer , Volume:integer) //NOTE we should constrain volume to ml
+Represents: entity set “Glycerol Stock”
+Primary Key: Sample_ID
+Foreign Key: Sample_ID references “Bacterial Culture”
+
+ Plate(Sample_ID:integer, Composition:varchar)
+Represents: entity set “Plate”
+Primary Key: Sample_ID
+Foreign Key: Sample_ID references “Bacterial Culture”
+
+ DNA Sample(Sample_ID:integer, Concentration:integer) //NOTE give units
+Represents: entity set “DNA Sample”
+Primary Key: Sample_ID
+Foreign Key: Sample_ID references “Sample”
+Constraints: Can be plasmid, digest, genomic, or ligation but not all at once
+
+ Plasmid(Sample_ID:integer , Name:varchar , Antibiotic:varchar)
+Represents: entity set “Plasmid”
+Primary Key: Sample_ID
+Foreign Key: Sample_ID references “DNA Sample”
+
+Digest(Sample_ID:integer, Res_Enz_1:varchar , Res_Enz_2:varchar)
+Represents: entity set “Digest”
+Primary Key: Sample_ID
+Foreign Key: Sample_ID references “DNA Sample”
+
+Genomic(Sample_ID:integer, Origin:varchar)
+Represents: entity set “Genomic”
+Primary Key: Sample_ID
+Foreign Key: Sample_ID references “DNA Sample”
+
+Ligation(Sample_ID:integer , Part1:varchar, Part2:varchar)
+Represents: entity set “Ligation”
+Primary Key: Sample_ID
+Foreign Key: Sample_ID references “DNA Sample”

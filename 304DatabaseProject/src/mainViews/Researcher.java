@@ -178,26 +178,60 @@ public class Researcher extends Application implements User {
             @Override
             public void handle(ActionEvent e) {
                 int type = 8;
-                if(sampleTypeBox.getValue() == "Bacterial Culture")
+                String strainpass = null;
+                int volumepass = 0;
+                String compositionpass = null;
+                int concentrationpass = 0;
+                String plasmidNamepass = null;
+                String plasmidAntibioticpass = null;
+                String rez1pass = null;
+                String rez2pass = null;
+                String genomeOriginpass = null;
+                String lig1pass = null;
+                String lig2pass = null;
+                if(sampleTypeBox.getValue() == "Bacterial Culture") {
                     type = 0;
-                if(sampleTypeBox.getValue() == "Glycerol Stock")
+                    strainpass = strainTextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "Glycerol Stock") {
                     type = 1;
-                if(sampleTypeBox.getValue() == "Plate")
+                    strainpass = strainTextField.getText();
+                    volumepass = Integer.parseInt(volumeTextField.getText());
+                }
+                if(sampleTypeBox.getValue() == "Plate") {
                     type = 2;
-                if(sampleTypeBox.getValue() == "DNA Sample")
+                    strainpass = strainTextField.getText();
+                    compositionpass = compositionTextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "DNA Sample"){
                     type = 3;
-                if(sampleTypeBox.getValue() == "Plasmid")
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                }
+                if(sampleTypeBox.getValue() == "Plasmid") {
                     type = 4;
-                if(sampleTypeBox.getValue() == "Digest")
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                    plasmidNamepass = plasmidTextField.getText();
+                    plasmidAntibioticpass = antibioticTextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "Digest") {
                     type = 5;
-                if(sampleTypeBox.getValue() == "Genomic")
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                    rez1pass = rez1TextField.getText();
+                    rez2pass = rez2TextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "Genomic") {
                     type = 6;
-                if(sampleTypeBox.getValue() == "Ligation")
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                    genomeOriginpass = genomicTextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "Ligation") {
                     type = 7;
-
-                addSampleResponse.setText(addSample(type, strainTextField.getText(),Integer.parseInt(volumeTextField.getText()),compositionTextField.getText()
-                , Integer.parseInt(concentrationTextField.getText()), plasmidTextField.getText(),antibioticTextField.getText(),
-                        rez1TextField.getText(), rez2TextField.getText(), genomicTextField.getText(), ligation1TextField.getText(), ligation2TextField.getText()));
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                    lig1pass = ligation1TextField.getText();
+                    lig2pass = ligation2TextField.getText();
+                }
+                addSampleResponse.setText(addSample(type, strainpass, volumepass ,compositionpass,concentrationpass, plasmidNamepass,
+                        plasmidAntibioticpass, rez1pass, rez2pass, genomeOriginpass, lig1pass,lig2pass));
             }
         });
 
@@ -439,7 +473,7 @@ public class Researcher extends Application implements User {
 
 
         });
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         editSampleScene = new Scene(editSamplePane, 1000, 500);
 
         // addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
@@ -1158,28 +1192,146 @@ public class Researcher extends Application implements User {
         return null;
     }
 
-    //TODO (Ksenia) - incomplete
+    //TODO (Ksenia) - write Documentation for this
+    //attributeCase = 0 if Duration selected, =1 if SampleID is selected
 
-    public Map<String, String[]> findOngoingResearch(boolean employeeID, boolean startDate, boolean duration,
-                                                     boolean sampleID, String attribute, String comparator,
-                                                     int value){
-        Statement stmt1;
+    public Map<String, String[]> findOngoingResearch(boolean startDate, boolean duration,
+                                                     int attributeCase, int value){
+        PreparedStatement ps;
         ResultSet results;
         OurConnection connectionToDatabase = new OurConnection();
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             //if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
-                stmt1 = con.createStatement();
                 Map<String, String[]> researchList = new HashMap<String, String[]>();
 
-                if(attribute != null && comparator != null && value != 0){
-                    results = stmt1.executeQuery("select ? from researches where ?");
+                if(startDate&&duration){
+                    switch(attributeCase){
+                        case 0:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, duration, samp_id " +
+                                    "FROM researches WHERE duration > ?");
+                            ps.setInt(1, value);
+                            break;
+                        case 1:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, duration, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        default:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, duration, samp_id " +
+                                    "FROM researches");
+                            break;
+                    }
+
+                    results = ps.executeQuery();
+                    while (results.next()) {
+                        String sampleID = "Sample ID: " + results.getString("samp_id");
+                        String employeeID = "Researcher ID: " + results.getString("emp_id");
+                        String startDate_query = "Start Date: " + results.getString("start_date");
+                        String duration_query = "Duration: " + results.getString("duration");
+
+                        if (!results.wasNull()) {
+                            String[] researchAttributes = {startDate_query, duration_query};
+                            researchList.put(sampleID + "  ,  " + employeeID, researchAttributes);
+                        }
+                    }
+
+                }
+                else if(startDate){
+                    switch(attributeCase){
+                        case 0:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, samp_id " +
+                                    "FROM researches WHERE duration > ?");
+                            ps.setInt(1, value);
+                            break;
+                        case 1:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        default:
+                            ps = con.prepareStatement("SELECT emp_id, start_date, samp_id " +
+                                    "FROM researches");
+                            break;
+                    }
+
+                    results = ps.executeQuery();
+                    while (results.next()) {
+                        String sampleID = "Sample ID: " + results.getString("samp_id");
+                        String employeeID = "Researcher ID: " + results.getString("emp_id");
+                        String startDate_query = "Start Date: " + results.getString("start_date");
+
+                        if (!results.wasNull()) {
+                            String[] researchAttributes = {startDate_query};
+                            researchList.put(sampleID + "  ,  " + employeeID, researchAttributes);
+                        }
+                    }
+
+                }
+                else if(duration){
+                    switch(attributeCase){
+                        case 0:
+                            ps = con.prepareStatement("SELECT emp_id, duration, samp_id " +
+                                    "FROM researches WHERE duration > ?");
+                            ps.setInt(1, value);
+                            break;
+                        case 1:
+                            ps = con.prepareStatement("SELECT emp_id, duration, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        default:
+                            ps = con.prepareStatement("SELECT emp_id, duration, samp_id " +
+                                    "FROM researches");
+                            break;
+                    }
+                    results = ps.executeQuery();
+                    while (results.next()) {
+                        String sampleID = "Sample ID: " + results.getString("samp_id");
+                        String employeeID = "Researcher ID: " + results.getString("emp_id");
+                        String duration_query = "Duration: " + results.getString("duration");
+
+                        if (!results.wasNull()) {
+                            String[] researchAttributes = {duration_query};
+                            researchList.put(sampleID + "  ,  " + employeeID, researchAttributes);
+                        }
+                    }
+
+                }
+                else{
+                    switch(attributeCase){
+                        case 0:
+                            ps = con.prepareStatement("SELECT emp_id, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        case 1:
+                            ps = con.prepareStatement("SELECT emp_id, samp_id " +
+                                    "FROM researches WHERE samp_id > ?");
+                            ps.setInt(1, value);
+                            break;
+                        default:
+                            ps = con.prepareStatement("SELECT emp_id, samp_id " +
+                                    "FROM researches");
+                            break;
+                    }
+                    results = ps.executeQuery();
+                    while (results.next()) {
+                        String sampleID = "Sample ID: " + results.getString("samp_id");
+                        String employeeID = "Researcher ID: " + results.getString("emp_id");
+
+                        if (!results.wasNull()) {
+                            String[] researchAttributes = {};
+                            researchList.put(sampleID + "  ,  " + employeeID, researchAttributes);
+                        }
+                    }
+
+
                 }
 
-                results = stmt1.executeQuery("select ? from researches");
+                ps.close();
 
-                stmt1.close();
                 return researchList;
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
