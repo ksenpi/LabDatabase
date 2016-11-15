@@ -2,51 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8f6ef1a-ccc3-4a2f-b69a-c912173161e9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$10.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$11.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$12.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$13.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$14.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$15.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$16.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$17.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$18.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$2.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$3.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$4.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$5.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$6.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$7.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$8.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$9.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$10.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$11.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$12.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$13.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$14.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$15.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$16.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$6.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$7.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$8.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$9.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/Lab Manager Specs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Lab Manager Specs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mainViews/Researcher Specs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/ExternalUser.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/ExternalUser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$1.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$2.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/304DatabaseProject/mainViews/LabManagerTest.class" afterPath="$PROJECT_DIR$/out/test/304DatabaseProject/mainViews/LabManagerTest.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/ExternalUser.java" afterPath="$PROJECT_DIR$/src/mainViews/ExternalUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/LabManager.java" afterPath="$PROJECT_DIR$/src/mainViews/LabManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/Researcher.java" afterPath="$PROJECT_DIR$/src/mainViews/Researcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/startLoginWindow.java" afterPath="$PROJECT_DIR$/src/mainViews/startLoginWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tst/mainViews/LabManagerTest.java" afterPath="$PROJECT_DIR$/tst/mainViews/LabManagerTest.java" />
     </list>
     <ignored path="LabDatabase.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,8 +29,10 @@
         <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-10.259259">
-              <caret line="200" column="45" selection-start-line="200" selection-start-column="44" selection-end-line="200" selection-end-column="45" />
-              <folding />
+              <caret line="190" column="45" selection-start-line="200" selection-start-column="44" selection-end-line="200" selection-end-column="45" />
+              <folding>
+                <element signature="e#1118#1119#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,8 +52,8 @@
       <file leaf-file-name="startLoginWindow.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mainViews/startLoginWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5804196">
-              <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.7718447">
+              <caret line="100" column="57" selection-start-line="100" selection-start-column="57" selection-end-line="100" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,10 +65,10 @@
         <entry file="file://$PROJECT_DIR$/src/mainViews/Researcher.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-10.259259">
-              <caret line="1232" column="65" selection-start-line="1232" selection-start-column="65" selection-end-line="1232" selection-end-column="65" />
+              <caret line="1248" column="65" selection-start-line="1248" selection-start-column="65" selection-end-line="1248" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#47920#47928#0" expanded="true" />
+                <element signature="e#48602#48610#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -162,10 +120,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="823" />
+    <option name="x" value="4" />
     <option name="y" value="23" />
-    <option name="width" value="1140" />
-    <option name="height" value="1417" />
+    <option name="width" value="1227" />
+    <option name="height" value="745" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -595,6 +553,9 @@
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f8f6ef1a-ccc3-4a2f-b69a-c912173161e9" name="Default" comment="" />
@@ -638,18 +599,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="823" y="23" width="1140" height="1417" extended-state="0" />
-    <editor active="true" />
+    <frame x="4" y="23" width="1227" height="745" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.49649122" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293919" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32307693" sideWeight="0.5028525" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32307693" sideWeight="0.4971475" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2980333" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24912281" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23145884" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -698,7 +659,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
-          <folding />
+          <folding>
+            <element signature="e#1118#1119#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -716,7 +679,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1118#1119#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -724,7 +689,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1118#1119#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -786,26 +753,28 @@
     <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.259259">
-          <caret line="200" column="45" selection-start-line="200" selection-start-column="44" selection-end-line="200" selection-end-column="45" />
-          <folding />
+          <caret line="190" column="45" selection-start-line="200" selection-start-column="44" selection-end-line="200" selection-end-column="45" />
+          <folding>
+            <element signature="e#1118#1119#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainViews/Researcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.259259">
-          <caret line="1232" column="65" selection-start-line="1232" selection-start-column="65" selection-end-line="1232" selection-end-column="65" />
+          <caret line="1248" column="65" selection-start-line="1248" selection-start-column="65" selection-end-line="1248" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#47920#47928#0" expanded="true" />
+            <element signature="e#48602#48610#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainViews/startLoginWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5804196">
-          <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.7718447">
+          <caret line="100" column="57" selection-start-line="100" selection-start-column="57" selection-end-line="100" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
