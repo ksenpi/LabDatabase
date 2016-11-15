@@ -179,26 +179,60 @@ public class Researcher extends Application implements User {
             @Override
             public void handle(ActionEvent e) {
                 int type = 8;
-                if(sampleTypeBox.getValue() == "Bacterial Culture")
+                String strainpass = null;
+                int volumepass = 0;
+                String compositionpass = null;
+                int concentrationpass = 0;
+                String plasmidNamepass = null;
+                String plasmidAntibioticpass = null;
+                String rez1pass = null;
+                String rez2pass = null;
+                String genomeOriginpass = null;
+                String lig1pass = null;
+                String lig2pass = null;
+                if(sampleTypeBox.getValue() == "Bacterial Culture") {
                     type = 0;
-                if(sampleTypeBox.getValue() == "Glycerol Stock")
+                    strainpass = strainTextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "Glycerol Stock") {
                     type = 1;
-                if(sampleTypeBox.getValue() == "Plate")
+                    strainpass = strainTextField.getText();
+                    volumepass = Integer.parseInt(volumeTextField.getText());
+                }
+                if(sampleTypeBox.getValue() == "Plate") {
                     type = 2;
-                if(sampleTypeBox.getValue() == "DNA Sample")
+                    strainpass = strainTextField.getText();
+                    compositionpass = compositionTextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "DNA Sample"){
                     type = 3;
-                if(sampleTypeBox.getValue() == "Plasmid")
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                }
+                if(sampleTypeBox.getValue() == "Plasmid") {
                     type = 4;
-                if(sampleTypeBox.getValue() == "Digest")
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                    plasmidNamepass = plasmidTextField.getText();
+                    plasmidAntibioticpass = antibioticTextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "Digest") {
                     type = 5;
-                if(sampleTypeBox.getValue() == "Genomic")
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                    rez1pass = rez1TextField.getText();
+                    rez2pass = rez2TextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "Genomic") {
                     type = 6;
-                if(sampleTypeBox.getValue() == "Ligation")
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                    genomeOriginpass = genomicTextField.getText();
+                }
+                if(sampleTypeBox.getValue() == "Ligation") {
                     type = 7;
-
-                addSampleResponse.setText(addSample(type, strainTextField.getText(),Integer.parseInt(volumeTextField.getText()),compositionTextField.getText()
-                , Integer.parseInt(concentrationTextField.getText()), plasmidTextField.getText(),antibioticTextField.getText(),
-                        rez1TextField.getText(), rez2TextField.getText(), genomicTextField.getText(), ligation1TextField.getText(), ligation2TextField.getText()));
+                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                    lig1pass = ligation1TextField.getText();
+                    lig2pass = ligation2TextField.getText();
+                }
+                addSampleResponse.setText(addSample(type, strainpass, volumepass ,compositionpass,concentrationpass, plasmidNamepass,
+                        plasmidAntibioticpass, rez1pass, rez2pass, genomeOriginpass, lig1pass,lig2pass));
             }
         });
 
@@ -440,7 +474,7 @@ public class Researcher extends Application implements User {
 
 
         });
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         editSampleScene = new Scene(editSamplePane, 1000, 500);
 
         // addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////

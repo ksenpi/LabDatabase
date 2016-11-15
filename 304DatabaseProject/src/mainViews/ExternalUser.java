@@ -108,9 +108,12 @@ public class ExternalUser extends Application implements User{
 
         Map<String, String[]> sampleList = generateSampleList();
         for (String key : sampleList.keySet()) {
+            String sampleProperties = "";
             for(String element: sampleList.get(key)) {
-                samplelistItems.add(key + ", " + element);
+                //samplelistItems.add(key + ", " + element);
+                sampleProperties += element + ",   ";
             }
+            samplelistItems.add(key + " : " + sampleProperties);
 
         }
         samplelist.setItems(samplelistItems);

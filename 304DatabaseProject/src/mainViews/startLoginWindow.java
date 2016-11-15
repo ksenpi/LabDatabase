@@ -106,11 +106,11 @@ public class startLoginWindow extends Application  {
                     actiontarget.setFill(Color.FIREBRICK);
                     actiontarget.setText("select User Type");
                 }
-                if (comboBox.getValue().equals("External User")){
+                else if (comboBox.getValue().equals("External User")){
                     externalUser = new ExternalUser();
                     externalUser.start(ExternalUser.classStage);
                 }
-                if (true) // todo - darius - check that the user ID is in the corresponding user table
+                else if (!userTextField.getText().equals("")) // todo - darius - check that the user ID is in the corresponding user table
                 {
                     if (comboBox.getValue().equals("Researcher")){
                         //todo - tamar/darius - check that the id is in userid
@@ -119,9 +119,9 @@ public class startLoginWindow extends Application  {
                         ;//todo - tamar - show researcher view panel
                     }
                         //todo - tamar - show researcher view panel
-                    if (comboBox.getValue().equals("Lab Manager"))
+                    if (comboBox.getValue().equals("Lab Manager")){
                         labManager = new LabManager(Integer.parseInt(userTextField.getText()));
-                        labManager.start(LabManager.classStage);
+                        labManager.start(LabManager.classStage);}
                         ;   //todo - tamar - show lab manager view panel
 
                 }
