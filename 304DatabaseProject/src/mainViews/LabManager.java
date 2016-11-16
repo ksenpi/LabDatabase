@@ -682,9 +682,16 @@ public class LabManager extends Application implements User{
                 psCheck.setInt(1, fridgeID);
                 final ResultSet resultSet = psCheck.executeQuery();
                 if (resultSet.next()) {
-                    int occupancy = resultSet.getInt("f_occupancy");
-                    if(occupancy==0){
-                        //Where the actual deleting happens
+                    //int occupancy = resultSet.getInt("f_occupancy");
+                    final String queryCheck2 = "SELECT * from container2 WHERE fr_id = ?";
+                    final PreparedStatement psCheck2 = con.prepareStatement(queryCheck2);
+                    psCheck2.setInt(1, fridgeID);
+                    final ResultSet resultSet2 = psCheck2.executeQuery();
+                    if(resultSet2.next()){
+                        return "Error: There are still containers in this fridge.";
+
+                    }
+                    else{
                         ps1 = con.prepareStatement("DELETE FROM fridge2 WHERE fr_id = ?");
                         ps1.setInt(1, fridgeID);
 
@@ -693,9 +700,6 @@ public class LabManager extends Application implements User{
 
                         ps1.close();
                         return "OK";
-                    }
-                    else{
-                        return "Error_Occupancy_NOT_0";
                     }
 
 
