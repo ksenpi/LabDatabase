@@ -572,6 +572,10 @@ public class LabManager extends Application implements User{
 
     // Added temperature constraint to fridge
     public String addFridge(int temperature, int employeeID){
+
+        if(temperature >0){
+           return "Invalid temperature input: The temperature must be negative";
+        }
         PreparedStatement ps1;
         PreparedStatement ps2;
         ResultSet rs;

@@ -2,60 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8f6ef1a-ccc3-4a2f-b69a-c912173161e9" name="Default" comment="">
-<<<<<<< HEAD
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/ExternalUser.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/ExternalUser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$2.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/ExternalUser.java" afterPath="$PROJECT_DIR$/src/mainViews/ExternalUser.java" />
-=======
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$10.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$11.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$12.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$13.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$14.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$15.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$16.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$17.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$18.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$2.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$3.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$4.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$5.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$6.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$7.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$8.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager$9.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$10.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$11.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$12.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$13.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$14.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$15.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$16.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$6.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$7.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$8.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$9.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/Lab Manager Specs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Lab Manager Specs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mainViews/Researcher Specs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/ExternalUser.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/ExternalUser.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/LabManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$1.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$10.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$10.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$11.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$12.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$12.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$13.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$13.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$14.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$14.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$15.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$15.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$16.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$16.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$2.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$3.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$4.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$5.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$6.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$7.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$8.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$9.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher$9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/Researcher.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$1.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$2.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow.class" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/mainViews/startLoginWindow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/304DatabaseProject/mainViews/LabManagerTest.class" afterPath="$PROJECT_DIR$/out/test/304DatabaseProject/mainViews/LabManagerTest.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/ExternalUser.java" afterPath="$PROJECT_DIR$/src/mainViews/ExternalUser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/304DatabaseProject/Lab Manager Specs" afterPath="$PROJECT_DIR$/out/production/304DatabaseProject/Lab Manager Specs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/LabManager.java" afterPath="$PROJECT_DIR$/src/mainViews/LabManager.java" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/Researcher.java" afterPath="$PROJECT_DIR$/src/mainViews/Researcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainViews/startLoginWindow.java" afterPath="$PROJECT_DIR$/src/mainViews/startLoginWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tst/mainViews/LabManagerTest.java" afterPath="$PROJECT_DIR$/tst/mainViews/LabManagerTest.java" />
     </list>
     <ignored path="LabDatabase.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,7 +39,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -78,69 +48,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-<<<<<<< HEAD
-      <file leaf-file-name="startLoginWindow.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/mainViews/startLoginWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="180" column="0" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-=======
-      <file leaf-file-name="ExternalUser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.259259">
-              <caret line="200" column="45" selection-start-line="200" selection-start-column="44" selection-end-line="200" selection-end-column="45" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LabManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LabManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mainViews/LabManager.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="-1471">
-              <caret line="1158" column="0" selection-start-line="1158" selection-start-column="0" selection-end-line="1158" selection-end-column="0" />
-              <folding />
-=======
-            <state vertical-scroll-proportion="-10.259259">
-              <caret line="1150" column="51" selection-start-line="1150" selection-start-column="46" selection-end-line="1150" selection-end-column="51" />
+            <state relative-caret-position="400">
+              <caret line="596" column="0" selection-start-line="596" selection-start-column="0" selection-end-line="596" selection-end-column="0" />
               <folding>
-                <element signature="e#52789#52807#0" expanded="true" />
+                <element signature="e#51371#51387#0" expanded="true" />
+                <element signature="e#52909#52927#0" expanded="true" />
+                <element signature="e#54994#55012#0" expanded="true" />
+                <element signature="e#57609#57627#0" expanded="true" />
+                <element signature="e#67075#67093#0" expanded="true" />
               </folding>
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="startLoginWindow.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/mainViews/startLoginWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="-3571">
-              <caret line="820" column="39" selection-start-line="820" selection-start-column="38" selection-end-line="820" selection-end-column="39" />
-              <folding />
-=======
-            <state vertical-scroll-proportion="0.5804196">
-              <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Researcher.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mainViews/Researcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.259259">
-              <caret line="1232" column="65" selection-start-line="1232" selection-start-column="65" selection-end-line="1232" selection-end-column="65" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#47920#47928#0" expanded="true" />
-              </folding>
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
             </state>
           </provider>
         </entry>
@@ -176,16 +95,7 @@
         <option value="$PROJECT_DIR$/304DatabaseProject/src/mainViews/LabManager1.java" />
         <option value="$PROJECT_DIR$/304DatabaseProject/src/mainViews/LabManager.java" />
         <option value="$PROJECT_DIR$/304DatabaseProject/src/mainViews/Researcher.java" />
-<<<<<<< HEAD
-        <option value="$PROJECT_DIR$/src/mainViews/ExternalUser.java" />
-        <option value="$PROJECT_DIR$/src/mainViews/startLoginWindow.java" />
-=======
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/mainViews/ExternalUser.java" />
-        <option value="$PROJECT_DIR$/src/mainViews/startLoginWindow.java" />
         <option value="$PROJECT_DIR$/src/mainViews/LabManager.java" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-        <option value="$PROJECT_DIR$/src/mainViews/Researcher.java" />
       </list>
     </option>
   </component>
@@ -196,10 +106,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="823" />
+    <option name="x" value="53" />
     <option name="y" value="23" />
-    <option name="width" value="1140" />
-    <option name="height" value="1417" />
+    <option name="width" value="1227" />
+    <option name="height" value="722" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -226,12 +136,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< HEAD
-=======
-      <pane id="PackagesPane" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -282,74 +186,22 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="304DatabaseProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="304DatabaseProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-<<<<<<< HEAD
-              <option name="myItemId" value="databaseConnection" />
-=======
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="304DatabaseProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="304DatabaseProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="databaseConnection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="304DatabaseProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="304DatabaseProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/third_year/cpsc304/classes12.zip!/" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/UBC Third Year/CPSC 304/Oracledrivers/classes12.jar!/" />
   </component>
   <component name="RunManager" selected="Application.startLoginWindow">
     <configuration default="false" name="startLoginWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -440,31 +292,26 @@
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -474,27 +321,20 @@
       <option name="METHOD_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -612,12 +452,80 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
       <method />
     </configuration>
     <list size="4">
@@ -628,27 +536,23 @@
     </list>
     <recent_temporary>
       <list size="5">
-<<<<<<< HEAD
         <item index="0" class="java.lang.String" itemvalue="Application.startLoginWindow" />
-        <item index="1" class="java.lang.String" itemvalue="Application.ExternalUser" />
-        <item index="2" class="java.lang.String" itemvalue="Application.LabManager" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Researcher" />
-=======
-        <item index="0" class="java.lang.String" itemvalue="Application.ExternalUser" />
         <item index="1" class="java.lang.String" itemvalue="Application.LabManager" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Researcher" />
-        <item index="3" class="java.lang.String" itemvalue="Application.startLoginWindow" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
+        <item index="2" class="java.lang.String" itemvalue="Application.ExternalUser" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Researcher" />
         <item index="4" class="java.lang.String" itemvalue="Application.Researcher" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f8f6ef1a-ccc3-4a2f-b69a-c912173161e9" name="Default" comment="" />
       <created>1478737185732</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1478737185732</updated>
       <workItem from="1478737188605" duration="675000" />
       <workItem from="1478738086200" duration="4926000" />
@@ -656,18 +560,21 @@
     <task id="LOCAL-00001" summary="Updates from Tamar">
       <created>1478815493399</created>
       <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
       <updated>1478815493399</updated>
     </task>
     <task id="LOCAL-00002" summary="Before removing Researcher and replacing it with the new researcher&#10;">
       <created>1478817578697</created>
       <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
       <updated>1478817578697</updated>
     </task>
     <task id="LOCAL-00003" summary="Replaced all existing users with javafx files&#10;">
       <created>1478818243254</created>
       <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
       <updated>1478818243255</updated>
     </task>
@@ -677,51 +584,35 @@
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="5601000" />
   </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="823" y="23" width="1140" height="1417" extended-state="0" />
+    <frame x="53" y="23" width="1227" height="722" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4435612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-=======
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293919" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32781458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2980333" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24912281" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24978903" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -750,111 +641,64 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/src/mainViews/startLoginWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/mainViews/LabManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="144" column="20" selection-start-line="144" selection-start-column="20" selection-end-line="144" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#51371#51387#0" expanded="true" />
+            <element signature="e#52909#52927#0" expanded="true" />
+            <element signature="e#54994#55012#0" expanded="true" />
+            <element signature="e#57609#57627#0" expanded="true" />
+            <element signature="e#67075#67093#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/Researcher.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/EventHandlerManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16965">
-          <caret line="1131" column="50" selection-start-line="1131" selection-start-column="50" selection-end-line="1131" selection-end-column="50" />
-=======
-    <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
+        <state relative-caret-position="3105">
+          <caret line="237" column="0" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainViews/LabManager.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="13515">
-          <caret line="901" column="104" selection-start-line="901" selection-start-column="32" selection-end-line="901" selection-end-column="104" />
-=======
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#52789#52807#0" expanded="true" />
+            <element signature="e#51371#51387#0" expanded="true" />
+            <element signature="e#52909#52927#0" expanded="true" />
+            <element signature="e#54994#55012#0" expanded="true" />
+            <element signature="e#57609#57627#0" expanded="true" />
+            <element signature="e#67075#67093#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/EventHandlerManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="3555">
+          <caret line="237" column="0" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mainViews/LabManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#51371#51387#0" expanded="true" />
+            <element signature="e#52909#52927#0" expanded="true" />
+            <element signature="e#54994#55012#0" expanded="true" />
+            <element signature="e#57609#57627#0" expanded="true" />
+            <element signature="e#67075#67093#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databaseConnection/OurConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="285">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-=======
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/branch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="123" column="43" selection-start-line="123" selection-start-column="43" selection-end-line="123" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="797" column="10" selection-start-line="797" selection-start-column="10" selection-end-line="797" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/Researcher Specs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/304DatabaseProject/Lab Manager Specs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/java/sql/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="262" column="9" selection-start-line="262" selection-start-column="9" selection-end-line="262" selection-end-column="9" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-          <folding />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/304DatabaseProject/src/mainViews/startLoginWindow.java" />
     <entry file="file://$PROJECT_DIR$/304DatabaseProject/src/databaseConnection/OurConnection.java" />
     <entry file="file://$PROJECT_DIR$/304DatabaseProject/src/mainViews/Researcher.java" />
@@ -874,86 +718,32 @@
     <entry file="file://$PROJECT_DIR$/304DatabaseProject/src/mainViews/startLoginWindow.java" />
     <entry file="file://$PROJECT_DIR$/304DatabaseProject/src/mainViews/Researcher.java" />
     <entry file="file://$PROJECT_DIR$/304DatabaseProject/.idea/workspace.xml" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="414" column="0" selection-start-line="414" selection-start-column="0" selection-end-line="414" selection-end-column="0" />
-=======
+        <state relative-caret-position="252">
+          <caret line="241" column="33" selection-start-line="241" selection-start-column="33" selection-end-line="241" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/EventHandlerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="237" column="0" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/mainViews/LabManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.259259">
-          <caret line="1150" column="51" selection-start-line="1150" selection-start-column="46" selection-end-line="1150" selection-end-column="51" />
+        <state relative-caret-position="400">
+          <caret line="596" column="0" selection-start-line="596" selection-start-column="0" selection-end-line="596" selection-end-column="0" />
           <folding>
-            <element signature="e#52789#52807#0" expanded="true" />
+            <element signature="e#51371#51387#0" expanded="true" />
+            <element signature="e#52909#52927#0" expanded="true" />
+            <element signature="e#54994#55012#0" expanded="true" />
+            <element signature="e#57609#57627#0" expanded="true" />
+            <element signature="e#67075#67093#0" expanded="true" />
           </folding>
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/ExternalUser.java">
-<<<<<<< HEAD
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding>
-            <element signature="e#2884#2892#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databaseConnection/OurConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-=======
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.259259">
-          <caret line="200" column="45" selection-start-line="200" selection-start-column="44" selection-end-line="200" selection-end-column="45" />
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/Researcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="-3571">
-          <caret line="820" column="39" selection-start-line="820" selection-start-column="38" selection-end-line="820" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/Researcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1471">
-          <caret line="1158" column="0" selection-start-line="1158" selection-start-column="0" selection-end-line="1158" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/startLoginWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="180" column="0" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="-10.259259">
-          <caret line="1232" column="65" selection-start-line="1232" selection-start-column="65" selection-end-line="1232" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#47920#47928#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainViews/startLoginWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5804196">
-          <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
->>>>>>> 493244c17251c64f9a10939472062c65ad48f89b
         </state>
       </provider>
     </entry>
