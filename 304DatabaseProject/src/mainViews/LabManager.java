@@ -40,16 +40,40 @@ public class LabManager extends Application implements User{
     static Stage classStage = new Stage();
 
     public static void main(String[] args) {
-        launch(args);
+    //    launch(args);
 
     // Just for testing!
-     //   LabManager lb = new LabManager(1);
-     //   lb.start(null);
+        LabManager lb = new LabManager(7);
+        lb.start(null);
 
     }
 
     @Override
     public void start(Stage primaryStage) {
+
+        String result = addFridge(30, 30);
+        System.out.println("result: " + result);
+
+        ResultSet results;
+        Statement stmt;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.createStatement();
+                results = stmt.executeQuery("select temperature from fridge2 where fr_id = 2");;
+
+                while (results.next()) {
+                    int something = results.getInt("temperature");
+                    System.out.println(something);
+                }
+                stmt.close();
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+
+
 //added so we can call the class from another class
         LabManager.classStage = primaryStage ;
 
@@ -638,6 +662,7 @@ public class LabManager extends Application implements User{
 
         return "Error_Adding";
     }
+
     public String removeFridge(int fridgeID) {
         PreparedStatement ps1;
 
@@ -688,6 +713,30 @@ public class LabManager extends Application implements User{
             }
         }
         return "Error_Removing";
+    }
+
+    public String updateTemperature(int fridgeID, int temperature) {
+
+        // Add check if fridgeID is valid
+
+        PreparedStatement stmt;
+        OurConnection connectionToDatabase = new OurConnection();
+        if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
+            try {
+                Connection con = connectionToDatabase.getConnection();
+                stmt = con.prepareStatement("update fridge2 set temperature = " +
+                        temperature + "where fr_id = " + fridgeID);
+                stmt.executeUpdate();
+                con.commit();
+
+                stmt.close();
+                return "Done!";
+
+            } catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+            }
+        }
+        return "New temperature is not valid, must be negative!";
     }
 
     public String addResearcher(String employeeName){
