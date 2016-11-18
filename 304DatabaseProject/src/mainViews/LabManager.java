@@ -646,7 +646,7 @@ public class LabManager extends Application implements User{
                     con.commit();
 
                     ps2.close();
-                    return "OK";
+                    return "Fridge added! The new fridge has id " + fridgeID;
 
                 //}
 
@@ -664,7 +664,7 @@ public class LabManager extends Application implements User{
             }
         }
 
-        return "Error_Adding";
+        return "Error adding the fridge: Please try again";
     }
 
     public String removeFridge(int fridgeID) {
@@ -699,12 +699,12 @@ public class LabManager extends Application implements User{
                         con.commit();
 
                         ps1.close();
-                        return "OK";
+                        return "Fridge removed!";
                     }
 
 
                 } else {
-                    return "Error_Does_NOT_Exist";
+                    return "Error: This fridge ID is non-existent";
                 }
 
             } catch (SQLException ex) {
@@ -720,7 +720,7 @@ public class LabManager extends Application implements User{
                 }
             }
         }
-        return "Error_Removing";
+        return "Error removing the fridge: Please try again";
     }
 
     public String updateTemperature(int fridgeID, int temperature) {
@@ -738,7 +738,7 @@ public class LabManager extends Application implements User{
                 con.commit();
 
                 stmt.close();
-                return "Done!";
+                return "Temperature updated!";
 
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
@@ -784,7 +784,7 @@ public class LabManager extends Application implements User{
                     con.commit();
 
                     ps1.close();
-                    return "OK";
+                    return "Researcher added! The new researcher has Employee ID " + employeeID;
 
                 //}
 
@@ -802,7 +802,7 @@ public class LabManager extends Application implements User{
             }
         }
 
-        return "Error_Adding";
+        return "Error adding the researcher: Please try again";
     }
 
 
@@ -843,7 +843,7 @@ public class LabManager extends Application implements User{
                     con.commit();
 
                     ps1.close();
-                    return "OK";
+                    return "Lab manager added! The new lab manager has Employee ID " + employeeID;
 
                 //}
 
@@ -861,7 +861,7 @@ public class LabManager extends Application implements User{
             }
         }
 
-        return "Error_Adding";
+        return "Error adding the lab manager: Please try again";
     }
 
     public String removeLabManager(int employeeID){
@@ -887,12 +887,12 @@ public class LabManager extends Application implements User{
                     con.commit();
 
                     ps1.close();
-                    return "OK";
+                    return "Lab Manager removed!";
 
 
                 }
                 else{
-                    return "Error_Does_NOT_Exist";
+                    return "Error: This Lab Manager ID is non-existent";
                 }
 
             } catch (SQLException ex) {
@@ -909,7 +909,7 @@ public class LabManager extends Application implements User{
             }
         }
 
-        return "Error_Removing";
+        return "Error removing the Lab Manager: Please try again";
 
     }
 
@@ -968,22 +968,22 @@ public class LabManager extends Application implements User{
                                 con.commit();
 
                                 ps1.close();
-                                return "OK";
+                                return "Sample added to box!";
                             }
                             else{
-                                return "Error_Container_At_Capacity";
+                                return "Error: This box is at capacity";
                             }
                         }
 
 
                     }
                     else{
-                        return "Error_Container_NOT_Exist";
+                        return "Error: This box ID is non-existent";
                     }
 
                 }
                 else{
-                    return "Error_Sample_NOT_Exist";
+                    return "Error: This sample ID is non-existent";
                 }
 
             } catch (SQLException ex) {
@@ -999,7 +999,7 @@ public class LabManager extends Application implements User{
                 }
             }
         }
-        return "Error_Adding";
+        return "Error adding sample to box: Please try again";
     }
 
     public String removeSampleFromBox(int containerID, int sampleID){
@@ -1034,15 +1034,15 @@ public class LabManager extends Application implements User{
                                 con.commit();
 
                                 ps1.close();
-                                return "OK";
+                                return "Sample removed from box!";
                     }
                     else{
-                        return "Error_Container_NOT_Exist";
+                        return "Error: This box ID is non-existent";
                     }
 
                 }
                 else{
-                    return "Error_Sample_NOT_Exist";
+                    return "Error: This sample ID is non-existent";
                 }
 
             } catch (SQLException ex) {
@@ -1058,7 +1058,7 @@ public class LabManager extends Application implements User{
                 }
             }
         }
-        return "Error_Removing";
+        return "Error removing the sample from box: Please try again";
     }
 
     public String addBox(String containerName, int fridgeID) {
@@ -1108,16 +1108,16 @@ public class LabManager extends Application implements User{
                             con.commit();
 
                             ps1.close();
-                            return "OK";
+                            return "Box added! The new box has ID " + containerID;
 
                         }
                         else{
-                            return "Error_Fridge_At_Capacity";
+                            return "Error: this fridge is at capacity";
                         }
                     }
                 }
                 else{
-                    return "Error_Fridge_NOT_Exist";
+                    return "Error: this fridge ID is non-existent";
                 }
 
 
@@ -1135,7 +1135,7 @@ public class LabManager extends Application implements User{
             }
         }
 
-        return "Error_Adding";
+        return "Error adding the box: Please try again";
     }
 
     public String removeBox(int containerID) {
@@ -1162,15 +1162,15 @@ public class LabManager extends Application implements User{
                         con.commit();
 
                         ps1.close();
-                        return "OK";
+                        return "Box removed!";
                     }
                     else{
-                        return "Error_Occupancy_NOT_0";
+                        return "Error: the occupancy of the box is not 0";
                     }
 
                 }
                 else{
-                    return "Error_Container_NOT_Exist";
+                    return "Error: this box ID is non-existent";
                 }
 
 
@@ -1188,7 +1188,7 @@ public class LabManager extends Application implements User{
             }
         }
 
-        return "Error_Removing";
+        return "Error removing the box: Please try again";
     }
 
     // Update Query

@@ -727,7 +727,7 @@ public class Researcher extends Application implements User {
 
                 }
                 else{
-                    return "Error_Invalid_Type";
+                    return "Error: Sample type selected is not valid";
                 }
 
                 switch(type){
@@ -794,7 +794,7 @@ public class Researcher extends Application implements User {
                         break;
 
                 }
-                return "OK";
+                return "Sample added! The new sample ID is " + sampleID;
 
 
             } catch (SQLException ex) {
@@ -811,7 +811,7 @@ public class Researcher extends Application implements User {
             }
         }
 
-        return "Error_Adding";
+        return "Error adding the sample: Please try again";
     }
 
     public String editSample(int sampleID, String strain, int volume, String composition, int concentration,
@@ -952,11 +952,11 @@ public class Researcher extends Application implements User {
 
                     }
 
-                    return "OK";
+                    return "Sample updated!";
 
                 }
                 else{
-                    return "Error_Sample_NOT_Exist";
+                    return "Error: This sample ID is non existent";
                 }
 
             } catch (SQLException ex) {
@@ -973,7 +973,7 @@ public class Researcher extends Application implements User {
             }
         }
 
-        return "Error_Updating";
+        return "Error updating the sample: Please try again";
     }
     //TODO (Ksenia)
     public String addSampleResearch(int employeeID, int duration, int sampleID){
@@ -1002,15 +1002,15 @@ public class Researcher extends Application implements User {
                         con.commit();
 
                         ps1.close();
-                        return "OK";
+                        return "Sample research added!";
 
                     }
                     else{
-                        return "Error_Invalid_Duration";
+                        return "Error: Durations less than 0 or greater than 60 days are not permitted";
                     }
                 }
                 else{
-                    return "Error_Sample_NOT_Exist";
+                    return "Error: This sample ID is non-existent";
                 }
 
 
@@ -1028,7 +1028,7 @@ public class Researcher extends Application implements User {
             }
         }
 
-        return "Error_Adding";
+        return "Error adding sample research: Please try again";
     }
     public String addBox(String containerName, int fridgeID) {
 
@@ -1077,16 +1077,16 @@ public class Researcher extends Application implements User {
                             con.commit();
 
                             ps1.close();
-                            return "OK";
+                            return "Box added! The new box ID is " + containerID;
 
                         }
                         else{
-                            return "Error_Fridge_At_Capacity";
+                            return "Error: this fridge is at capacity";
                         }
                     }
                 }
                 else{
-                    return "Error_Fridge_NOT_Exist";
+                    return "Error: this fridge is non-existent";
                 }
 
 
@@ -1104,7 +1104,7 @@ public class Researcher extends Application implements User {
             }
         }
 
-        return "Error_Adding";
+        return "Error adding the box: Please try again";
     }
 
     public String removeBox(int containerID) {
@@ -1131,15 +1131,15 @@ public class Researcher extends Application implements User {
                         con.commit();
 
                         ps1.close();
-                        return "OK";
+                        return "Box removed!";
                     }
                     else{
-                        return "Error_Occupancy_NOT_0";
+                        return "Error: the occupancy of the box is not 0";
                     }
 
                 }
                 else{
-                    return "Error_Container_NOT_Exist";
+                    return "Error: this box ID is non-existent";
                 }
 
 
@@ -1157,7 +1157,7 @@ public class Researcher extends Application implements User {
             }
         }
 
-        return "Error_Removing";
+        return "Error removing the box: Please try again";
     }
 
     // returns the researchers who have researched every sample;
