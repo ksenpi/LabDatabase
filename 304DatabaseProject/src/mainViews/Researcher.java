@@ -736,7 +736,7 @@ public class Researcher extends Application implements User {
                 ongoingResearchItems.removeAll();
                 boolean fnstartDate = false;
                 boolean fnduration = false;
-                int fnattributeCase = 0;
+                int fnattributeCase = 5;
                 int fnvalue = 0;
 
                 if(choices.getValue()=="Start Date")
@@ -747,9 +747,9 @@ public class Researcher extends Application implements User {
                     fnattributeCase = 0;
                 if(advancedSearchChoices.getValue()=="Sample ID")
                     fnattributeCase = 1;
-                if(advancedSearchTxt.getText()!="")
+                if(!advancedSearchTxt.getText().isEmpty())
                     fnvalue = Integer.parseInt(advancedSearchTxt.getText());
-                
+
                 Map<String, String[]> findOngoingResult = findOngoingResearch(fnstartDate, fnduration, fnattributeCase, fnvalue);
 
                 for (String key : findOngoingResult.keySet()) {
