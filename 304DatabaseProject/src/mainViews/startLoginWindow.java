@@ -36,14 +36,6 @@ public class startLoginWindow extends Application {
     private LabManager labManager;
     private ExternalUser externalUser;
 
-
-    //TODO (Tamar): This will be the first thing a user sees when they open up the application. Currently the login
-    //window is not what we want (I just copied an example off the internet), but it'll be in a similar layout.
-    //Ideally, we want the user to select whether they are a Researcher, Lab Manager, or external user. If they
-    //are a researcher or lab manager, they should be prompted to put in their employee id.
-    //If this employee id does not exist in the table, login should be denied.
-    //Their user type will determine the next window that is shown to them.
-
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Welcome to LabDatabasePro3000");

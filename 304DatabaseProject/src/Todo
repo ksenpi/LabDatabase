@@ -1,9 +1,8 @@
 Lab Manager
 - findBoxlessSamples
 - findContainersUnderCapacity
-- generateWorkList
-- generateSampleList
 - findResearchDurationsByResearcher
+-update temp (check)
 
 Researcher
 - addSample
@@ -12,6 +11,3 @@ Researcher
 - findOngoingResearch
 - generateWorkList
 - generateSampleList
-
-starLoginWindow
-- check ID

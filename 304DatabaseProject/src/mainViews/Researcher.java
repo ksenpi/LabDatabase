@@ -602,7 +602,7 @@ public class Researcher extends Application implements User {
         addBoxScene = new Scene(addBoxPane, 1000, 500);
 
         //removeBoxScene////////////////////////////////////////////////////////////////////////////////////////////////
-        Label containerIDLabel2 = new Label("Sample ID:");
+        Label containerIDLabel2 = new Label("Box ID:");
         TextField containerIDtxt2 = new TextField();
         containerIDtxt2.lengthProperty().addListener(new ChangeListener<Number>(){
 

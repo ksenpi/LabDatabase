@@ -6,6 +6,8 @@ import databaseConnection.OurConnection;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -24,12 +27,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LabManager extends Application implements User{
+    /*- findBoxlessSamples
+- findContainersUnderCapacity
+- generateWorkList
+- generateSampleList
+- findResearchDurationsByResearcher*/
+
     int labManagerID;
     Stage theStage;
     Button addFridge, removeFridge, addResearcher, addLabManager, removeLabManager, addSampleToBox, removeSampleFromBox, addBox, removeBox,
-            addFridgeBack, removeFridgeBack, addResearcherBack, addLabManagerBack, removeLabManagerBack, addSampleToBoxBack, removeSampleFromBoxBack, addBoxBack, removeBoxBack;
-    Scene entryScene, addFridgeScene, removeFridgeScene, addResearcherScene, addLabManagerScene, removeLabManagerScene, addSampleToBoxScene, removeSampleFromBoxScene, addBoxScene, removeBoxScene;
-    GridPane entryPane, addFridgePane, removeFridgePane, addResearcherPane, addLabManagerPane, removeLabManagerPane, addSampleToBoxPane, removeSampleFromBoxPane, addBoxPane, removeBoxPane;
+            addFridgeBack, removeFridgeBack, addResearcherBack, addLabManagerBack, removeLabManagerBack, addSampleToBoxBack,
+            removeSampleFromBoxBack, addBoxBack, removeBoxBack,
+            findBoxlessSamples, findContainersUnderCapacity, generateWorkList, generateSampleList, findResearchDurationsByResearcher,updateTemperature
+            ,findBoxlessSamplesBack, findContainersUnderCapacityBack, generateWorkListBack, generateSampleListBack, findResearchDurationsByResearcherBack, updateTemperatureBack;
+    Scene entryScene, addFridgeScene, removeFridgeScene, addResearcherScene, addLabManagerScene, removeLabManagerScene,
+            addSampleToBoxScene, removeSampleFromBoxScene, addBoxScene, removeBoxScene,
+    findBoxlessSamplesScene, findContainersUnderCapacityScene, generateWorkListScene, generateSampleListScene, findResearchDurationsByResearcherScene, updateTemperatureScene;
+    GridPane entryPane, addFridgePane, removeFridgePane, addResearcherPane, addLabManagerPane, removeLabManagerPane,
+            addSampleToBoxPane, removeSampleFromBoxPane, addBoxPane, removeBoxPane,
+    findBoxlessSamplesPane, findContainersUnderCapacityPane, generateWorkListPane, generateSampleListPane, findResearchDurationsByResearcherPane, updateTemperaturePane;
 
 
     public LabManager(int labManagerID) {
@@ -98,6 +114,18 @@ public class LabManager extends Application implements User{
         addBoxBack.setOnAction(e->ButtonClicked(e));
         removeBoxBack= new Button("Go to Main Page");
         removeBoxBack.setOnAction(e->ButtonClicked(e));
+        findBoxlessSamplesBack= new Button("Go to Main Page");
+        findBoxlessSamplesBack.setOnAction(e->ButtonClicked(e));
+        findContainersUnderCapacityBack= new Button("Go to Main Page");
+        findContainersUnderCapacityBack.setOnAction(e->ButtonClicked(e));
+        generateWorkListBack= new Button("Go to Main Page");
+        generateWorkListBack.setOnAction(e->ButtonClicked(e));
+        generateSampleListBack= new Button("Go to Main Page");
+        generateSampleListBack.setOnAction(e->ButtonClicked(e));
+        findResearchDurationsByResearcherBack= new Button("Go to Main Page");
+        findResearchDurationsByResearcherBack.setOnAction(e->ButtonClicked(e));
+        updateTemperatureBack= new Button("Go to Main Page");
+        updateTemperatureBack.setOnAction(e->ButtonClicked(e));
         //entryScene////////////////////////////////////////////////////////////////////////////////////////////////////
         addFridge=new Button("Add Fridge");
         removeFridge = new Button("Remove Fridge");
@@ -108,16 +136,28 @@ public class LabManager extends Application implements User{
         removeSampleFromBox = new Button("Remove Sample From Box");
         addBox = new Button("Add Box");
         removeBox = new Button("Remove Box");
+        findBoxlessSamples = new Button("Find Boxless Samples");
+        findContainersUnderCapacity = new Button("Find Containers with Space");
+        generateWorkList = new Button("See Worklist");
+        generateSampleList = new Button("See Samplelist");
+        findResearchDurationsByResearcher = new Button("Find Research Durations");
+        updateTemperature = new Button("Update Temperature");
 
-        addFridge.setOnAction(e-> ButtonClicked(e));;
-        removeFridge.setOnAction(e-> ButtonClicked(e));;
-        addResearcher.setOnAction(e-> ButtonClicked(e));;
-        addLabManager.setOnAction(e-> ButtonClicked(e));;
-        removeLabManager.setOnAction(e-> ButtonClicked(e));;
-        addSampleToBox.setOnAction(e-> ButtonClicked(e));;
-        removeSampleFromBox.setOnAction(e-> ButtonClicked(e));;
-        addBox.setOnAction(e-> ButtonClicked(e));;
-        removeBox.setOnAction(e-> ButtonClicked(e));;
+        addFridge.setOnAction(e-> ButtonClicked(e));
+        removeFridge.setOnAction(e-> ButtonClicked(e));
+        addResearcher.setOnAction(e-> ButtonClicked(e));
+        addLabManager.setOnAction(e-> ButtonClicked(e));
+        removeLabManager.setOnAction(e-> ButtonClicked(e));
+        addSampleToBox.setOnAction(e-> ButtonClicked(e));
+        removeSampleFromBox.setOnAction(e-> ButtonClicked(e));
+        addBox.setOnAction(e-> ButtonClicked(e));
+        removeBox.setOnAction(e-> ButtonClicked(e));
+        findBoxlessSamples.setOnAction(e-> ButtonClicked(e));
+        findContainersUnderCapacity.setOnAction(e-> ButtonClicked(e));
+        generateWorkList.setOnAction(e-> ButtonClicked(e));
+        generateSampleList.setOnAction(e-> ButtonClicked(e));
+        findResearchDurationsByResearcher.setOnAction(e-> ButtonClicked(e));
+        updateTemperature.setOnAction(e-> ButtonClicked(e));
 
         entryPane = new GridPane();
         entryPane.setAlignment(Pos.CENTER);
@@ -125,7 +165,6 @@ public class LabManager extends Application implements User{
         entryPane.setVgap(10);
         entryPane.setPadding(new Insets(25, 25, 25, 25));
         entryPane.setVgap(10);
-
         entryPane.add(addFridge,0,0);
         entryPane.add(removeFridge,1,0);
         entryPane.add(addResearcher,2,0);
@@ -135,6 +174,12 @@ public class LabManager extends Application implements User{
         entryPane.add(removeSampleFromBox,0,2);
         entryPane.add(addBox,1,2);
         entryPane.add(removeBox,2,2);
+        entryPane.add(findBoxlessSamples,0,3);
+        entryPane.add(findContainersUnderCapacity,1,3);
+        entryPane.add(generateWorkList,2,3);
+        entryPane.add(generateSampleList,0,4);
+        entryPane.add(findResearchDurationsByResearcher,1,4);
+        entryPane.add(updateTemperature,2,4);
 
         entryScene = new Scene(entryPane, 1000, 500);
         //addFridgeScene   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -396,7 +441,6 @@ public class LabManager extends Application implements User{
 
         addSampleToBoxScene = new Scene(addSampleToBoxPane, 1000, 500);
         // removeSampleFromBoxScene ////////////////////////////////////////////////////////////////////////////////////
-        //** removeSampleFromBox(int containerID, int sampleID) **
         Label containerIDLabel1 = new Label("Container ID:");
         TextField containerIDtxt1 = new TextField();
         containerIDtxt1.lengthProperty().addListener(new ChangeListener<Number>(){
@@ -562,6 +606,177 @@ public class LabManager extends Application implements User{
         removeBoxPane.add(removeBoxEnter,7,7);
 
         removeBoxScene = new Scene(removeBoxPane, 1000, 500);
+
+        //findBoxlessSamples////////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> boxlessSamples = new ListView<String>();
+        ObservableList<String> boxlessSamplesItems = FXCollections.observableArrayList ();
+
+        Map<String, String> boxless = findBoxlessSamples();
+        for (String key : boxless.keySet()) {
+            String result1 = key + " , " + boxless.get(key);
+            boxlessSamplesItems.add(result1);
+        }
+
+        boxlessSamples.setItems(boxlessSamplesItems);
+
+        findBoxlessSamplesPane = new GridPane();
+        findBoxlessSamplesPane.setAlignment(Pos.CENTER);
+        findBoxlessSamplesPane.setHgap(10);
+        findBoxlessSamplesPane.setVgap(10);
+        findBoxlessSamplesPane.setPadding(new Insets(25, 25, 25, 25));
+        findBoxlessSamplesPane.setVgap(10);
+
+        findBoxlessSamplesPane.add(boxlessSamples,0,0);
+        findBoxlessSamplesPane.add(findBoxlessSamplesBack,0,7);
+
+        findBoxlessSamplesScene = new Scene(findBoxlessSamplesPane, 1000, 500);
+
+        // todo findContainersUnderCapacity//////////////////////////////////////////////////////////////////////////////////
+
+        ListView<String> containersUnderCapacity = new ListView<String>();
+        ObservableList<String> containersUnderCapacityItems = FXCollections.observableArrayList ();
+
+        //Map<String, String[]> workList = generateWorkList(); //todo tamar write in function here
+        //for (String key : workList.keySet()) {
+        //    boxlessSamplesItems.add(key + "  ,   " + workList.get(key)[0]);
+        //}
+
+        containersUnderCapacity.setItems(containersUnderCapacityItems);
+
+        findContainersUnderCapacityPane = new GridPane();
+        findContainersUnderCapacityPane.setAlignment(Pos.CENTER);
+        findContainersUnderCapacityPane.setHgap(10);
+        findContainersUnderCapacityPane.setVgap(10);
+        findContainersUnderCapacityPane.setPadding(new Insets(25, 25, 25, 25));
+        findContainersUnderCapacityPane.setVgap(10);
+
+        findContainersUnderCapacityPane.add(containersUnderCapacity,0,0);
+        findContainersUnderCapacityPane.add(findContainersUnderCapacityBack,0,7);
+
+        findContainersUnderCapacityScene = new Scene(findContainersUnderCapacityPane, 1000, 500);
+        // generateWorkList/////////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> WorkList = new ListView<String>();
+        ObservableList<String> WorkListItems = FXCollections.observableArrayList ();
+
+        Map<String, String[]> workList = generateWorkList();
+        for (String key : workList.keySet()) {
+            WorkListItems.add(key + "  ,   " + workList.get(key)[0]);
+        }
+
+        WorkList.setItems(WorkListItems);
+
+        generateWorkListPane = new GridPane();
+        generateWorkListPane.setAlignment(Pos.CENTER);
+        generateWorkListPane.setHgap(10);
+        generateWorkListPane.setVgap(10);
+        generateWorkListPane.setPadding(new Insets(25, 25, 25, 25));
+        generateWorkListPane.setVgap(10);
+
+        generateWorkListPane.add(WorkList,0,0);
+        generateWorkListPane.add(generateWorkListBack,0,7);
+
+        generateWorkListScene = new Scene(generateWorkListPane, 1000, 500);
+
+        // generateSampleList///////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> samplelist = new ListView<>();
+
+        ObservableList<String> samplelistItems =FXCollections.observableArrayList ();
+
+        Map<String, String[]> sampleList = generateSampleList();
+        for (String key : sampleList.keySet()) {
+            String sampleProperties = "";
+            for(String element: sampleList.get(key)) {
+                //samplelistItems.add(key + ", " + element);
+                sampleProperties += element + ",   ";
+            }
+            samplelistItems.add(key + " : " + sampleProperties);
+
+        }
+        samplelist.setItems(samplelistItems);
+
+        generateSampleListPane = new GridPane();
+        generateSampleListPane.setAlignment(Pos.CENTER);
+        generateSampleListPane.setHgap(10);
+        generateSampleListPane.setVgap(10);
+        generateSampleListPane.setPadding(new Insets(25, 25, 25, 25));
+        generateSampleListPane.setVgap(10);
+
+        generateSampleListPane.add(samplelist,0,0);
+        generateSampleListPane.add(generateSampleListBack,0,7);
+
+        generateSampleListScene = new Scene(generateSampleListPane, 1000, 500);
+
+        // todo findResearchDurationsByResearcher////////////////////////////////////////////////////////////////////////////
+
+        // update Temperature////////////////////////////////////////////////////////////////////////////
+        Label updateFridgeID = new Label("Fridge ID:");
+        TextField updateFridgeIDtxt = new TextField();
+        updateFridgeIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = updateFridgeIDtxt.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        updateFridgeIDtxt.setText(updateFridgeIDtxt.getText().substring(0,updateFridgeIDtxt.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Label updateFridgeTemp = new Label("New Temperature:");
+        TextField updateFridgeTemptxt = new TextField();
+        updateFridgeTemptxt.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = updateFridgeTemptxt.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        updateFridgeTemptxt.setText(updateFridgeTemptxt.getText().substring(0,updateFridgeTemptxt.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Text updateFridgeResponse = new Text();
+        Button updateFridgeEnter = new Button("Enter");
+        updateFridgeEnter.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                updateFridgeResponse.setText(updateTemperature(Integer.parseInt(updateFridgeIDtxt.getText()),
+                        Integer.parseInt(updateFridgeTemptxt.getText())));
+            }});
+
+        updateTemperaturePane = new GridPane();
+        updateTemperaturePane.setAlignment(Pos.CENTER);
+        updateTemperaturePane.setHgap(10);
+        updateTemperaturePane.setVgap(10);
+        updateTemperaturePane.setPadding(new Insets(25, 25, 25, 25));
+        updateTemperaturePane.setVgap(10);
+
+        updateTemperaturePane.add(updateFridgeResponse, 7, 8);
+        updateTemperaturePane.add(updateFridgeID,0,0);
+        updateTemperaturePane.add(updateFridgeIDtxt,1,0);
+        updateTemperaturePane.add(updateFridgeTemp,0,1);
+        updateTemperaturePane.add(updateFridgeTemptxt,1,1);
+        updateTemperaturePane.add(updateTemperatureBack,0,7);
+        updateTemperaturePane.add(updateFridgeEnter,7,7);
+
+        updateTemperatureScene = new Scene(updateTemperaturePane, 1000, 500);
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         primaryStage.setScene(entryScene);
@@ -572,7 +787,8 @@ public class LabManager extends Application implements User{
     public void ButtonClicked(ActionEvent e) {
         if((e.getSource()==addFridgeBack)||(e.getSource()==removeFridgeBack)||(e.getSource()==addResearcherBack)||(e.getSource()==addLabManagerBack)
                 ||(e.getSource()==removeLabManagerBack)|| (e.getSource()==addSampleToBoxBack)|| (e.getSource()==removeSampleFromBoxBack)|| (e.getSource()==addBoxBack)
-                || (e.getSource()==removeBoxBack))
+                || (e.getSource()==removeBoxBack)|| (e.getSource()==findBoxlessSamplesBack)|| (e.getSource()==findContainersUnderCapacityBack)|| (e.getSource()==generateWorkListBack)
+                || (e.getSource()==generateSampleListBack)|| (e.getSource()==findResearchDurationsByResearcherBack)|| (e.getSource()==updateTemperatureBack))
             theStage.setScene(entryScene);
         if (e.getSource()==addFridge)
             theStage.setScene(addFridgeScene);
@@ -592,6 +808,19 @@ public class LabManager extends Application implements User{
             theStage.setScene(addBoxScene);
         if (e.getSource()==removeBox)
             theStage.setScene(removeBoxScene);
+        if (e.getSource()==findBoxlessSamples)
+            theStage.setScene(findBoxlessSamplesScene);
+        if (e.getSource()==findContainersUnderCapacity)
+            theStage.setScene(findContainersUnderCapacityScene);
+        if (e.getSource()==generateWorkList)
+            theStage.setScene(generateWorkListScene);
+        if (e.getSource()==generateSampleList)
+            theStage.setScene(generateSampleListScene);
+        if (e.getSource()==findResearchDurationsByResearcher)
+            theStage.setScene(findResearchDurationsByResearcherScene);
+        if (e.getSource()==updateTemperature)
+            theStage.setScene(updateTemperatureScene);
+
     }
 
     // Added temperature constraint to fridge
