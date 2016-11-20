@@ -1,0 +1,17 @@
+Lab Manager
+- findBoxlessSamples
+- findContainersUnderCapacity
+- generateWorkList
+- generateSampleList
+- findResearchDurationsByResearcher
+
+Researcher
+- addSample
+- editSample
+- findResearchersResearchingAll
+- findOngoingResearch
+- generateWorkList
+- generateSampleList
+
+starLoginWindow
+- check ID

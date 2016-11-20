@@ -117,21 +117,13 @@ public class startLoginWindow extends Application {
                     externalUser = new ExternalUser();
                     externalUser.start(ExternalUser.classStage);
                 }
-                else if (!userTextField.getText().equals("")) // todo - darius - check that the user ID is in the corresponding user table
-                {
-                    if (comboBox.getValue().equals("Researcher")){
-                        //todo - tamar/darius - check that the id is in userid
+                else if (comboBox.getValue().equals("Researcher") && isIDValid(2,Integer.parseInt(userTextField.getText()))){
                         researcher = new Researcher(Integer.parseInt(userTextField.getText()));
                         researcher.start(Researcher.classStage);
-                        ;//todo - tamar - show researcher view panel
                     }
-                        //todo - tamar - show researcher view panel
-                    if (comboBox.getValue().equals("Lab Manager")){
+                else if (comboBox.getValue().equals("Lab Manager") && isIDValid(1,Integer.parseInt(userTextField.getText()))){
                         labManager = new LabManager(Integer.parseInt(userTextField.getText()));
                         labManager.start(LabManager.classStage);}
-                        ;   //todo - tamar - show lab manager view panel
-
-                }
                 else {
                     actiontarget.setFill(Color.FIREBRICK);
                     actiontarget.setText("access denied");
