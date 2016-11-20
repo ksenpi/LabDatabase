@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -25,10 +26,14 @@ import java.sql.Date;
 import java.util.*;
 
 public class Researcher extends Application implements User {
-    Button addSample, editSample, addSampleResearch, addBox, removeBox, addSampleBack, editSampleBack, addSampleResearchBack,  addBoxBack, removeBoxBack;
+    Button addSample, editSample, addSampleResearch, addBox, removeBox, addSampleBack, editSampleBack, addSampleResearchBack,  addBoxBack, removeBoxBack
+            ,findResearchersResearchingAll, findOngoingResearch, generateWorkList, generateSampleList
+            ,findResearchersResearchingAllBack, findOngoingResearchBack, generateWorkListBack, generateSampleListBack;
     Stage theStage;
-    Scene entryScene, addSampleScene, editSampleScene, addSampleResearchScene, addBoxScene, removeBoxScene;
-    GridPane entryPane, addSamplePane, editSamplePane, addSampleResearchPane,  addBoxPane, removeBoxPane;
+    Scene entryScene, addSampleScene, editSampleScene, addSampleResearchScene, addBoxScene, removeBoxScene
+            ,findResearchersResearchingAllScene, findOngoingResearchScene, generateWorkListScene, generateSampleListScene;
+    GridPane entryPane, addSamplePane, editSamplePane, addSampleResearchPane,  addBoxPane, removeBoxPane
+            ,findResearchersResearchingAllPane, findOngoingResearchPane, generateWorkListPane, generateSampleListPane;
     final int researcherID;
 
     public Researcher(int researcherID) {
@@ -60,19 +65,37 @@ public class Researcher extends Application implements User {
         addBoxBack.setOnAction(e->ButtonClicked(e));
         removeBoxBack = new Button("Go to Main Page");
         removeBoxBack.setOnAction(e->ButtonClicked(e));
-
+        findResearchersResearchingAllBack = new Button("Go to Main Page");
+        findResearchersResearchingAllBack.setOnAction(e->ButtonClicked(e));
+        findOngoingResearchBack = new Button("Go to Main Page");
+        findOngoingResearchBack.setOnAction(e->ButtonClicked(e));
+        generateWorkListBack = new Button("Go to Main Page");
+        generateWorkListBack.setOnAction(e->ButtonClicked(e));
+        generateSampleListBack = new Button("Go to Main Page");
+        generateSampleListBack.setOnAction(e->ButtonClicked(e));
         //entryScene////////////////////////////////////////////////////////////////////////////////////////////////////
         addSample = new Button("Add Sample");
         editSample = new Button("Edit Sample");
         addSampleResearch = new Button("Research Sample");
         addBox = new Button("Add Box");
         removeBox = new Button("Remove Box");
+
+        findResearchersResearchingAll = new Button("Find Researchers Researching All Samples");
+        findOngoingResearch = new Button("Find Ongoing Research");
+        generateWorkList = new Button("See Worklist");
+        generateSampleList = new Button("See Samplelist");
+
         //making button actions
         addSample.setOnAction(e-> ButtonClicked(e));
         editSample.setOnAction(e-> ButtonClicked(e));
         addSampleResearch.setOnAction(e-> ButtonClicked(e));
         addBox.setOnAction(e-> ButtonClicked(e));
         removeBox.setOnAction(e-> ButtonClicked(e));
+        findResearchersResearchingAll.setOnAction(e-> ButtonClicked(e));
+        findOngoingResearch.setOnAction(e-> ButtonClicked(e));
+        generateWorkList.setOnAction(e-> ButtonClicked(e));
+        generateSampleList.setOnAction(e-> ButtonClicked(e));
+
         //entryPane (gridpane)
         entryPane = new GridPane();
         entryPane.setAlignment(Pos.CENTER);
@@ -86,6 +109,11 @@ public class Researcher extends Application implements User {
         entryPane.add(addSampleResearch, 2, 0);
         entryPane.add(addBox, 0, 1);
         entryPane.add(removeBox, 1, 1);
+        entryPane.add(findResearchersResearchingAll, 2, 1);
+        entryPane.add(findOngoingResearch, 0, 2);
+        entryPane.add(generateWorkList, 1, 2);
+        entryPane.add(generateSampleList, 2, 2);
+
         entryScene = new Scene(entryPane, 1000, 500);
 
 
@@ -647,6 +675,169 @@ public class Researcher extends Application implements User {
 
         removeBoxScene = new Scene(removeBoxPane, 1000, 500);
 
+
+        //todo findResearchersResearchingAll////////////////////////////////////////////////////////////////////////////////
+        ListView<String> allResearchers = new ListView<String>();
+        ObservableList<String> allResearchersItems = FXCollections.observableArrayList ();
+
+        List<String> foundResearchers = findResearchersResearchingAll();
+        for(String researcher:foundResearchers)
+            allResearchersItems.add(researcher);
+        //allResearchersItems.addAll(foundResearchers);
+
+        allResearchers.setItems(allResearchersItems);
+
+        findResearchersResearchingAllPane = new GridPane();
+        findResearchersResearchingAllPane.setAlignment(Pos.CENTER);
+        findResearchersResearchingAllPane.setHgap(10);
+        findResearchersResearchingAllPane.setVgap(10);
+        findResearchersResearchingAllPane.setPadding(new Insets(25, 25, 25, 25));
+        findResearchersResearchingAllPane.setVgap(10);
+
+        findResearchersResearchingAllPane.add(allResearchers,0,0);
+        findResearchersResearchingAllPane.add(findResearchersResearchingAllBack,0,7);
+
+        findResearchersResearchingAllScene = new Scene(findResearchersResearchingAllPane, 1000, 500);
+
+        //todo findOngoingResearch /////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> ongoingResearch = new ListView<String>();
+        ObservableList<String> ongoingResearchItems = FXCollections.observableArrayList ();
+
+        Label info = new Label("What information are you interested in seeing?");
+        ComboBox choices = new ComboBox(FXCollections.observableArrayList("Start Date", "Duration"));
+        Label advancedSearch = new Label("Advanced Search");
+        ComboBox advancedSearchChoices = new ComboBox(FXCollections.observableArrayList("Duration", "Sample ID"));
+        TextField advancedSearchTxt = new TextField();
+        advancedSearchTxt.lengthProperty().addListener(new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = advancedSearchTxt.getText().charAt(oldValue.intValue());
+                    System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
+
+                    //Check if the new character is the number or other's
+                    if(!(ch >= '0' && ch <= '9' )){
+
+                        //if it's not number then just setText to previous one
+                        advancedSearchTxt.setText(advancedSearchTxt.getText().substring(0,advancedSearchTxt.getText().length()-1));
+                    }
+                }
+            }
+
+        });
+        Button ongoingResearchEnter = new Button("Enter");
+        ongoingResearchEnter.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                ongoingResearch.getItems().clear();
+                ongoingResearchItems.removeAll();
+                boolean fnstartDate = false;
+                boolean fnduration = false;
+                int fnattributeCase = 0;
+                int fnvalue = 0;
+
+                if(choices.getValue()=="Start Date")
+                    fnstartDate = true;
+                if(choices.getValue()=="Duration")
+                    fnduration = true;
+                if(advancedSearchChoices.getValue()=="Duration")
+                    fnattributeCase = 0;
+                if(advancedSearchChoices.getValue()=="Sample ID")
+                    fnattributeCase = 1;
+                if(advancedSearchTxt.getText()!="")
+                    fnvalue = Integer.parseInt(advancedSearchTxt.getText());
+                
+                Map<String, String[]> findOngoingResult = findOngoingResearch(fnstartDate, fnduration, fnattributeCase, fnvalue);
+
+                for (String key : findOngoingResult.keySet()) {
+                    String sampleProperties = "";
+                    for(String element: findOngoingResult.get(key)) {
+                        //samplelistItems.add(key + ", " + element);
+                        sampleProperties += element + ",   ";
+                    }
+                    ongoingResearchItems.add(key + " : " + sampleProperties);
+
+                }
+
+                ongoingResearch.setItems(ongoingResearchItems);
+                findOngoingResearchPane.add(ongoingResearch,1,3);
+            }});
+
+
+        ongoingResearch.setItems(ongoingResearchItems);
+        findOngoingResearchPane = new GridPane();
+        findOngoingResearchPane.setAlignment(Pos.CENTER);
+        findOngoingResearchPane.setHgap(10);
+        findOngoingResearchPane.setVgap(10);
+        findOngoingResearchPane.setPadding(new Insets(25, 25, 25, 25));
+        findOngoingResearchPane.setVgap(10);
+
+        findOngoingResearchPane.add(info,0,0);
+        findOngoingResearchPane.add(choices,1,0);
+        findOngoingResearchPane.add(advancedSearch,0,1);
+        findOngoingResearchPane.add(advancedSearchChoices,1,1);
+        findOngoingResearchPane.add(advancedSearchTxt,2,1);
+        findOngoingResearchPane.add(ongoingResearchEnter,7,7);
+        findOngoingResearchPane.add(findOngoingResearchBack,0,7);
+
+        findOngoingResearchScene = new Scene(findOngoingResearchPane, 1000, 500);
+        // generateWorkList/////////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> WorkList = new ListView<String>();
+        ObservableList<String> WorkListItems = FXCollections.observableArrayList ();
+
+        Map<String, String[]> workList = generateWorkList();
+        for (String key : workList.keySet()) {
+            WorkListItems.add(key + "  ,   " + workList.get(key)[0]);
+        }
+
+        WorkList.setItems(WorkListItems);
+
+        generateWorkListPane = new GridPane();
+        generateWorkListPane.setAlignment(Pos.CENTER);
+        generateWorkListPane.setHgap(10);
+        generateWorkListPane.setVgap(10);
+        generateWorkListPane.setPadding(new Insets(25, 25, 25, 25));
+        generateWorkListPane.setVgap(10);
+
+        generateWorkListPane.add(WorkList,0,0);
+        generateWorkListPane.add(generateWorkListBack,0,7);
+
+        generateWorkListScene = new Scene(generateWorkListPane, 1000, 500);
+
+        // generateSampleList///////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> samplelist = new ListView<>();
+
+        ObservableList<String> samplelistItems =FXCollections.observableArrayList ();
+
+        Map<String, String[]> sampleList = generateSampleList();
+        for (String key : sampleList.keySet()) {
+            String sampleProperties = "";
+            for(String element: sampleList.get(key)) {
+                //samplelistItems.add(key + ", " + element);
+                sampleProperties += element + ",   ";
+            }
+            samplelistItems.add(key + " : " + sampleProperties);
+
+        }
+        samplelist.setItems(samplelistItems);
+
+        generateSampleListPane = new GridPane();
+        generateSampleListPane.setAlignment(Pos.CENTER);
+        generateSampleListPane.setHgap(10);
+        generateSampleListPane.setVgap(10);
+        generateSampleListPane.setPadding(new Insets(25, 25, 25, 25));
+        generateSampleListPane.setVgap(10);
+
+        generateSampleListPane.add(samplelist,0,0);
+        generateSampleListPane.add(generateSampleListBack,0,7);
+
+        generateSampleListScene = new Scene(generateSampleListPane, 1000, 500);
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         primaryStage.setScene(entryScene);
 
         primaryStage.show();
@@ -656,7 +847,8 @@ public class Researcher extends Application implements User {
 
     public void ButtonClicked(ActionEvent e) {
         if((e.getSource()==addSampleBack)||(e.getSource()==editSampleBack)||(e.getSource()==addSampleResearchBack)
-                ||(e.getSource()==addBoxBack)|| (e.getSource()==removeBoxBack))
+                ||(e.getSource()==addBoxBack)|| (e.getSource()==removeBoxBack)
+                || (e.getSource()==findResearchersResearchingAllBack)|| (e.getSource()==findOngoingResearchBack)|| (e.getSource()==generateWorkListBack)|| (e.getSource()==generateSampleListBack))
             theStage.setScene(entryScene);
         if (e.getSource()==addSample)
             theStage.setScene(addSampleScene);
@@ -668,6 +860,14 @@ public class Researcher extends Application implements User {
             theStage.setScene(addBoxScene);
         if (e.getSource()==removeBox)
             theStage.setScene(removeBoxScene);
+        if (e.getSource()==findResearchersResearchingAll)
+            theStage.setScene(findResearchersResearchingAllScene);
+        if (e.getSource()==findOngoingResearch)
+            theStage.setScene(findOngoingResearchScene);
+        if (e.getSource()==generateWorkList)
+            theStage.setScene(generateWorkListScene);
+        if (e.getSource()==generateSampleList)
+            theStage.setScene(generateSampleListScene);
     }
 
     //type is 0-7

@@ -6,5 +6,51 @@ Researcher
 - editSample
 - findResearchersResearchingAll (allready a list )
 - findOngoingResearch
-- generateWorkList
-- generateSampleList
+//todo
+        ListView<String> researchingAll = new ListView<String>();
+        ObservableList<String> researchingAllItems = FXCollections.observableArrayList ();
+
+        //List<String> foundResearchers = findResearchersResearchingAll();
+        //researchingAllItems.addAll(foundResearchers);
+        /*todo
+        Map<String, String[]> workList = generateWorkList();
+        for (String key : workList.keySet()) {
+            WorkListItems.add(key + "  ,   " + workList.get(key)[0]);
+        }
+*/
+        researchingAll.setItems(researchingAllItems);
+
+        findResearchersResearchingAllPane = new GridPane();
+        findResearchersResearchingAllPane.setAlignment(Pos.CENTER);
+        findResearchersResearchingAllPane.setHgap(10);
+        findResearchersResearchingAllPane.setVgap(10);
+        findResearchersResearchingAllPane.setPadding(new Insets(25, 25, 25, 25));
+        findResearchersResearchingAllPane.setVgap(10);
+
+        findOngoingResearchPane.add(researchingAll,0,0);
+        findOngoingResearchPane.add(findResearchersResearchingAllBack,0,7);
+
+        findResearchersResearchingAllScene = new Scene(findResearchersResearchingAllPane, 1000, 500);
+
+//todo findOngoingResearch /////////////////////////////////////////////////////////////////////////////////////////
+       ListView<String> ongoingResearch = new ListView<String>();
+        ObservableList<String> ongoingResearchItems = FXCollections.observableArrayList ();
+/*todo
+        Map<String, String[]> workList = generateWorkList();
+        for (String key : workList.keySet()) {
+            WorkListItems.add(key + "  ,   " + workList.get(key)[0]);
+        }
+*/
+        ongoingResearch.setItems(ongoingResearchItems);
+
+        findOngoingResearchPane = new GridPane();
+        findOngoingResearchPane.setAlignment(Pos.CENTER);
+        findOngoingResearchPane.setHgap(10);
+        findOngoingResearchPane.setVgap(10);
+        findOngoingResearchPane.setPadding(new Insets(25, 25, 25, 25));
+        findOngoingResearchPane.setVgap(10);
+
+        findOngoingResearchPane.add(ongoingResearch,0,0);
+        findOngoingResearchPane.add(findOngoingResearchBack,0,7);
+
+        findOngoingResearchScene = new Scene(findOngoingResearchPane, 1000, 500);

@@ -809,7 +809,6 @@ public class LabManager extends Application implements User{
         findResearchDurationsByResearcherPane.add(minimum,1,0);
         findResearchDurationsByResearcherPane.add(maximum,2,0);
         findResearchDurationsByResearcherPane.add(total,3,0);
-        //findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,0,1);
         findResearchDurationsByResearcherPane.add(findResearchDurationsByResearcherBack,0,7);
 
         findResearchDurationsByResearcherScene = new Scene(findResearchDurationsByResearcherPane, 1000, 500);
