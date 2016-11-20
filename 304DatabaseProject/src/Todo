@@ -1,13 +1,10 @@
 Lab Manager
-- findBoxlessSamples
-- findContainersUnderCapacity
-- findResearchDurationsByResearcher
 -update temp (check)
 
 Researcher
 - addSample
 - editSample
-- findResearchersResearchingAll
+- findResearchersResearchingAll (allready a list )
 - findOngoingResearch
 - generateWorkList
 - generateSampleList

@@ -631,15 +631,25 @@ public class LabManager extends Application implements User{
 
         findBoxlessSamplesScene = new Scene(findBoxlessSamplesPane, 1000, 500);
 
-        // todo findContainersUnderCapacity//////////////////////////////////////////////////////////////////////////////////
+        //findContainersUnderCapacity//////////////////////////////////////////////////////////////////////////////////
 
         ListView<String> containersUnderCapacity = new ListView<String>();
         ObservableList<String> containersUnderCapacityItems = FXCollections.observableArrayList ();
 
-        //Map<String, String[]> workList = generateWorkList(); //todo tamar write in function here
-        //for (String key : workList.keySet()) {
-        //    boxlessSamplesItems.add(key + "  ,   " + workList.get(key)[0]);
-        //}
+        Map<String, String[]> under = findContainersUnderCapacity();
+        for (String key : under.keySet()) {
+            String value = "";
+            for (int i = 0; i < under.get(key).length - 1; i++) {
+                String next = under.get(key)[i];
+                if (i == 0) {
+                    value = next;
+                }
+                else {
+                    value = value + " , " + next;
+                }
+            }
+            containersUnderCapacityItems.add(key + " , " + value);
+        }
 
         containersUnderCapacity.setItems(containersUnderCapacityItems);
 
@@ -706,8 +716,103 @@ public class LabManager extends Application implements User{
 
         generateSampleListScene = new Scene(generateSampleListPane, 1000, 500);
 
-        // todo findResearchDurationsByResearcher////////////////////////////////////////////////////////////////////////////
+        //findResearchDurationsByResearcher////////////////////////////////////////////////////////////////////////////
+        ListView<String> ResearchDurationsByResearcher = new ListView<>();
+        ObservableList<String> empty =FXCollections.observableArrayList ();
+        ObservableList<String> ResearchDurationsByResearcherItems =FXCollections.observableArrayList ();
 
+        Button average = new Button("Find Average Duration Requested for Each Researcher"); //0
+        average.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                ResearchDurationsByResearcher.getItems().clear();
+                ResearchDurationsByResearcherItems.removeAll();
+                Map<String, String[]> researcherduration = findResearchDurationsByResearcher(0);
+                for (String key : researcherduration.keySet()) {
+                    String sampleProperties = "";
+                    for(String element: researcherduration.get(key)) {
+                        sampleProperties += element + ",   ";
+                    }
+                    ResearchDurationsByResearcherItems.add(key + " : " + sampleProperties);
+
+                }
+                ResearchDurationsByResearcher.setItems(ResearchDurationsByResearcherItems);
+                findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,0,1);
+            }});
+        Button minimum = new Button("Find Minimum Duration Requested for Each Researcher"); //1
+        minimum.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                ResearchDurationsByResearcher.getItems().clear();
+                ResearchDurationsByResearcherItems.removeAll();
+                Map<String, String[]> researcherduration = findResearchDurationsByResearcher(1);
+                for (String key : researcherduration.keySet()) {
+                    String sampleProperties = "";
+                    for(String element: researcherduration.get(key)) {
+                        sampleProperties += element + ",   ";
+                    }
+                    ResearchDurationsByResearcherItems.add(key + " : " + sampleProperties);
+
+                }
+                ResearchDurationsByResearcher.setItems(ResearchDurationsByResearcherItems);
+                findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,1,1);
+            }});
+        Button maximum = new Button("Find Maximum Duration Requested for Each Researcher"); //2
+        maximum.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                ResearchDurationsByResearcher.getItems().clear();
+                ResearchDurationsByResearcherItems.removeAll();
+                Map<String, String[]> researcherduration = findResearchDurationsByResearcher(2);
+                for (String key : researcherduration.keySet()) {
+                    String sampleProperties = "";
+                    for(String element: researcherduration.get(key)) {
+                        sampleProperties += element + ",   ";
+                    }
+                    ResearchDurationsByResearcherItems.add(key + " : " + sampleProperties);
+
+                }
+                ResearchDurationsByResearcher.setItems(ResearchDurationsByResearcherItems);
+                findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,2,1);
+            }});
+        Button total = new Button("Find Total Number of Requests for Each Researcher"); //3
+        total.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                ResearchDurationsByResearcher.getItems().clear();
+                ResearchDurationsByResearcherItems.removeAll();
+                Map<String, String[]> researcherduration = findResearchDurationsByResearcher(3);
+                for (String key : researcherduration.keySet()) {
+                    String sampleProperties = "";
+                    for(String element: researcherduration.get(key)) {
+                        sampleProperties += element + ",   ";
+                    }
+                    ResearchDurationsByResearcherItems.add(key + " : " + sampleProperties);
+
+                }
+                ResearchDurationsByResearcher.setItems(ResearchDurationsByResearcherItems);
+                findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,3,1);
+            }});
+
+        findResearchDurationsByResearcherPane = new GridPane();
+        findResearchDurationsByResearcherPane.setAlignment(Pos.CENTER);
+        findResearchDurationsByResearcherPane.setHgap(10);
+        findResearchDurationsByResearcherPane.setVgap(10);
+        findResearchDurationsByResearcherPane.setPadding(new Insets(25, 25, 25, 25));
+        findResearchDurationsByResearcherPane.setVgap(10);
+
+        findResearchDurationsByResearcherPane.add(average,0,0);
+        findResearchDurationsByResearcherPane.add(minimum,1,0);
+        findResearchDurationsByResearcherPane.add(maximum,2,0);
+        findResearchDurationsByResearcherPane.add(total,3,0);
+        //findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,0,1);
+        findResearchDurationsByResearcherPane.add(findResearchDurationsByResearcherBack,0,7);
+
+        findResearchDurationsByResearcherScene = new Scene(findResearchDurationsByResearcherPane, 1000, 500);
         // update Temperature////////////////////////////////////////////////////////////////////////////
         Label updateFridgeID = new Label("Fridge ID:");
         TextField updateFridgeIDtxt = new TextField();
