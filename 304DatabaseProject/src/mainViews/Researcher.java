@@ -2,6 +2,7 @@ package mainViews;/**
  * Created by Tamar on 2016-11-10.
  */
 
+import a.a.S;
 import databaseConnection.OurConnection;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -118,74 +119,74 @@ public class Researcher extends Application implements User {
 
 
         //addSampleScene////////////////////////////////////////////////////////////////////////////////////////////////
-        Label sampleType = new Label("Sample Type");
-        ChoiceBox sampleTypeBox = new ChoiceBox();
-        sampleTypeBox.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
-        //sampleTypeBox.getItems().addAll("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest");
-        Label strain = new Label("Strain:");
-        TextField strainTextField = new TextField();
-        Label volume = new Label("Volume(mL):");
-        TextField volumeTextField = new TextField();
-        volumeTextField.lengthProperty().addListener(new ChangeListener<Number>(){
+        Label addSampleType = new Label("Sample Type: ");
+        ChoiceBox addSampleTypeChoices = new ChoiceBox();
+        addSampleTypeChoices.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid",
+                "Digest", "Genomic", "Ligation"));
+        Label addSampleStrain = new Label("Strain: "); //bacterial culture, glycerol stock, plate
+        TextField addSampleStrainTxt = new TextField();
+        Label addSampleVolume = new Label("Volume in mL: "); //glycerol stock
+        TextField addSampleVolumeTxt = new TextField(); //todo
+        addSampleVolumeTxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
                 if(newValue.intValue() > oldValue.intValue()){
-                    char ch = volumeTextField.getText().charAt(oldValue.intValue());
+                    char ch = addSampleVolumeTxt.getText().charAt(oldValue.intValue());
                     System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
 
                     //Check if the new character is the number or other's
                     if(!(ch >= '0' && ch <= '9' )){
 
                         //if it's not number then just setText to previous one
-                        volumeTextField.setText(volumeTextField.getText().substring(0,volumeTextField.getText().length()-1));
+                        addSampleVolumeTxt.setText(addSampleVolumeTxt.getText().substring(0,addSampleVolumeTxt.getText().length()-1));
                     }
                 }
             }
 
         });
-        Label composition = new Label("Plate Composition:");
-        TextField compositionTextField = new TextField();
-        Label concentration = new Label("Concentration(ng/uL):");
-        TextField concentrationTextField = new TextField();
-        concentrationTextField.lengthProperty().addListener(new ChangeListener<Number>(){
+        Label addSampleComposition = new Label("Composition: "); //plate
+        TextField addSampleCompositionTxt = new TextField();
+        Label addSampleConcentration = new Label("Concentration in ng/uL: "); // DNA sample, plasmid, digest, genomic, ligation
+        TextField addSampleConcentrationTxt = new TextField();
+        addSampleConcentrationTxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
                 if(newValue.intValue() > oldValue.intValue()){
-                    char ch = concentrationTextField.getText().charAt(oldValue.intValue());
+                    char ch = addSampleConcentrationTxt.getText().charAt(oldValue.intValue());
                     System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
 
                     //Check if the new character is the number or other's
                     if(!(ch >= '0' && ch <= '9' )){
 
                         //if it's not number then just setText to previous one
-                        concentrationTextField.setText(concentrationTextField.getText().substring(0,concentrationTextField.getText().length()-1));
+                        addSampleConcentrationTxt.setText(addSampleConcentrationTxt.getText().substring(0,addSampleConcentrationTxt.getText().length()-1));
                     }
                 }
             }
 
         });
-        Label plasmidName = new Label("Plasmid Name:");
-        TextField plasmidTextField = new TextField();
-        Label plasmidAntibiotic = new Label("Plasmid Antibiotic:");
-        TextField antibioticTextField = new TextField();
-        Label rez1 = new Label("Restriction Enzyme 1:");
-        TextField rez1TextField = new TextField();
-        Label rez2 = new Label("Restriction Enzyme 2:");
-        TextField rez2TextField = new TextField();
-        Label genomic = new Label("Origin:");
-        TextField genomicTextField = new TextField();
-        Label ligation1 = new Label("Ligation Part 1:");
-        TextField ligation1TextField = new TextField();
-        Label ligation2 = new Label("Ligation Part 2:");
-        TextField ligation2TextField = new TextField();
+        Label addSamplePlasmidName = new Label("Plasmid Name: "); // plasmid
+        TextField addSamplePlasmidNameTxt = new TextField();
+        Label addSamplePlasmidAntibiotic = new Label("Plasmid Antibiotic Resistance: "); //plasmid
+        TextField addSamplePlasmidAntibioticTxt = new TextField();
+        Label addSampleRez1 = new Label("Restriction Enzyme 1: "); //digest
+        TextField addSampleRez1Txt = new TextField();
+        Label addSampleRez2 = new Label("Restriction Enzyme 2: "); //digest
+        TextField addSampleRez2Txt = new TextField();
+        Label addSampleOrigin = new Label("Genomic Origin: "); //genomic
+        TextField addSampleOriginTxt = new TextField();
+        Label addSamplePart1 = new Label("Ligation Part 1: "); //ligation
+        TextField addSamplePart1Txt = new TextField();
+        Label addSamplePart2 = new Label("Ligation Part 1   : "); //ligation
+        TextField addSamplePart2Txt = new TextField();
 
-        Button enterAddSample = new Button("Enter");
         Text addSampleResponse = new Text();
-        //entryPane (gridpane)
+        Button enteraddSample = new Button("Enter");
+
         addSamplePane = new GridPane();
         addSamplePane.setAlignment(Pos.CENTER);
         addSamplePane.setHgap(10);
@@ -193,19 +194,77 @@ public class Researcher extends Application implements User {
         addSamplePane.setPadding(new Insets(25, 25, 25, 25));
         addSamplePane.setVgap(10);
 
-        //adding all the buttons to the entry pane
-        addSamplePane.add(sampleType, 0, 0);
-        addSamplePane.add(sampleTypeBox, 1, 0);
 
-        addSamplePane.add(addSampleBack,0,7);                  //check the placement of this button
-        addSamplePane.add(enterAddSample,7,7);                   //check the placement of this button
+        addSamplePane.add(addSampleType,0,0);
+        addSamplePane.add(addSampleTypeChoices,1,0);
+        addSamplePane.add(addSampleBack,0,7);
+        addSamplePane.add(enteraddSample,7,7);
         addSamplePane.add(addSampleResponse,7,8);
 
-        enterAddSample.setOnAction(new EventHandler<ActionEvent>() {
+        addSampleTypeChoices.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
-                int type = 8;
+                addSamplePane.getChildren().remove(5, addSamplePane.getChildren().size());
+
+                if(addSampleTypeChoices.getValue().equals("Bacterial Culture")){
+                    addSamplePane.add(addSampleStrain,0,1);
+                    addSamplePane.add(addSampleStrainTxt,1,1);
+                }
+                if(addSampleTypeChoices.getValue().equals("Glycerol Stock")){
+                    addSamplePane.add(addSampleStrain,0,1);
+                    addSamplePane.add(addSampleStrainTxt,1,1);
+                    addSamplePane.add(addSampleVolume,0,2);
+                    addSamplePane.add(addSampleVolumeTxt,1,2);
+                }
+                if(addSampleTypeChoices.getValue().equals("Plate")){
+                    addSamplePane.add(addSampleStrain,0,1);
+                    addSamplePane.add(addSampleStrainTxt,1,1);
+                    addSamplePane.add(addSampleComposition,0,2);
+                    addSamplePane.add(addSampleCompositionTxt,1,2);
+                }
+                if(addSampleTypeChoices.getValue().equals("DNA Sample")){
+                    addSamplePane.add(addSampleConcentration,0,1);
+                    addSamplePane.add(addSampleConcentrationTxt,1,1);
+                }
+                if(addSampleTypeChoices.getValue().equals("Plasmid")){
+                    addSamplePane.add(addSampleConcentration,0,1);
+                    addSamplePane.add(addSampleConcentrationTxt,1,1);
+                    addSamplePane.add(addSamplePlasmidName,0,2);
+                    addSamplePane.add(addSamplePlasmidNameTxt,1,2);
+                    addSamplePane.add(addSamplePlasmidAntibiotic,0,3);
+                    addSamplePane.add(addSamplePlasmidAntibioticTxt,1,3);
+                }
+                if(addSampleTypeChoices.getValue().equals("Digest")){
+                    addSamplePane.add(addSampleConcentration,0,1);
+                    addSamplePane.add(addSampleConcentrationTxt,1,1);
+                    addSamplePane.add(addSampleRez1,0,2);
+                    addSamplePane.add(addSampleRez1Txt,1,2);
+                    addSamplePane.add(addSampleRez2,0,3);
+                    addSamplePane.add(addSampleRez2Txt,1,3);
+                }
+                if(addSampleTypeChoices.getValue().equals("Genomic")){
+                    addSamplePane.add(addSampleConcentration,0,1);
+                    addSamplePane.add(addSampleConcentrationTxt,1,1);
+                    addSamplePane.add(addSampleOrigin,0,2);
+                    addSamplePane.add(addSampleOriginTxt,1,2);
+                }
+                if(addSampleTypeChoices.getValue().equals("Ligation")){
+                    addSamplePane.add(addSampleConcentration,0,1);
+                    addSamplePane.add(addSampleConcentrationTxt,1,1);
+                    addSamplePane.add(addSamplePart1,0,2);
+                    addSamplePane.add(addSamplePart1Txt,1,2);
+                    addSamplePane.add(addSamplePart2,0,3);
+                    addSamplePane.add(addSamplePart2Txt,1,3);
+                }
+        }});
+
+
+        enteraddSample.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                int typepass = 8;
                 String strainpass = null;
                 int volumepass = 0;
                 String compositionpass = null;
@@ -217,294 +276,280 @@ public class Researcher extends Application implements User {
                 String genomeOriginpass = null;
                 String lig1pass = null;
                 String lig2pass = null;
-                if(sampleTypeBox.getValue() == "Bacterial Culture") {
-                    type = 0;
-                    strainpass = strainTextField.getText();
+                if(addSampleTypeChoices.getValue() == "Bacterial Culture") {
+                    typepass = 0;
+                    strainpass = addSampleStrainTxt.getText();
                 }
-                if(sampleTypeBox.getValue() == "Glycerol Stock") {
-                    type = 1;
-                    strainpass = strainTextField.getText();
-                    volumepass = Integer.parseInt(volumeTextField.getText());
+                if(addSampleTypeChoices.getValue() == "Glycerol Stock") {
+                    typepass = 1;
+                    strainpass = addSampleStrainTxt.getText();
+                    volumepass = Integer.parseInt(addSampleVolumeTxt.getText());
                 }
-                if(sampleTypeBox.getValue() == "Plate") {
-                    type = 2;
-                    strainpass = strainTextField.getText();
-                    compositionpass = compositionTextField.getText();
+                if(addSampleTypeChoices.getValue() == "Plate") {
+                    typepass = 2;
+                    strainpass = addSampleStrainTxt.getText();
+                    compositionpass = addSampleCompositionTxt.getText();
                 }
-                if(sampleTypeBox.getValue() == "DNA Sample"){
-                    type = 3;
-                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
+                if(addSampleTypeChoices.getValue() == "DNA Sample"){
+                    typepass = 3;
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
                 }
-                if(sampleTypeBox.getValue() == "Plasmid") {
-                    type = 4;
-                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
-                    plasmidNamepass = plasmidTextField.getText();
-                    plasmidAntibioticpass = antibioticTextField.getText();
+                if(addSampleTypeChoices.getValue() == "Plasmid") {
+                    typepass = 4;
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    plasmidNamepass = addSamplePlasmidNameTxt.getText();
+                    plasmidAntibioticpass = addSamplePlasmidAntibioticTxt.getText();
                 }
-                if(sampleTypeBox.getValue() == "Digest") {
-                    type = 5;
-                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
-                    rez1pass = rez1TextField.getText();
-                    rez2pass = rez2TextField.getText();
+                if(addSampleTypeChoices.getValue() == "Digest") {
+                    typepass = 5;
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    rez1pass = addSampleRez1Txt.getText();
+                    rez2pass = addSampleRez2Txt.getText();
                 }
-                if(sampleTypeBox.getValue() == "Genomic") {
-                    type = 6;
-                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
-                    genomeOriginpass = genomicTextField.getText();
+                if(addSampleTypeChoices.getValue() == "Genomic") {
+                    typepass = 6;
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    genomeOriginpass = addSampleOriginTxt.getText();
                 }
-                if(sampleTypeBox.getValue() == "Ligation") {
-                    type = 7;
-                    concentrationpass = Integer.parseInt(concentrationTextField.getText());
-                    lig1pass = ligation1TextField.getText();
-                    lig2pass = ligation2TextField.getText();
+                if(addSampleTypeChoices.getValue() == "Ligation") {
+                    typepass = 7;
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    lig1pass = addSamplePart1Txt.getText();
+                    lig2pass = addSamplePart2Txt.getText();
                 }
-                addSampleResponse.setText(addSample(type, strainpass, volumepass ,compositionpass,concentrationpass, plasmidNamepass,
+
+                addSampleResponse.setText(addSample(typepass, strainpass, volumepass ,compositionpass,concentrationpass, plasmidNamepass,
                         plasmidAntibioticpass, rez1pass, rez2pass, genomeOriginpass, lig1pass,lig2pass));
-            }
-        });
-
-        sampleTypeBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                addSamplePane.getChildren().remove(4, addSamplePane.getChildren().size());
-
-                if(sampleTypeBox.getValue()=="Bacterial Culture"){
-                    addSamplePane.add(strain, 0, 1);
-                    addSamplePane.add(strainTextField, 1, 1);
-                }
-                if(sampleTypeBox.getValue()=="Glycerol Stock"){
-                    addSamplePane.add(strain, 0, 1);
-                    addSamplePane.add(strainTextField, 1, 1);
-                    addSamplePane.add(volume, 0, 2);
-                    addSamplePane.add(volumeTextField, 1, 2);
-                }
-                if(sampleTypeBox.getValue()=="Plate"){
-                    addSamplePane.add(strain, 0, 1);
-                    addSamplePane.add(strainTextField, 1, 1);
-                    addSamplePane.add(composition, 0, 2);
-                    addSamplePane.add(compositionTextField, 1, 2);
-                }
-                if(sampleTypeBox.getValue()=="DNA Sample"){
-                    addSamplePane.add(concentration, 0, 1);
-                    addSamplePane.add(concentrationTextField, 1, 1);
-                }
-                if(sampleTypeBox.getValue()=="Plasmid"){
-                    addSamplePane.add(concentration, 0, 1);
-                    addSamplePane.add(concentrationTextField, 1, 1);
-                    addSamplePane.add(plasmidName, 0, 2);
-                    addSamplePane.add(plasmidTextField, 1, 2);
-                    addSamplePane.add(plasmidAntibiotic, 0, 3);
-                    addSamplePane.add(antibioticTextField, 1, 3);
-                }
-                if(sampleTypeBox.getValue()=="Ligation"){
-                    addSamplePane.add(concentration, 0, 1);
-                    addSamplePane.add(concentrationTextField, 1, 1);
-                    addSamplePane.add(ligation1, 0, 2);
-                    addSamplePane.add(ligation1TextField, 1, 2);
-                    addSamplePane.add(ligation2, 0, 3);
-                    addSamplePane.add(ligation2TextField, 1, 3);
-                }
-                if(sampleTypeBox.getValue()=="Genomic"){
-                    addSamplePane.add(concentration, 0, 1);
-                    addSamplePane.add(concentrationTextField, 1, 1);
-                    addSamplePane.add(genomic, 0, 2);
-                    addSamplePane.add(genomicTextField, 1, 2);
-                }
-                if(sampleTypeBox.getValue()=="Digest"){
-                    addSamplePane.add(concentration, 0, 1);
-                    addSamplePane.add(concentrationTextField, 1, 1);
-                    addSamplePane.add(rez1, 0, 2);
-                    addSamplePane.add(rez1TextField, 1, 2);
-                    addSamplePane.add(rez2, 0, 3);
-                    addSamplePane.add(rez2TextField, 1, 3);
-                }
 
             }
-
-
         });
 
         addSampleScene = new Scene(addSamplePane, 1000, 500);
 
-        // editSampleScene//////////////////////////////////////////////////////////////////////////////////////////////
-        //make buttons
-        Label sampleType1 = new Label("Sample Type");
-        ChoiceBox sampleTypeBox1 = new ChoiceBox();
-        sampleTypeBox1.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid", "Ligation", "Genomic", "Digest"));
-        Label sampleIDLabel = new Label("Sample ID: ");
-        TextField sampleIDTextfield = new TextField();
-        sampleIDTextfield.lengthProperty().addListener(new ChangeListener<Number>(){
+        //todo editSampleScene//////////////////////////////////////////////////////////////////////////////////////////
+        Label editSampleType = new Label("Sample Type: ");
+        ChoiceBox editSampleTypeChoices = new ChoiceBox();
+        editSampleTypeChoices.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid",
+                "Digest", "Genomic", "Ligation"));
+        Label editSampleStrain = new Label("Strain: "); //bacterial culture, glycerol stock, plate
+        TextField editSampleStrainTxt = new TextField();
+        Label editSampleVolume = new Label("Volume in mL: "); //glycerol stock
+        TextField editSampleVolumeTxt = new TextField(); //todo
+        editSampleVolumeTxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
                 if(newValue.intValue() > oldValue.intValue()){
-                    char ch = sampleIDTextfield.getText().charAt(oldValue.intValue());
+                    char ch = editSampleVolumeTxt.getText().charAt(oldValue.intValue());
                     System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
 
                     //Check if the new character is the number or other's
                     if(!(ch >= '0' && ch <= '9' )){
 
                         //if it's not number then just setText to previous one
-                        sampleIDTextfield.setText(sampleIDTextfield.getText().substring(0,sampleIDTextfield.getText().length()-1));
+                        editSampleVolumeTxt.setText(editSampleVolumeTxt.getText().substring(0,editSampleVolumeTxt.getText().length()-1));
                     }
                 }
             }
 
         });
-        Button enterEditSample = new Button("Enter");
-        enterEditSample.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                //editSample(); //todo - tamar- add the right call now
-            }
-        });
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        Label strain1 = new Label("Strain:");
-        TextField strainTextField1 = new TextField();
-        Label volume1 = new Label("Volume(mL):");
-        TextField volumeTextField1 = new TextField();
-        volumeTextField1.lengthProperty().addListener(new ChangeListener<Number>(){
+        Label editSampleComposition = new Label("Composition: "); //plate
+        TextField editSampleCompositionTxt = new TextField();
+        Label editSampleConcentration = new Label("Concentration in ng/uL: "); // DNA sample, plasmid, digest, genomic, ligation
+        TextField editSampleConcentrationTxt = new TextField();
+        editSampleConcentrationTxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
                 if(newValue.intValue() > oldValue.intValue()){
-                    char ch = volumeTextField1.getText().charAt(oldValue.intValue());
+                    char ch = editSampleConcentrationTxt.getText().charAt(oldValue.intValue());
                     System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
 
                     //Check if the new character is the number or other's
                     if(!(ch >= '0' && ch <= '9' )){
 
                         //if it's not number then just setText to previous one
-                        volumeTextField1.setText(volumeTextField1.getText().substring(0,volumeTextField1.getText().length()-1));
+                        editSampleConcentrationTxt.setText(editSampleConcentrationTxt.getText().substring(0,editSampleConcentrationTxt.getText().length()-1));
                     }
                 }
             }
 
         });
-        Label composition1 = new Label("Plate Composition:");
-        TextField compositionTextField1 = new TextField();
-        Label concentration1 = new Label("Concentration(ng/uL):");
-        TextField concentrationTextField1 = new TextField();
-        concentrationTextField1.lengthProperty().addListener(new ChangeListener<Number>(){
+        Label editSamplePlasmidName = new Label("Plasmid Name: "); // plasmid
+        TextField editSamplePlasmidNameTxt = new TextField();
+        Label editSamplePlasmidAntibiotic = new Label("Plasmid Antibiotic Resistance: "); //plasmid
+        TextField editSamplePlasmidAntibioticTxt = new TextField();
+        Label editSampleRez1 = new Label("Restriction Enzyme 1: "); //digest
+        TextField editSampleRez1Txt = new TextField();
+        Label editSampleRez2 = new Label("Restriction Enzyme 2: "); //digest
+        TextField editSampleRez2Txt = new TextField();
+        Label editSampleOrigin = new Label("Genomic Origin: "); //genomic
+        TextField editSampleOriginTxt = new TextField();
+        Label editSamplePart1 = new Label("Ligation Part 1: "); //ligation
+        TextField editSamplePart1Txt = new TextField();
+        Label editSamplePart2 = new Label("Ligation Part 1   : "); //ligation
+        TextField editSamplePart2Txt = new TextField();
+        Label editSampleID = new Label("Sample ID: "); // DNA sample, plasmid, digest, genomic, ligation
+        TextField editSampleIDTxt = new TextField();
+        editSampleIDTxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
                 if(newValue.intValue() > oldValue.intValue()){
-                    char ch = concentrationTextField1.getText().charAt(oldValue.intValue());
+                    char ch = editSampleIDTxt.getText().charAt(oldValue.intValue());
                     System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);
 
                     //Check if the new character is the number or other's
                     if(!(ch >= '0' && ch <= '9' )){
 
                         //if it's not number then just setText to previous one
-                        concentrationTextField1.setText(concentrationTextField1.getText().substring(0,concentrationTextField1.getText().length()-1));
+                        editSampleIDTxt.setText(editSampleIDTxt.getText().substring(0,editSampleIDTxt.getText().length()-1));
                     }
                 }
             }
 
         });
-        Label plasmidName1 = new Label("Plasmid Name:");
-        TextField plasmidTextField1 = new TextField();
-        Label plasmidAntibiotic1 = new Label("Plasmid Antibiotic:");
-        TextField antibioticTextField1 = new TextField();
-        Label rez11 = new Label("Restriction Enzyme 1:");
-        TextField rez1TextField1 = new TextField();
-        Label rez21 = new Label("Restriction Enzyme 2:");
-        TextField rez2TextField1 = new TextField();
-        Label genomic1 = new Label("Origin:");
-        TextField genomicTextField1 = new TextField();
-        Label ligation11 = new Label("Ligation Part 1:");
-        TextField ligation1TextField1 = new TextField();
-        Label ligation21 = new Label("Ligation Part 2:");
-        TextField ligation2TextField1 = new TextField();
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        Text editSampleResponse = new Text();
+        Button entereditSample = new Button("Enter");
 
-
-        //entryPane (gridpane)
         editSamplePane = new GridPane();
         editSamplePane.setAlignment(Pos.CENTER);
         editSamplePane.setHgap(10);
         editSamplePane.setVgap(10);
         editSamplePane.setPadding(new Insets(25, 25, 25, 25));
         editSamplePane.setVgap(10);
-        //adding all the buttons to the entry pane
-        editSamplePane.add(sampleType1,0, 0);
-        editSamplePane.add(sampleTypeBox1, 1, 0);
-        editSamplePane.add(sampleIDLabel, 2, 0);
-        editSamplePane.add(sampleIDTextfield, 3, 0);
-        editSamplePane.add(editSampleBack,0,7);                  //check the placement of this button
-        editSamplePane.add(enterEditSample,7,7);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        sampleTypeBox1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                editSamplePane.getChildren().remove(6, editSamplePane.getChildren().size());
 
-                if(sampleTypeBox1.getValue()=="Bacterial Culture"){
-                    editSamplePane.add(strain1, 0, 1);
-                    editSamplePane.add(strainTextField1, 1, 1);
+
+        editSamplePane.add(editSampleType,0,0);
+        editSamplePane.add(editSampleTypeChoices,1,0);
+        editSamplePane.add(editSampleID,2,0);
+        editSamplePane.add(editSampleIDTxt,3,0);
+        editSamplePane.add(editSampleBack,0,7);
+        editSamplePane.add(entereditSample,7,7);
+        editSamplePane.add(editSampleResponse,7,8);
+
+        editSampleTypeChoices.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                editSamplePane.getChildren().remove(7, editSamplePane.getChildren().size());
+
+                if(editSampleTypeChoices.getValue().equals("Bacterial Culture")){
+                    editSamplePane.add(editSampleStrain,0,1);
+                    editSamplePane.add(editSampleStrainTxt,1,1);
                 }
-                if(sampleTypeBox1.getValue()=="Glycerol Stock"){
-                    editSamplePane.add(strain1, 0, 1);
-                    editSamplePane.add(strainTextField1, 1, 1);
-                    editSamplePane.add(volume1, 0, 2);
-                    editSamplePane.add(volumeTextField1, 1, 2);
+                if(editSampleTypeChoices.getValue().equals("Glycerol Stock")){
+                    editSamplePane.add(editSampleStrain,0,1);
+                    editSamplePane.add(editSampleStrainTxt,1,1);
+                    editSamplePane.add(editSampleVolume,0,2);
+                    editSamplePane.add(editSampleVolumeTxt,1,2);
                 }
-                if(sampleTypeBox1.getValue()=="Plate"){
-                    editSamplePane.add(strain1, 0, 1);
-                    editSamplePane.add(strainTextField1, 1, 1);
-                    editSamplePane.add(composition1, 0, 2);
-                    editSamplePane.add(compositionTextField1, 1, 2);
+                if(editSampleTypeChoices.getValue().equals("Plate")){
+                    editSamplePane.add(editSampleStrain,0,1);
+                    editSamplePane.add(editSampleStrainTxt,1,1);
+                    editSamplePane.add(editSampleComposition,0,2);
+                    editSamplePane.add(editSampleCompositionTxt,1,2);
                 }
-                if(sampleTypeBox1.getValue()=="DNA Sample"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
+                if(editSampleTypeChoices.getValue().equals("DNA Sample")){
+                    addSamplePane.add(editSampleConcentration,0,1);
+                    addSamplePane.add(editSampleConcentrationTxt,1,1);
                 }
-                if(sampleTypeBox1.getValue()=="Plasmid"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                    editSamplePane.add(plasmidName1, 0, 2);
-                    editSamplePane.add(plasmidTextField1, 1, 2);
-                    editSamplePane.add(plasmidAntibiotic1, 0, 3);
-                    editSamplePane.add(antibioticTextField1, 1, 3);
+                if(editSampleTypeChoices.getValue().equals("Plasmid")){
+                    editSamplePane.add(editSampleConcentration,0,1);
+                    editSamplePane.add(editSampleConcentrationTxt,1,1);
+                    editSamplePane.add(editSamplePlasmidName,0,2);
+                    editSamplePane.add(editSamplePlasmidNameTxt,1,2);
+                    editSamplePane.add(editSamplePlasmidAntibiotic,0,3);
+                    editSamplePane.add(editSamplePlasmidAntibioticTxt,1,3);
                 }
-                if(sampleTypeBox1.getValue()=="Ligation"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                    editSamplePane.add(ligation11, 0, 2);
-                    editSamplePane.add(ligation1TextField1, 1, 2);
-                    editSamplePane.add(ligation21, 0, 3);
-                    editSamplePane.add(ligation2TextField1, 1, 3);
+                if(editSampleTypeChoices.getValue().equals("Digest")){
+                    editSamplePane.add(editSampleConcentration,0,1);
+                    editSamplePane.add(editSampleConcentrationTxt,1,1);
+                    editSamplePane.add(editSampleRez1,0,2);
+                    editSamplePane.add(editSampleRez1Txt,1,2);
+                    editSamplePane.add(editSampleRez2,0,3);
+                    editSamplePane.add(editSampleRez2Txt,1,3);
                 }
-                if(sampleTypeBox1.getValue()=="Genomic"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                    editSamplePane.add(genomic1, 0, 2);
-                    editSamplePane.add(genomicTextField1, 1, 2);
+                if(editSampleTypeChoices.getValue().equals("Genomic")){
+                    editSamplePane.add(editSampleConcentration,0,1);
+                    editSamplePane.add(editSampleConcentrationTxt,1,1);
+                    editSamplePane.add(editSampleOrigin,0,2);
+                    editSamplePane.add(editSampleOriginTxt,1,2);
                 }
-                if(sampleTypeBox1.getValue()=="Digest"){
-                    editSamplePane.add(concentration1, 0, 1);
-                    editSamplePane.add(concentrationTextField1, 1, 1);
-                    editSamplePane.add(rez11, 0, 2);
-                    editSamplePane.add(rez1TextField1, 1, 2);
-                    editSamplePane.add(rez21, 0, 3);
-                    editSamplePane.add(rez2TextField1, 1, 3);
+                if(editSampleTypeChoices.getValue().equals("Ligation")){
+                    editSamplePane.add(editSampleConcentration,0,1);
+                    editSamplePane.add(editSampleConcentrationTxt,1,1);
+                    editSamplePane.add(editSamplePart1,0,2);
+                    editSamplePane.add(editSamplePart1Txt,1,2);
+                    editSamplePane.add(editSamplePart2,0,3);
+                    editSamplePane.add(editSamplePart2Txt,1,3);
                 }
+            }});
+
+
+        entereditSample.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                int typepass = Integer.parseInt(editSampleIDTxt.getText());
+                String strainpass = null;
+                int volumepass = 0;
+                String compositionpass = null;
+                int concentrationpass = 0;
+                String plasmidNamepass = null;
+                String plasmidAntibioticpass = null;
+                String rez1pass = null;
+                String rez2pass = null;
+                String genomeOriginpass = null;
+                String lig1pass = null;
+                String lig2pass = null;
+                if(editSampleTypeChoices.getValue() == "Bacterial Culture") {
+                    strainpass = addSampleStrainTxt.getText();
+                }
+                if(editSampleTypeChoices.getValue() == "Glycerol Stock") {
+                    strainpass = addSampleStrainTxt.getText();
+                    volumepass = Integer.parseInt(addSampleVolumeTxt.getText());
+                }
+                if(editSampleTypeChoices.getValue() == "Plate") {
+                    strainpass = addSampleStrainTxt.getText();
+                    compositionpass = addSampleCompositionTxt.getText();
+                }
+                if(editSampleTypeChoices.getValue() == "DNA Sample"){
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                }
+                if(editSampleTypeChoices.getValue() == "Plasmid") {
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    plasmidNamepass = addSamplePlasmidNameTxt.getText();
+                    plasmidAntibioticpass = addSamplePlasmidAntibioticTxt.getText();
+                }
+                if(editSampleTypeChoices.getValue() == "Digest") {
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    rez1pass = addSampleRez1Txt.getText();
+                    rez2pass = addSampleRez2Txt.getText();
+                }
+                if(editSampleTypeChoices.getValue() == "Genomic") {
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    genomeOriginpass = addSampleOriginTxt.getText();
+                }
+                if(editSampleTypeChoices.getValue() == "Ligation") {
+                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    lig1pass = addSamplePart1Txt.getText();
+                    lig2pass = addSamplePart2Txt.getText();
+                }
+
+                editSampleResponse.setText(editSample(typepass, strainpass, volumepass ,compositionpass,concentrationpass, plasmidNamepass,
+                        plasmidAntibioticpass, rez1pass, rez2pass, genomeOriginpass, lig1pass,lig2pass));
 
             }
-
-
         });
 
         editSampleScene = new Scene(editSamplePane, 1000, 500);
-
-        // addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
+        //todo//////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
 
         Label duration = new Label("Duration in Days:");
         TextField durationText = new TextField();
@@ -551,7 +596,6 @@ public class Researcher extends Application implements User {
         Text addSampleResearchResponse = new Text();
         Button enteraddSampleResearch = new Button("Enter");
 
-        //addSamplePane
         addSampleResearchPane = new GridPane();
         addSampleResearchPane.setAlignment(Pos.CENTER);
         addSampleResearchPane.setHgap(10);
@@ -559,7 +603,6 @@ public class Researcher extends Application implements User {
         addSampleResearchPane.setPadding(new Insets(25, 25, 25, 25));
         addSampleResearchPane.setVgap(10);
 
-        //adding all the buttons to the entry pane
         addSampleResearchPane.add(duration, 0, 1);
         addSampleResearchPane.add(durationText,1,1);
         addSampleResearchPane.add(sampleIDLabel1,0,2);
@@ -575,7 +618,7 @@ public class Researcher extends Application implements User {
                 addSampleResearchResponse.setText(addSampleResearch(researcherID,Integer.parseInt(durationText.getText()),Integer.parseInt(SampleIDTextfield1.getText())));
             }
         });
-        //addSampleResearchScene
+
         addSampleResearchScene = new Scene(addSampleResearchPane, 1000, 500);
 
         //addBoxScene//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -676,7 +719,7 @@ public class Researcher extends Application implements User {
         removeBoxScene = new Scene(removeBoxPane, 1000, 500);
 
 
-        //todo findResearchersResearchingAll////////////////////////////////////////////////////////////////////////////////
+        //findResearchersResearchingAll////////////////////////////////////////////////////////////////////////////////
         ListView<String> allResearchers = new ListView<String>();
         ObservableList<String> allResearchersItems = FXCollections.observableArrayList ();
 
@@ -699,7 +742,7 @@ public class Researcher extends Application implements User {
 
         findResearchersResearchingAllScene = new Scene(findResearchersResearchingAllPane, 1000, 500);
 
-        //todo findOngoingResearch /////////////////////////////////////////////////////////////////////////////////////////
+        //findOngoingResearch /////////////////////////////////////////////////////////////////////////////////////////
         ListView<String> ongoingResearch = new ListView<String>();
         ObservableList<String> ongoingResearchItems = FXCollections.observableArrayList ();
 
