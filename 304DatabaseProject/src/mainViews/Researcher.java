@@ -326,7 +326,7 @@ public class Researcher extends Application implements User {
 
         addSampleScene = new Scene(addSamplePane, 1000, 500);
 
-        //todo editSampleScene//////////////////////////////////////////////////////////////////////////////////////////
+        //editSampleScene//////////////////////////////////////////////////////////////////////////////////////////
         Label editSampleType = new Label("Sample Type: ");
         ChoiceBox editSampleTypeChoices = new ChoiceBox();
         editSampleTypeChoices.setItems(FXCollections.observableArrayList("Bacterial Culture", "Glycerol Stock", "Plate", "DNA Sample", "Plasmid",
@@ -548,7 +548,7 @@ public class Researcher extends Application implements User {
         });
 
         editSampleScene = new Scene(editSamplePane, 1000, 500);
-        //todo//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         //addSampleResearchScene///////////////////////////////////////////////////////////////////////////////////////
 
         Label duration = new Label("Duration in Days:");

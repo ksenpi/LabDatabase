@@ -861,8 +861,10 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
-                updateFridgeResponse.setText(updateTemperature(Integer.parseInt(updateFridgeIDtxt.getText()),
-                        Integer.parseInt(updateFridgeTemptxt.getText())));
+                if(updateFridgeIDtxt.getText().isEmpty()||updateFridgeTemptxt.getText().isEmpty())
+                    updateFridgeResponse.setText("Make sure no field is empty");
+                else{updateFridgeResponse.setText(updateTemperature(Integer.parseInt(updateFridgeIDtxt.getText()),
+                        Integer.parseInt(updateFridgeTemptxt.getText())));}
             }});
 
         updateTemperaturePane = new GridPane();
