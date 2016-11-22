@@ -109,6 +109,10 @@ public class startLoginWindow extends Application {
                     externalUser = new ExternalUser();
                     externalUser.start(ExternalUser.classStage);
                 }
+                else if (userTextField.getText().isEmpty()){
+                    actiontarget.setFill(Color.FIREBRICK);
+                    actiontarget.setText("missing user ID");
+                }
                 else if (comboBox.getValue().equals("Researcher") && isIDValid(2,Integer.parseInt(userTextField.getText()))){
                         researcher = new Researcher(Integer.parseInt(userTextField.getText()));
                         researcher.start(Researcher.classStage);

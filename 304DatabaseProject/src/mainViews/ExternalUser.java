@@ -108,7 +108,6 @@ public class ExternalUser extends Application implements User{
         for (String key : sampleList.keySet()) {
             String sampleProperties = "";
             for(String element: sampleList.get(key)) {
-                //samplelistItems.add(key + ", " + element);
                 sampleProperties += element + ",   ";
             }
             samplelistItems.add(key + " : " + sampleProperties);
@@ -131,28 +130,6 @@ public class ExternalUser extends Application implements User{
         primaryStage.setScene(entryScene);
 
         primaryStage.show();
-        //TODO (Tamar): Generate window for ExternalUser. There should be a button associated with each of the
-        //methods below. I have given an example for how you can handle the ResultSet handed back from a helper.
-
-/*
-        Map<String, String[]> workList = generateWorkList();
-        System.out.println(workList);
-        for (String key : workList.keySet()) {
-            System.out.println(key + "  ,   " + workList.get(key)[0]);
-
-        }
-
-        Map<String, String[]> sampleList = generateSampleList();
-        for (String key : sampleList.keySet()) {
-            System.out.printf("%s", key);
-            for(String element: sampleList.get(key)){
-                System.out.printf("%s", "     ,     ");
-                System.out.printf("%s", element);
-            }
-            System.out.printf("%s\n", "");
-
-        }
-*/
     }
 
     public void ButtonClicked(ActionEvent e) {

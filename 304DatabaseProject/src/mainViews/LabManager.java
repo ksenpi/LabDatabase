@@ -27,12 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LabManager extends Application implements User{
-    /*- findBoxlessSamples
-- findContainersUnderCapacity
-- generateWorkList
-- generateSampleList
-- findResearchDurationsByResearcher*/
-
     int labManagerID;
     Stage theStage;
     Button addFridge, removeFridge, addResearcher, addLabManager, removeLabManager, addSampleToBox, removeSampleFromBox, addBox, removeBox,
@@ -210,7 +204,10 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
-                addFridgeResponse.setText(addFridge(Integer.parseInt(temptxt.getText()),labManagerID));
+                if(temptxt.getText().isEmpty())
+                    addFridgeResponse.setText("Please enter a temperature value");
+                else
+                    addFridgeResponse.setText(addFridge(Integer.parseInt(temptxt.getText()),labManagerID));
             }});
         addFridgePane = new GridPane();
         addFridgePane.setAlignment(Pos.CENTER);
@@ -255,6 +252,9 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
+                if(removeFridgeIDtxt.getText().isEmpty())
+                    removeFridgeResponse.setText("Please enter a fridge ID");
+                else
                 removeFridgeResponse.setText(removeFridge(Integer.parseInt(removeFridgeIDtxt.getText())));
             }});
 
@@ -282,6 +282,9 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
+                if(employeeNametxt.getText().isEmpty())
+                    addResearcherResponse.setText("Please enter an employee name");
+                else
                 addResearcherResponse.setText(addResearcher(employeeNametxt.getText()));
             }});
 
@@ -309,6 +312,9 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
+                if(labmanagerNametxt.getText().isEmpty())
+                    addlabmanagerResponse.setText("Please enter a lab manager name");
+                else
                 addlabmanagerResponse.setText(addLabManager(labmanagerNametxt.getText()));
             }});
 
@@ -327,7 +333,7 @@ public class LabManager extends Application implements User{
 
         addLabManagerScene = new Scene(addLabManagerPane, 1000, 500);
         // removeLabManagerScene ///////////////////////////////////////////////////////////////////////////////////////
-        Label removeLabManagerID = new Label("Fridge ID:");
+        Label removeLabManagerID = new Label("Lab Manager ID:");
         TextField removeLabManagerIDtxt = new TextField();
         removeLabManagerIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
@@ -354,6 +360,9 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
+                if(removeLabManagerIDtxt.getText().isEmpty())
+                    removeLabManagerResponse.setText("Please enter the lab manager ID");
+                else
                 removeLabManagerResponse.setText(removeLabManager(Integer.parseInt(removeLabManagerIDtxt.getText())));
             }});
 
@@ -372,7 +381,7 @@ public class LabManager extends Application implements User{
 
         removeLabManagerScene = new Scene(removeLabManagerPane, 1000, 500);
         // addSampleToBoxScene//////////////////////////////////////////////////////////////////////////////////////////
-        Label containerIDLabel = new Label("Container ID:");
+        Label containerIDLabel = new Label("Box ID:");
         TextField containerIDtxt = new TextField();
         containerIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
@@ -421,6 +430,9 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
+                if(containerIDtxt.getText().isEmpty()||sampleIDtxt.getText().isEmpty())
+                    addSampleToBoxResponse.setText("Please make sure no field is empty");
+                else
                 addSampleToBoxResponse.setText(addSampleToBox(Integer.parseInt(containerIDtxt.getText()),Integer.parseInt(sampleIDtxt.getText()),labManagerID));
             }});
 
@@ -441,7 +453,7 @@ public class LabManager extends Application implements User{
 
         addSampleToBoxScene = new Scene(addSampleToBoxPane, 1000, 500);
         // removeSampleFromBoxScene ////////////////////////////////////////////////////////////////////////////////////
-        Label containerIDLabel1 = new Label("Container ID:");
+        Label containerIDLabel1 = new Label("Box ID:");
         TextField containerIDtxt1 = new TextField();
         containerIDtxt1.lengthProperty().addListener(new ChangeListener<Number>(){
 
@@ -490,6 +502,9 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
+                if(containerIDtxt1.getText().isEmpty()||sampleIDtxt1.getText().isEmpty())
+                    removeSamplefromBoxResponse.setText("Please make sure no field is empty");
+                else
                 removeSamplefromBoxResponse.setText(removeSampleFromBox(Integer.parseInt(containerIDtxt1.getText()),Integer.parseInt(sampleIDtxt1.getText())));
             }});
 
@@ -510,10 +525,9 @@ public class LabManager extends Application implements User{
 
         removeSampleFromBoxScene = new Scene(removeSampleFromBoxPane, 1000, 500);
         // addBoxScene /////////////////////////////////////////////////////////////////////////////////////////////////
-        //** addBox(String containerName, int fridgeID) **
-        Label containerNameLabel = new Label("Container Name:");
+        Label containerNameLabel = new Label("Box Name:");
         TextField containerNametxt = new TextField();
-        Label fridgeIDLabel = new Label("Sample ID:");
+        Label fridgeIDLabel = new Label("Fridge ID:");
         TextField fridgeIDtxt = new TextField();
         fridgeIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
@@ -540,6 +554,9 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
+                if(containerNametxt.getText().isEmpty()||fridgeIDtxt.getText().isEmpty())
+                    addBoxResponse.setText("Please make sure no field is empty");
+                else
                 addBoxResponse.setText(addBox(containerNametxt.getText(),Integer.parseInt(fridgeIDtxt.getText())));
             }});
 
@@ -562,7 +579,7 @@ public class LabManager extends Application implements User{
         // removeBoxScene///////////////////////////////////////////////////////////////////////////////////////////////
         //** removeBox(int containerID) **
 
-        Label containerIDLabel2 = new Label("Sample ID:");
+        Label containerIDLabel2 = new Label("Box ID:");
         TextField containerIDtxt2 = new TextField();
         containerIDtxt2.lengthProperty().addListener(new ChangeListener<Number>(){
 
@@ -589,6 +606,9 @@ public class LabManager extends Application implements User{
 
             @Override
             public void handle(ActionEvent e) {
+                if(containerIDtxt2.getText().isEmpty())
+                    removeBoxResponse.setText("Please make sure no field is empty");
+                else
                 removeBoxResponse.setText(removeBox(Integer.parseInt(containerIDtxt2.getText())));
             }});
 
@@ -667,14 +687,28 @@ public class LabManager extends Application implements User{
         // generateWorkList/////////////////////////////////////////////////////////////////////////////////////////////
         ListView<String> WorkList = new ListView<String>();
         ObservableList<String> WorkListItems = FXCollections.observableArrayList ();
+        Button generateWorkListEnter = new Button("Enter");
+        generateWorkListEnter.setOnAction(new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent e) {
+                WorkList.getItems().clear();
+                WorkListItems.removeAll();
+                Map<String, String[]> workList = generateWorkList();
+                for (String key : workList.keySet()) {
+                    WorkListItems.add(key + "  ,   " + workList.get(key)[0]);
+                }
+
+                WorkList.setItems(WorkListItems);
+            }});
+        /*
         Map<String, String[]> workList = generateWorkList();
         for (String key : workList.keySet()) {
             WorkListItems.add(key + "  ,   " + workList.get(key)[0]);
         }
 
         WorkList.setItems(WorkListItems);
-
+*/
         generateWorkListPane = new GridPane();
         generateWorkListPane.setAlignment(Pos.CENTER);
         generateWorkListPane.setHgap(10);
@@ -684,10 +718,34 @@ public class LabManager extends Application implements User{
 
         generateWorkListPane.add(WorkList,0,0);
         generateWorkListPane.add(generateWorkListBack,0,7);
+        generateWorkListPane.add(generateWorkListEnter,7,7);
 
         generateWorkListScene = new Scene(generateWorkListPane, 1000, 500);
 
         // generateSampleList///////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> samplelist = new ListView<>();
+        ObservableList<String> samplelistItems =FXCollections.observableArrayList ();
+
+        Button generateSampleListEnter = new Button("Enter");
+        generateSampleListEnter.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                samplelistItems.removeAll();
+                samplelist.getItems().clear();
+                Map<String, String[]> sampleList = generateSampleList();
+                for (String key : sampleList.keySet()) {
+                    String sampleProperties = "";
+                    for(String element: sampleList.get(key)) {
+                        //samplelistItems.add(key + ", " + element);
+                        sampleProperties += element + ",   ";
+                    }
+                    samplelistItems.add(key + " : " + sampleProperties);
+
+                }
+                samplelist.setItems(samplelistItems);
+            }});
+        /*
         ListView<String> samplelist = new ListView<>();
 
         ObservableList<String> samplelistItems =FXCollections.observableArrayList ();
@@ -702,7 +760,7 @@ public class LabManager extends Application implements User{
             samplelistItems.add(key + " : " + sampleProperties);
 
         }
-        samplelist.setItems(samplelistItems);
+        samplelist.setItems(samplelistItems);*/
 
         generateSampleListPane = new GridPane();
         generateSampleListPane.setAlignment(Pos.CENTER);
@@ -713,6 +771,7 @@ public class LabManager extends Application implements User{
 
         generateSampleListPane.add(samplelist,0,0);
         generateSampleListPane.add(generateSampleListBack,0,7);
+        generateSampleListPane.add(generateSampleListEnter,7,7);
 
         generateSampleListScene = new Scene(generateSampleListPane, 1000, 500);
 
@@ -721,7 +780,7 @@ public class LabManager extends Application implements User{
         ObservableList<String> empty =FXCollections.observableArrayList ();
         ObservableList<String> ResearchDurationsByResearcherItems =FXCollections.observableArrayList ();
 
-        Button average = new Button("Find Average Duration Requested for Each Researcher"); //0
+        Button average = new Button("Average Research Duration"); //0
         average.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -740,7 +799,7 @@ public class LabManager extends Application implements User{
                 ResearchDurationsByResearcher.setItems(ResearchDurationsByResearcherItems);
                 findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,0,1);
             }});
-        Button minimum = new Button("Find Minimum Duration Requested for Each Researcher"); //1
+        Button minimum = new Button("Minimum Research Duration"); //1
         minimum.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -759,7 +818,7 @@ public class LabManager extends Application implements User{
                 ResearchDurationsByResearcher.setItems(ResearchDurationsByResearcherItems);
                 findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,1,1);
             }});
-        Button maximum = new Button("Find Maximum Duration Requested for Each Researcher"); //2
+        Button maximum = new Button("Maximum Research Duration"); //2
         maximum.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -778,7 +837,7 @@ public class LabManager extends Application implements User{
                 ResearchDurationsByResearcher.setItems(ResearchDurationsByResearcherItems);
                 findResearchDurationsByResearcherPane.add(ResearchDurationsByResearcher,2,1);
             }});
-        Button total = new Button("Find Total Number of Requests for Each Researcher"); //3
+        Button total = new Button("Total Research Number"); //3
         total.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -943,7 +1002,6 @@ public class LabManager extends Application implements User{
         Connection con = null;
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
-                //two more things: check if the fridgeID is already existing & add to maintains table
 
                 con = connectionToDatabase.getConnection();
 
@@ -954,15 +1012,6 @@ public class LabManager extends Application implements User{
                     fridgeID = rs.getInt("max") + 1;
                 }
 
-                /*final String queryCheck = "SELECT * from fridge2 WHERE fr_id = ?";
-                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
-                psCheck.setInt(1, fridgeID);
-                final ResultSet resultSet = psCheck.executeQuery();*/
-                /*if(resultSet.next()) {
-                    return "Error_Already_Exists";
-
-                }*/
-                //else{
                     ps1 = con.prepareStatement("INSERT INTO fridge2 VALUES (?,?,?)");
                     ps1.setInt(1, fridgeID);
                     ps1.setInt(2, 0);
@@ -1059,18 +1108,29 @@ public class LabManager extends Application implements User{
     }
 
     public String updateTemperature(int fridgeID, int temperature) {
-
-        // Add check if fridgeID is valid
+        Statement stmt1;
+        ResultSet results;
 
         PreparedStatement stmt;
         OurConnection connectionToDatabase = new OurConnection();
         if (connectionToDatabase.connect("ora_e5w9a", "a10682145")) {
             try {
                 Connection con = connectionToDatabase.getConnection();
+                stmt1 = con.createStatement();
+                results = stmt1.executeQuery("select max(fr_id) from fridge2");
+                if (results.next()) {
+                    if (results.getInt("max(fr_id)") < fridgeID) {
+                        return "Fridge ID is not valid!";
+                    }
+                }
                 stmt = con.prepareStatement("update fridge2 set temperature = " +
                         temperature + "where fr_id = " + fridgeID);
                 stmt.executeUpdate();
                 con.commit();
+
+                if (temperature > 0) {
+                    return "New temperature is not valid, must be negative!";
+                }
 
                 stmt.close();
                 return "Temperature updated!";
@@ -1079,7 +1139,7 @@ public class LabManager extends Application implements User{
                 System.out.println("Message: " + ex.getMessage());
             }
         }
-        return "New temperature is not valid, must be negative!";
+        return "Error!";
     }
 
     public String addResearcher(String employeeName){
@@ -1100,16 +1160,6 @@ public class LabManager extends Application implements User{
                 if(rs.next()){
                     employeeID = rs.getInt("max") + 1;
                 }
-
-                /*final String queryCheck = "SELECT * from researcher WHERE emp_id = ?";
-                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
-                psCheck.setInt(1, employeeID);
-                final ResultSet resultSet = psCheck.executeQuery();
-                if(resultSet.next()) {
-                    return "Error_Already_Exists";
-
-                }*/
-                //else{
 
                     ps1 = con.prepareStatement("INSERT INTO researcher VALUES (?,?)");
                     ps1.setInt(1, employeeID);
@@ -1159,16 +1209,6 @@ public class LabManager extends Application implements User{
                 if(rs.next()){
                     employeeID = rs.getInt("max") + 1;
                 }
-
-                /*final String queryCheck = "SELECT * from lab_manager WHERE emp_id = ?";
-                final PreparedStatement psCheck = con.prepareStatement(queryCheck);
-                psCheck.setInt(1, employeeID);
-                final ResultSet resultSet = psCheck.executeQuery();
-                if(resultSet.next()) {
-                    return "Error_Already_Exists";
-
-                }*/
-                //else{
 
                     ps1 = con.prepareStatement("INSERT INTO lab_manager VALUES (?,?)");
                     ps1.setInt(1, employeeID);
@@ -1525,126 +1565,7 @@ public class LabManager extends Application implements User{
 
         return "Error removing the box: Please try again";
     }
-
-    // Update Query
-
-
-
-/*
-    // Organizes all the samples into the minimum required number of boxes
-    // TODO (Darius): Finish
-    public String organizeSamples() {
-        ResultSet results;
-        ResultSet results2;
-        Statement stmt1;
-        Statement stmt2;;
-        int numSamples = 0;
-        OurConnection connectionToDatabase = new OurConnection();
-        if (connectionToDatabase.connect("ora_o1i0b", "a30662143")) {
-            try {
-                Connection con = connectionToDatabase.getConnection();
-                stmt1 = con.createStatement();
-                stmt2 = con.createStatement();
-
-                results = stmt1.executeQuery("select count(*) from contains");
-                while (results.next()) {
-                    numSamples = results.getInt("count(*)");
-                }
-                stmt1.close();
-                if (numSamples != 0) {
-
-                    int maxContainerID = 0;
-
-                    // Determine how many containers will be needed
-                    int numFullContainers = numSamples/10;
-                    int numRemainingSamples = numSamples%10;
-                    int totalContainers = 0;
-                    if (numRemainingSamples!=0) {
-                        totalContainers = numFullContainers + 1;
-                    } else {
-                        totalContainers = numFullContainers;
-                    }
-
-                    results = stmt2.executeQuery("select max(c_id) from contains");
-                    while (results.next()) {
-                        // Determine if already organized
-                        maxContainerID = results.getInt("max(c_id)");
-                        if (maxContainerID == totalContainers - 1) {
-                            return "Already organized!";
-                        }
-                    }
-                    stmt2.close();
-
-                    int  containersAtCapacity = 0;
-
-                    while (totalContainers != maxContainerID - 1) {
-
-                        Statement stmt3 = con.createStatement();
-                        results = stmt3.executeQuery("select count(*) from contains where c_id = " + containersAtCapacity);
-
-                        int numberInContainer = 0;
-
-                        while (results.next()) {
-                            numberInContainer = results.getInt("count(*)");
-                            if (numberInContainer <= 10) {
-                                Statement stmt4 = con.createStatement();
-                                results2 = stmt4.executeQuery("select c_id, fr_id, c_occupancy, f_occupancy, samp_id, " +
-                                "emp_id, count(*) from contains where c_id = " + maxContainerID +
-                                "group by c_id, fr_id, f_occupancy, c_occupancy, samp_id, emp_id");
-
-                                while (results2.next() && numberInContainer <= 10) {
-                                    int fr_id = results2.getInt("fr_id");
-                                    int c_id = results2.getInt("c_id");
-                                    int fr_id = results2.getInt("fr_id");
-                                }
-
-                            } else {
-                                containersAtCapacity++;
-                                break;
-                            }
-                        }
-
-
-
-//                        Statement stmt3 = con.createStatement();
-//                        results = stmt3.executeQuery("select c_id, fr_id, c_occupancy, f_occupancy, samp_id, " +
-//                                "emp_id, count(*) from contains where c_id = " + containersAtCapacity +
-//                                "group by c_id, fr_id, f_occupancy, c_occupancy, samp_id, emp_id");
-//                        while (results.next()) {
-//                            if (results.getInt("count(*)") != 10) {
-//
-//                            } else {
-//
-//                                containersAtCapacity++;
-//                            }
-//                        }
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-                return "Done!";
-            }
-            catch (SQLException ex) {
-                System.out.println("Message: " + ex.getMessage());
-            }
-        }
-        return "This should not happen!";
-    }
-    */
-
-
-
+    
     //Query 10
     public Map<String, String> findBoxlessSamples(){
         Statement stmt;
@@ -1744,7 +1665,7 @@ public class LabManager extends Application implements User{
                     name = results.getString("name");
                     EmployeeID = "EmployeeID: " + results.getString("emp_id");
                     if (!results.wasNull()) {
-                        String[] workerAttributes = {"Name: " + name, "Type: Lab Manager"};
+                        String[] workerAttributes = {"Name: " + name + " ,  " + "Type: Lab Manager"};
                         workerList.put(EmployeeID, workerAttributes);
                     }
                 }
@@ -1756,10 +1677,10 @@ public class LabManager extends Application implements User{
                     EmployeeID = "EmployeeID: " + results.getString("emp_id");
                     if (!results.wasNull()) {
                         if (workerList.get(EmployeeID) == null) {
-                            String[] workerAttributes = {"Name: " + name, "Type: Researcher"};
+                            String[] workerAttributes = {"Name: " + name + " ,  " + "Type: Researcher"};
                             workerList.put(EmployeeID, workerAttributes);
                         } else {
-                            String[] workerAttributes = {"Name: " + name, "Type: Lab Manager and Researcher"};
+                            String[] workerAttributes = {"Name: " + name + " ,  " + "Type: Lab Manager and Researcher"};
                             workerList.put(EmployeeID, workerAttributes);
                         }
                     }
