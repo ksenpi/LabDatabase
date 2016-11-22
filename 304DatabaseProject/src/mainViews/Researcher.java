@@ -276,6 +276,7 @@ public class Researcher extends Application implements User {
                 String genomeOriginpass = null;
                 String lig1pass = null;
                 String lig2pass = null;
+
                 if(addSampleTypeChoices.getValue() == "Bacterial Culture") {
                     typepass = 0;
                     strainpass = addSampleStrainTxt.getText();
@@ -283,6 +284,7 @@ public class Researcher extends Application implements User {
                 if(addSampleTypeChoices.getValue() == "Glycerol Stock") {
                     typepass = 1;
                     strainpass = addSampleStrainTxt.getText();
+                    if(!addSampleVolumeTxt.getText().isEmpty())
                     volumepass = Integer.parseInt(addSampleVolumeTxt.getText());
                 }
                 if(addSampleTypeChoices.getValue() == "Plate") {
@@ -292,36 +294,41 @@ public class Researcher extends Application implements User {
                 }
                 if(addSampleTypeChoices.getValue() == "DNA Sample"){
                     typepass = 3;
+                    if(!addSampleConcentrationTxt.getText().isEmpty())
                     concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
                 }
                 if(addSampleTypeChoices.getValue() == "Plasmid") {
                     typepass = 4;
+                    if(!addSampleConcentrationTxt.getText().isEmpty())
                     concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
                     plasmidNamepass = addSamplePlasmidNameTxt.getText();
                     plasmidAntibioticpass = addSamplePlasmidAntibioticTxt.getText();
                 }
                 if(addSampleTypeChoices.getValue() == "Digest") {
                     typepass = 5;
+                    if(!addSampleConcentrationTxt.getText().isEmpty())
                     concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
                     rez1pass = addSampleRez1Txt.getText();
                     rez2pass = addSampleRez2Txt.getText();
                 }
                 if(addSampleTypeChoices.getValue() == "Genomic") {
                     typepass = 6;
+                    if(!addSampleConcentrationTxt.getText().isEmpty())
                     concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
                     genomeOriginpass = addSampleOriginTxt.getText();
                 }
                 if(addSampleTypeChoices.getValue() == "Ligation") {
                     typepass = 7;
+                    if(!addSampleConcentrationTxt.getText().isEmpty())
                     concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
                     lig1pass = addSamplePart1Txt.getText();
                     lig2pass = addSamplePart2Txt.getText();
                 }
 
                 addSampleResponse.setText(addSample(typepass, strainpass, volumepass ,compositionpass,concentrationpass, plasmidNamepass,
-                        plasmidAntibioticpass, rez1pass, rez2pass, genomeOriginpass, lig1pass,lig2pass));
+                        plasmidAntibioticpass, rez1pass, rez2pass, genomeOriginpass, lig1pass,lig2pass));}
 
-            }
+
         });
 
         addSampleScene = new Scene(addSamplePane, 1000, 500);
@@ -495,6 +502,9 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
+                if(editSampleIDTxt.getText().isEmpty())
+                    editSampleResponse.setText("Please make sure sample ID is not empty");
+                else{
                 int typepass = Integer.parseInt(editSampleIDTxt.getText());
                 String strainpass = null;
                 int volumepass = 0;
@@ -511,40 +521,46 @@ public class Researcher extends Application implements User {
                     strainpass = addSampleStrainTxt.getText();
                 }
                 if(editSampleTypeChoices.getValue() == "Glycerol Stock") {
-                    strainpass = addSampleStrainTxt.getText();
-                    volumepass = Integer.parseInt(addSampleVolumeTxt.getText());
+                    strainpass = editSampleStrainTxt.getText();
+                    if(!editSampleVolumeTxt.getText().isEmpty())
+                    volumepass = Integer.parseInt(editSampleVolumeTxt.getText());
                 }
                 if(editSampleTypeChoices.getValue() == "Plate") {
-                    strainpass = addSampleStrainTxt.getText();
-                    compositionpass = addSampleCompositionTxt.getText();
+                    strainpass = editSampleStrainTxt.getText();
+                    compositionpass = editSampleCompositionTxt.getText();
                 }
                 if(editSampleTypeChoices.getValue() == "DNA Sample"){
-                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
+                    if(!editSampleConcentrationTxt.getText().isEmpty())
+                    concentrationpass = Integer.parseInt(editSampleConcentrationTxt.getText());
                 }
                 if(editSampleTypeChoices.getValue() == "Plasmid") {
-                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
-                    plasmidNamepass = addSamplePlasmidNameTxt.getText();
-                    plasmidAntibioticpass = addSamplePlasmidAntibioticTxt.getText();
+                    if(!editSampleConcentrationTxt.getText().isEmpty())
+                    concentrationpass = Integer.parseInt(editSampleConcentrationTxt.getText());
+                    plasmidNamepass = editSamplePlasmidNameTxt.getText();
+                    plasmidAntibioticpass = editSamplePlasmidAntibioticTxt.getText();
                 }
                 if(editSampleTypeChoices.getValue() == "Digest") {
-                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
-                    rez1pass = addSampleRez1Txt.getText();
-                    rez2pass = addSampleRez2Txt.getText();
+                    if(!editSampleConcentrationTxt.getText().isEmpty())
+                    concentrationpass = Integer.parseInt(editSampleConcentrationTxt.getText());
+                    rez1pass = editSampleRez1Txt.getText();
+                    rez2pass = editSampleRez2Txt.getText();
                 }
                 if(editSampleTypeChoices.getValue() == "Genomic") {
-                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
-                    genomeOriginpass = addSampleOriginTxt.getText();
+                    if(!editSampleConcentrationTxt.getText().isEmpty())
+                    concentrationpass = Integer.parseInt(editSampleConcentrationTxt.getText());
+                    genomeOriginpass = editSampleOriginTxt.getText();
                 }
                 if(editSampleTypeChoices.getValue() == "Ligation") {
-                    concentrationpass = Integer.parseInt(addSampleConcentrationTxt.getText());
-                    lig1pass = addSamplePart1Txt.getText();
-                    lig2pass = addSamplePart2Txt.getText();
+                    if(!editSampleConcentrationTxt.getText().isEmpty())
+                    concentrationpass = Integer.parseInt(editSampleConcentrationTxt.getText());
+                    lig1pass = editSamplePart1Txt.getText();
+                    lig2pass = editSamplePart2Txt.getText();
                 }
 
                 editSampleResponse.setText(editSample(typepass, strainpass, volumepass ,compositionpass,concentrationpass, plasmidNamepass,
                         plasmidAntibioticpass, rez1pass, rez2pass, genomeOriginpass, lig1pass,lig2pass));
 
-            }
+            }}
         });
 
         editSampleScene = new Scene(editSamplePane, 1000, 500);
@@ -615,6 +631,9 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
+                if(durationText.getText().isEmpty()||SampleIDTextfield1.getText().isEmpty())
+                    addSampleResearchResponse.setText("Make sure no field is empty");
+                else
                 addSampleResearchResponse.setText(addSampleResearch(researcherID,Integer.parseInt(durationText.getText()),Integer.parseInt(SampleIDTextfield1.getText())));
             }
         });
@@ -623,9 +642,9 @@ public class Researcher extends Application implements User {
 
         //addBoxScene//////////////////////////////////////////////////////////////////////////////////////////////////
         //Buttons
-        Label containerNameLabel = new Label("Container Name:");
+        Label containerNameLabel = new Label("Box Name:");
         TextField containerNametxt = new TextField();
-        Label fridgeIDLabel = new Label("Sample ID:");
+        Label fridgeIDLabel = new Label("Fridge ID:");
         TextField fridgeIDtxt = new TextField();
         fridgeIDtxt.lengthProperty().addListener(new ChangeListener<Number>(){
 
@@ -652,6 +671,9 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
+                if(containerNametxt.getText().isEmpty()||fridgeIDtxt.getText().isEmpty())
+                    addBoxResponse.setText("Make sure no field is empty");
+                else
                 addBoxResponse.setText(addBox(containerNametxt.getText(),Integer.parseInt(fridgeIDtxt.getText())));
             }});
 
@@ -700,6 +722,9 @@ public class Researcher extends Application implements User {
 
             @Override
             public void handle(ActionEvent e) {
+                if(containerIDtxt2.getText().isEmpty())
+                    removeBoxResponse.setText("Make sure no field is empty");
+                else
                 removeBoxResponse.setText(removeBox(Integer.parseInt(containerIDtxt2.getText())));
             }});
 
@@ -749,6 +774,7 @@ public class Researcher extends Application implements User {
         Label info = new Label("What information are you interested in seeing?");
         ComboBox choices = new ComboBox(FXCollections.observableArrayList("Start Date", "Duration"));
         Label advancedSearch = new Label("Advanced Search");
+        Label greaterThan = new Label(">");
         ComboBox advancedSearchChoices = new ComboBox(FXCollections.observableArrayList("Duration", "Sample ID"));
         TextField advancedSearchTxt = new TextField();
         advancedSearchTxt.lengthProperty().addListener(new ChangeListener<Number>(){
@@ -822,7 +848,8 @@ public class Researcher extends Application implements User {
         findOngoingResearchPane.add(choices,1,0);
         findOngoingResearchPane.add(advancedSearch,0,1);
         findOngoingResearchPane.add(advancedSearchChoices,1,1);
-        findOngoingResearchPane.add(advancedSearchTxt,2,1);
+        findOngoingResearchPane.add(greaterThan,2,1);
+        findOngoingResearchPane.add(advancedSearchTxt,3,1);
         findOngoingResearchPane.add(ongoingResearchEnter,7,7);
         findOngoingResearchPane.add(findOngoingResearchBack,0,7);
 
@@ -830,14 +857,28 @@ public class Researcher extends Application implements User {
         // generateWorkList/////////////////////////////////////////////////////////////////////////////////////////////
         ListView<String> WorkList = new ListView<String>();
         ObservableList<String> WorkListItems = FXCollections.observableArrayList ();
+        Button generateWorkListEnter = new Button("Enter");
+        generateWorkListEnter.setOnAction(new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent e) {
+                WorkList.getItems().clear();
+                WorkListItems.removeAll();
+                Map<String, String[]> workList = generateWorkList();
+                for (String key : workList.keySet()) {
+                    WorkListItems.add(key + "  ,   " + workList.get(key)[0]);
+                }
+
+                WorkList.setItems(WorkListItems);
+            }});
+        /*
         Map<String, String[]> workList = generateWorkList();
         for (String key : workList.keySet()) {
             WorkListItems.add(key + "  ,   " + workList.get(key)[0]);
         }
 
         WorkList.setItems(WorkListItems);
-
+*/
         generateWorkListPane = new GridPane();
         generateWorkListPane.setAlignment(Pos.CENTER);
         generateWorkListPane.setHgap(10);
@@ -847,10 +888,34 @@ public class Researcher extends Application implements User {
 
         generateWorkListPane.add(WorkList,0,0);
         generateWorkListPane.add(generateWorkListBack,0,7);
+        generateWorkListPane.add(generateWorkListEnter,7,7);
 
         generateWorkListScene = new Scene(generateWorkListPane, 1000, 500);
 
         // generateSampleList///////////////////////////////////////////////////////////////////////////////////////////
+        ListView<String> samplelist = new ListView<>();
+        ObservableList<String> samplelistItems =FXCollections.observableArrayList ();
+
+        Button generateSampleListEnter = new Button("Enter");
+        generateSampleListEnter.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                samplelistItems.removeAll();
+                samplelist.getItems().clear();
+                Map<String, String[]> sampleList = generateSampleList();
+                for (String key : sampleList.keySet()) {
+                    String sampleProperties = "";
+                    for(String element: sampleList.get(key)) {
+                        //samplelistItems.add(key + ", " + element);
+                        sampleProperties += element + ",   ";
+                    }
+                    samplelistItems.add(key + " : " + sampleProperties);
+
+                }
+                samplelist.setItems(samplelistItems);
+            }});
+        /*
         ListView<String> samplelist = new ListView<>();
 
         ObservableList<String> samplelistItems =FXCollections.observableArrayList ();
@@ -865,7 +930,7 @@ public class Researcher extends Application implements User {
             samplelistItems.add(key + " : " + sampleProperties);
 
         }
-        samplelist.setItems(samplelistItems);
+        samplelist.setItems(samplelistItems);*/
 
         generateSampleListPane = new GridPane();
         generateSampleListPane.setAlignment(Pos.CENTER);
@@ -876,6 +941,7 @@ public class Researcher extends Application implements User {
 
         generateSampleListPane.add(samplelist,0,0);
         generateSampleListPane.add(generateSampleListBack,0,7);
+        generateSampleListPane.add(generateSampleListEnter,7,7);
 
         generateSampleListScene = new Scene(generateSampleListPane, 1000, 500);
 
@@ -1606,7 +1672,7 @@ public class Researcher extends Application implements User {
                     name = results.getString("name");
                     EmployeeID = "EmployeeID: " + results.getString("emp_id");
                     if (!results.wasNull()) {
-                        String[] workerAttributes = {"Name: " + name, "Type: Lab Manager"};
+                        String[] workerAttributes = {"Name: " + name + " ,  " + "Type: Lab Manager"};
                         workerList.put(EmployeeID, workerAttributes);
                     }
                 }
@@ -1618,10 +1684,10 @@ public class Researcher extends Application implements User {
                     EmployeeID = "EmployeeID: " + results.getString("emp_id");
                     if (!results.wasNull()) {
                         if (workerList.get(EmployeeID) == null) {
-                            String[] workerAttributes = {"Name: " + name, "Type: Researcher"};
+                            String[] workerAttributes = {"Name: " + name + " ,  " + "Type: Researcher"};
                             workerList.put(EmployeeID, workerAttributes);
                         } else {
-                            String[] workerAttributes = {"Name: " + name, "Type: Lab Manager and Researcher"};
+                            String[] workerAttributes = {"Name: " + name + " ,  " + "Type: Lab Manager and Researcher"};
                             workerList.put(EmployeeID, workerAttributes);
                         }
                     }
